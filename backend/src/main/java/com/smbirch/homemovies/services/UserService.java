@@ -13,5 +13,5 @@ public interface UserService {
 
     UserResponseDto getUserByUsername(String username);
 
-    UserResponseDto getUserByCredentials(CredentialsDto credentialsDto);
+    UserResponseDto validateUser(CredentialsDto credentialsDto);
 }

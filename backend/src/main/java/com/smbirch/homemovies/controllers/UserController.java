@@ -31,8 +31,8 @@ public class UserController {
     return userService.getUserByUsername(username);
   }
 
-  @PostMapping("/login")
-  public UserResponseDto getUserByCredentials(@RequestBody CredentialsDto credentialsDto) {
-    return userService.getUserByCredentials(credentialsDto);
+  @PostMapping("/validate")
+  public UserResponseDto validateUser(@RequestBody CredentialsDto credentialsDto) {
+    return userService.validateUser(credentialsDto);
   }
 }

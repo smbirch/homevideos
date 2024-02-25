@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserResponseDto getUserByCredentials(CredentialsDto credentialsDto) {
+  public UserResponseDto validateUser(CredentialsDto credentialsDto) {
     User userByUsername = getUserHelper(credentialsDto.getUsername());
     if (!Objects.equals(
         userByUsername.getCredentials().getPassword(), credentialsDto.getPassword())) {
