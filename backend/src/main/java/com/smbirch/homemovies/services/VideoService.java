@@ -7,5 +7,6 @@ import java.util.List;
 public interface VideoService {
 
     List<VideoResponseDto> getAllVideos();
+
     VideoResponseDto getVideoById(Long id);
 }

@@ -6,7 +6,9 @@ import com.smbirch.homemovies.exceptions.NotFoundException;
 import com.smbirch.homemovies.mappers.VideoMapper;
 import com.smbirch.homemovies.repositories.VideoRepository;
 import com.smbirch.homemovies.services.VideoService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

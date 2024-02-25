@@ -12,8 +12,7 @@ import java.io.Serial;
 @Getter
 @Setter
 public class NotAuthorizedException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = -5552076667106114422L;
+    @Serial private static final long serialVersionUID = -5552076667106114422L;
 
     private String message;
 }

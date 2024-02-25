@@ -10,8 +10,7 @@ import java.io.Serial;
 @Getter
 @Setter
 public class NotFoundException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = -6496940574625196392L;
+    @Serial private static final long serialVersionUID = -6496940574625196392L;
 
     private String message;
 }
