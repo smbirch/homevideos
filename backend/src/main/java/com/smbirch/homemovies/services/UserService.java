@@ -1,5 +1,6 @@
 package com.smbirch.homemovies.services;
 
+import com.smbirch.homemovies.dtos.CredentialsDto;
 import com.smbirch.homemovies.dtos.UserRequestDto;
 import com.smbirch.homemovies.dtos.UserResponseDto;
 
@@ -9,4 +10,8 @@ public interface UserService {
     List<UserResponseDto> getAllUsers();
 
     UserResponseDto createUser(UserRequestDto userRequestDto);
+
+    UserResponseDto getUserByUsername(String username);
+
+    UserResponseDto getUserByCredentials(CredentialsDto credentialsDto);
 }
