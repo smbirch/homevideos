@@ -1,11 +1,10 @@
 package com.smbirch.homemovies.controllers;
 
+import com.smbirch.homemovies.dtos.UserRequestDto;
 import com.smbirch.homemovies.dtos.UserResponseDto;
 import com.smbirch.homemovies.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +18,10 @@ public class UserController {
     @GetMapping
     public List<UserResponseDto> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @PostMapping
+    public UserResponseDto createUser(@RequestBody UserRequestDto userRequestDto) {
+        return userService.createUser(userRequestDto);
     }
 }

@@ -5,6 +5,4 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class VideoRequestDto {
-
-}
+public class VideoRequestDto {}
