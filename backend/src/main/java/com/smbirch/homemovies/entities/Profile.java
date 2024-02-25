@@ -14,7 +14,5 @@ public class Profile {
 
     private String lastName;
 
-    @Nonnull
-    private String email;
-
+    @Nonnull private String email;
 }

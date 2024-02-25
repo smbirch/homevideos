@@ -11,5 +11,4 @@ public class VideoResponseDto {
     private String title;
 
     private String url;
-
 }
