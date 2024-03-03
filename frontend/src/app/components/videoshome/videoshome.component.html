@@ -1,0 +1,11 @@
+<div class="video-grid">
+  <div *ngFor="let video of videos" class="video-item">
+    <div class="video-wrapper">
+      <video>
+        <source [src]="video.thumbnailUrl" type="text/html">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <a class="button" routerLink="{{ video.id }}">{{ video.title }}</a>
+  </div>
+</div>

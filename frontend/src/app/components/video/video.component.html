@@ -1,0 +1,7 @@
+<div *ngIf="video" class="video-wrapper">
+  <video controls>
+    <source [src]="video.url" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+<div *ngIf="video" class="video-title">{{ video.title }}</div>

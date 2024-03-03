@@ -1,0 +1,22 @@
+.video-wrapper {
+  position: relative;
+}
+
+.video-wrapper video {
+  width: 70%;
+  height: auto;
+  display: flex;
+  border-radius: 8px;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.video-title {
+  margin-top: 10px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 15%;
+}

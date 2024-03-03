@@ -1,0 +1,27 @@
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.video-item {
+  position: relative;
+}
+
+.video-wrapper {
+  position: relative;
+}
+
+.video-item video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.video-title {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}
