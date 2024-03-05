@@ -1,0 +1,8 @@
+<div class="video-grid" *ngIf="videos && videos.length > 0">
+  <div *ngFor="let video of videos" class="video-item">
+    <div class="video-wrapper">
+      <img ngSrc="{{video.thumbnailurl}}" width="150" height="115.5" priority>
+    <a class="button" href="{{video.url}}"  target="_blank">{{ video.title }}</a>
+  </div>
+</div>
+</div>
