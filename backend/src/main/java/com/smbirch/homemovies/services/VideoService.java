@@ -9,4 +9,6 @@ public interface VideoService {
     List<VideoResponseDto> getAllVideos();
 
     VideoResponseDto getVideoById(Long id);
+
+    List<String> getAllThumbnails();
 }

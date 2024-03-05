@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +24,13 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public List<VideoResponseDto> getAllVideos() {
-
-        return videoMapper.entitiesToDtos(videoRepository.findAll());
+        List<VideoResponseDto> videos = videoMapper.entitiesToDtos(videoRepository.findAll());
+        for (VideoResponseDto video : videos) {
+            video.setUrl("https://d1vqiwu0adek5c.cloudfront.net/" + video.getUrl());
+            String tempUrl = "https://d1vqiwu0adek5c.cloudfront.net/";
+            video.setThumbnailurl( tempUrl + video.getThumbnailurl());
+        }
+        return videos;
     }
 
     @Override
@@ -34,7 +40,20 @@ public class VideoServiceImpl implements VideoService {
         if (current.isEmpty()) {
             throw new NotFoundException("Video not found.");
         }
-        System.out.println("got video by ID " + id);
-        return videoMapper.entityToDto(current.get());
+
+        VideoResponseDto video = videoMapper.entityToDto(current.get());
+        video.setUrl("https://d1vqiwu0adek5c.cloudfront.net/" + video.getUrl());
+        return video;
+    }
+
+    @Override
+    public List<String> getAllThumbnails() {
+        List<Video> videos = videoRepository.findAll();
+        List<String> videoThumbnailUrls = new ArrayList<>();
+        for (Video video : videos) {
+            videoThumbnailUrls.add(
+                    "https://d1vqiwu0adek5c.cloudfront.net/" + video.getThumbnailurl());
+        }
+        return videoThumbnailUrls;
     }
 }

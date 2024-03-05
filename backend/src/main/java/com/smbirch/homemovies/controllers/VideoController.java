@@ -28,4 +28,9 @@ public class VideoController {
     public VideoResponseDto getVideoById(@PathVariable("id") Long id) {
         return videoService.getVideoById(id);
     }
+
+    @GetMapping("/all/thumbnails")
+    public List<String> getAllThumbnails() {
+        return videoService.getAllThumbnails();
+    }
 }
