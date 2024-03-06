@@ -6,9 +6,10 @@ import com.smbirch.homemovies.exceptions.NotFoundException;
 import com.smbirch.homemovies.mappers.VideoMapper;
 import com.smbirch.homemovies.repositories.VideoRepository;
 import com.smbirch.homemovies.services.VideoService;
-
 import lombok.RequiredArgsConstructor;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,13 +25,7 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public List<VideoResponseDto> getAllVideos() {
-        List<VideoResponseDto> videos = videoMapper.entitiesToDtos(videoRepository.findAll());
-        for (VideoResponseDto video : videos) {
-            video.setUrl("https://d1vqiwu0adek5c.cloudfront.net/" + video.getUrl());
-            String tempUrl = "https://d1vqiwu0adek5c.cloudfront.net/";
-            video.setThumbnailurl( tempUrl + video.getThumbnailurl());
-        }
-        return videos;
+        return videoMapper.entitiesToDtos(videoRepository.findAll());
     }
 
     @Override
@@ -41,19 +36,21 @@ public class VideoServiceImpl implements VideoService {
             throw new NotFoundException("Video not found.");
         }
 
-        VideoResponseDto video = videoMapper.entityToDto(current.get());
-        video.setUrl("https://d1vqiwu0adek5c.cloudfront.net/" + video.getUrl());
-        return video;
+        return videoMapper.entityToDto(current.get());
     }
 
     @Override
     public List<String> getAllThumbnails() {
         List<Video> videos = videoRepository.findAll();
         List<String> videoThumbnailUrls = new ArrayList<>();
-        for (Video video : videos) {
-            videoThumbnailUrls.add(
-                    "https://d1vqiwu0adek5c.cloudfront.net/" + video.getThumbnailurl());
-        }
         return videoThumbnailUrls;
+    }
+
+    @Override
+    public List<VideoResponseDto> getPage(int page) {
+        int pageSize = 10;
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Video> videoPage = videoRepository.findAll(pageable);
+        return videoMapper.entitiesToDtos(videoPage.getContent());
     }
 }

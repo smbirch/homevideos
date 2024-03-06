@@ -11,4 +11,6 @@ public interface VideoService {
     VideoResponseDto getVideoById(Long id);
 
     List<String> getAllThumbnails();
+
+    List<VideoResponseDto> getPage(int page);
 }

@@ -25,7 +25,7 @@ export class VideoshomeComponent implements OnInit {
   constructor(public videoService: VideoService) {}
 
   ngOnInit(): void {
-    this.getVideos();
+    this.getPage(0);
   }
 
   public getVideos(): void {
@@ -40,4 +40,15 @@ export class VideoshomeComponent implements OnInit {
     );
   }
 
+  private getPage(pageNumber: number) {
+    this.videoService.getPage(pageNumber).subscribe(
+      (response: Video[]) => {
+        this.videos = response;
+      },
+      (error: HttpErrorResponse) => {
+        console.error("An error occurred while fetching videos: ", error);
+      }
+    );
+
+  }
 }

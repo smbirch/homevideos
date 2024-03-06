@@ -2,13 +2,8 @@ package com.smbirch.homemovies.controllers;
 
 import com.smbirch.homemovies.dtos.VideoResponseDto;
 import com.smbirch.homemovies.services.VideoService;
-
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +27,10 @@ public class VideoController {
     @GetMapping("/all/thumbnails")
     public List<String> getAllThumbnails() {
         return videoService.getAllThumbnails();
+    }
+
+    @GetMapping("/page")
+    public List<VideoResponseDto> getPage(@RequestParam(defaultValue = "0") int page) {
+        return videoService.getPage(page);
     }
 }
