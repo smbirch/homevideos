@@ -22,6 +22,8 @@ public class Video {
 
     private String title;
 
+    private String filename;
+
     @Getter
     private String thumbnailurl;
 

@@ -12,5 +12,7 @@ public class VideoResponseDto {
 
     private String url;
 
+    private String filename;
+
     private String thumbnailurl;
 }
