@@ -6,7 +6,6 @@ import {RouterLink} from "@angular/router";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 
 
-
 @Component({
   selector: 'app-videoshome',
   standalone: true,
@@ -22,7 +21,8 @@ import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 export class VideoshomeComponent implements OnInit {
   public videos: Video[] = [];
 
-  constructor(public videoService: VideoService) {}
+  constructor(public videoService: VideoService) {
+  }
 
   ngOnInit(): void {
     this.getPage(0);
