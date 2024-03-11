@@ -15,7 +15,7 @@
 </div>
 
 <div class="modal" *ngIf="showModal">
-  <a class="modal-link" (click)="closeModal()" routerLink="/videoshome">Home</a>
+  <a class="modal-link" (click)="goHome()">Home</a>
   <a class="modal-link" (click)="closeModal()" routerLink="/about">About</a>
   <a class="modal-link" (click)="closeModal()" routerLink="/home">Login</a>
   <a class="modal-link" (click)="logout(); closeModal()">Logout</a>

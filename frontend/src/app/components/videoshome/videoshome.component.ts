@@ -48,11 +48,11 @@ export class VideoshomeComponent implements OnInit {
 
 
   public nextPage(): void {
-    if (this.currentPage === this.totalPages) {
+    // if (this.currentPage === this.totalPages) {
     this.currentPage++;
     this.getPage(this.currentPage);
     localStorage.setItem('currentPage', this.currentPage.toString());
-    }
+    // }
   }
 
   public previousPage(): void {

@@ -47,7 +47,10 @@ export class NavbarComponent {
   goHome() {
     this.closeModal();
     localStorage.setItem('currentPage', '0')
-    this.router.navigate(['/videosHome']);
-    window.location.reload();
+    if (this.isCurrentRoute('/videoshome')) {
+      window.location.reload();
+    } else {
+      this.router.navigate(['/videoshome']);
+    }
   }
 }
