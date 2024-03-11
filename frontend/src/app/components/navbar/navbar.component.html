@@ -1,10 +1,10 @@
 <div
   class="menu-bar"
   [class.open]="showModal"
-  *ngIf="!isCurrentRoute('/login') && !isCurrentRoute('/companies')"
+  *ngIf="!isCurrentRoute('/login')"
 >
   <div class="menu-item">
-    <p class="admin">{{ isAdmin() ? "ACTING AS ADMIN" : "" }}</p>
+    <a class="modal-link" (click)="goHome()">Home Videos</a>
   </div>
   <div class="spacer"></div>
   <div class="menu-item hamburger-menu" (click)="toggleModal()">
@@ -15,14 +15,8 @@
 </div>
 
 <div class="modal" *ngIf="showModal">
-  <a class="modal-link" (click)="closeModal()" routerLink="/home">Home</a>
-  <a class="modal-link" (click)="closeModal()" routerLink="/teams">Teams</a>
-  <a
-    *ngIf="isAdmin()"
-    class="modal-link"
-    (click)="closeModal()"
-    routerLink="/users-registry"
-  >Users Registry</a
-  >
+  <a class="modal-link" (click)="closeModal()" routerLink="/videoshome">Home</a>
+  <a class="modal-link" (click)="closeModal()" routerLink="/about">About</a>
+  <a class="modal-link" (click)="closeModal()" routerLink="/home">Login</a>
   <a class="modal-link" (click)="logout(); closeModal()">Logout</a>
 </div>

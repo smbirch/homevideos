@@ -3,10 +3,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 0px;
-  width: 99.85vw;
   background-color: #051622;
   color: white;
-  margin: -8px 0px 30px -8px;
+  margin: -8px 1px 30px 1px;
   border: 1px solid #deb992;
 }
 
@@ -62,6 +61,7 @@
   align-content: center;
   align-items: center;
   display: flex;
+  margin-top: -38px;
 }
 
 .menu-bar.open .modal {
@@ -86,6 +86,5 @@
 }
 
 .admin {
-  color: #f24e1e;
-  font-weight: 100;
+  color: #1ba098;
 }
