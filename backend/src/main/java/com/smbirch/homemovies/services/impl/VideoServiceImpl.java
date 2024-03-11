@@ -51,6 +51,10 @@ public class VideoServiceImpl implements VideoService {
         int pageSize = 10;
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<Video> videoPage = videoRepository.findAll(pageable);
+        System.out.println(page);
+        if (videoPage.isEmpty()) {
+            throw new NotFoundException("No more pages to fetch");
+        }
         return videoMapper.entitiesToDtos(videoPage.getContent());
     }
 }
