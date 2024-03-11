@@ -20,12 +20,18 @@ import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 })
 export class VideoshomeComponent implements OnInit {
   public videos: Video[] = [];
+  public currentPage: number = 0;
+  public totalPages: number = 0;
 
   constructor(public videoService: VideoService) {
   }
 
   ngOnInit(): void {
-    this.getPage(0);
+    const storedPage = localStorage.getItem('currentPage');
+    if (storedPage !== null) {
+      this.currentPage = parseInt(storedPage, 10);
+    }
+    this.getPage(this.currentPage);
   }
 
   public getVideos(): void {
@@ -40,7 +46,24 @@ export class VideoshomeComponent implements OnInit {
     );
   }
 
-  private getPage(pageNumber: number) {
+
+  public nextPage(): void {
+    // if (this.currentPage === this.totalPages) {
+    this.currentPage++;
+    this.getPage(this.currentPage);
+    localStorage.setItem('currentPage', this.currentPage.toString());
+    // }
+  }
+
+  public previousPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.getPage(this.currentPage);
+      localStorage.setItem('currentPage', this.currentPage.toString());
+    }
+  }
+
+  private getPage(pageNumber: number): void {
     this.videoService.getPage(pageNumber).subscribe(
       (response: Video[]) => {
         this.videos = response;
@@ -49,6 +72,5 @@ export class VideoshomeComponent implements OnInit {
         console.error("An error occurred while fetching videos: ", error);
       }
     );
-
   }
 }

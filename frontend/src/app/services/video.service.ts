@@ -26,6 +26,5 @@ export class VideoService {
 
   public getPage(pageNumber: number) {
     return this.http.get<Video[]>(`${this.apiServerUrl}/page?page=${pageNumber}`)
-
   }
 }

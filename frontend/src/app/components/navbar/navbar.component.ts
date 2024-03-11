@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {NgIf} from "@angular/common";
@@ -23,7 +23,6 @@ export class NavbarComponent {
     return this.router.url === route;
   }
 
-
   toggleModal() {
     this.showModal = !this.showModal;
   }
@@ -43,5 +42,15 @@ export class NavbarComponent {
     this.toggleModal();
     localStorage.clear();
     this.router.navigate(['/home']);
+  }
+
+  goHome() {
+    this.closeModal();
+    localStorage.setItem('currentPage', '0')
+    if (this.isCurrentRoute('/videoshome')) {
+      window.location.reload();
+    } else {
+      this.router.navigate(['/videoshome']);
+    }
   }
 }
