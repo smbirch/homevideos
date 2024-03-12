@@ -1,14 +1,15 @@
-
 <div class="video-grid" *ngIf="videos && videos.length > 0">
   <div *ngFor="let video of videos" class="video-item">
     <div class="video-wrapper">
-      <img [src]="video.thumbnailurl" width="150" height="115.5" priority>
+      <a [href]="video.url" target="_blank">
+        <img [src]="video.thumbnailurl" width="150" height="115.5" priority>
+      </a>
       <a class="video-title" [href]="video.url" target="_blank">{{ video.title }}</a>
     </div>
   </div>
 </div>
 <div class="pagination-buttons">
-  <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+  <button (click)="previousPage()" [disabled]="currentPage <= 0">Previous</button>
   <span>{{ currentPage + 1 }}</span>
   <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
 </div>

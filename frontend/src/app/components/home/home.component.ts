@@ -17,7 +17,6 @@ import {CredentialsDto} from "../../DTOs/credentialsDto";
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-
   credentials: CredentialsDto = { username: '', password: '' };
   loginError: boolean = false;
 
@@ -43,9 +42,9 @@ export class HomeComponent {
 
         // Navigate based on user role
         if (user.admin) {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/videoshome']);
         } else {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/videoshome']);
         }
       },
       (error) => {
