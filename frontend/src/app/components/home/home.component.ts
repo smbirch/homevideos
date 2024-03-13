@@ -31,11 +31,10 @@ export class HomeComponent {
         localStorage.setItem('currentUser', JSON.stringify({
           id: user.id,
           username: user.username,
-          firstName: user.profile?.firstName,
-          lastName: user.profile?.lastName,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
           active: user.active,
-          status: user.status,
           admin: user.admin,
           isLoggedIn: true
         }));

@@ -11,4 +11,6 @@ public class ProfileDto {
     private String lastName;
 
     private String email;
+
+    private boolean admin;
 }

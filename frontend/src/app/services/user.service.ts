@@ -20,7 +20,7 @@ export class UserService {
 
   public login(credentials: CredentialsDto): Observable<User> {
     // @ts-ignore
-    return this.http.post<User>(`${this.usersUrl}/login`, credentials).pipe(
+    return this.http.post<User>(`${this.apiServerUrl}/validate`, credentials).pipe(
       catchError(error => {
         return throwError(error);
       })

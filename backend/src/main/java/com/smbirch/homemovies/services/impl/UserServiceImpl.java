@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
         User userByUsername = getUserHelper(credentialsDto.getUsername());
         if (!Objects.equals(
                 userByUsername.getCredentials().getPassword(), credentialsDto.getPassword())) {
-            throw new BadRequestException("Password is incorrect");
+            throw new BadRequestException("Username or password is incorrect");
         } else {
             return userMapper.entityToDto(userByUsername);
         }
