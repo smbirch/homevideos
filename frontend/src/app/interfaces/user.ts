@@ -1,14 +1,14 @@
+import {ProfileDto} from "../DTOs/profileDto";
+
 export interface User {
   username: string;
-  password: any;
-  firstName: string;
-  lastName: string;
-  email: string;
+  profile: ProfileDto;
 }
-export const DEFAULT_USER: User = {
-  username: '',
-  password: null,
-  firstName: '',
-  lastName: '',
-  email: ''
-};
+// export const DEFAULT_USER: User = {
+//   username: '',
+//   password: null,
+//   firstName: '',
+//   lastName: '',
+//   email: '',
+//   admin: false
+// };

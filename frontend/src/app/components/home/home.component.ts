@@ -25,22 +25,20 @@ export class HomeComponent {
 
   login() {
     this.userService.login(this.credentials).subscribe(
-      (user: any) => {
+      (user: User) => {
         console.log(user)
         // Save user info to local storage
         localStorage.setItem('currentUser', JSON.stringify({
-          id: user.id,
           username: user.username,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          active: user.active,
-          admin: user.admin,
+          firstName: user.profile.firstName,
+          lastName: user.profile.lastName,
+          email: user.profile.email,
+          admin: user.profile.admin,
           isLoggedIn: true
         }));
 
         // Navigate based on user role
-        if (user.admin) {
+        if (user.profile.admin) {
           this.router.navigate(['/videoshome']);
         } else {
           this.router.navigate(['/videoshome']);
