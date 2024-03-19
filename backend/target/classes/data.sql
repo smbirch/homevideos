@@ -128,3 +128,5 @@ INSERT INTO video (url, title, thumbnailurl) VALUES ('https://d1vqiwu0adek5c.clo
 INSERT INTO video (url, title, thumbnailurl) VALUES ('https://d1vqiwu0adek5c.cloudfront.net/content/0549897390(8).mp4', '0549897390(8)', 'https://d1vqiwu0adek5c.cloudfront.net/content/thumbnails/0549897390(8).png');
 INSERT INTO video (url, title, thumbnailurl) VALUES ('https://d1vqiwu0adek5c.cloudfront.net/content/0549897390(9).mp4', '0549897390(9)', 'https://d1vqiwu0adek5c.cloudfront.net/content/thumbnails/0549897390(9).png');
 INSERT INTO video (url, title, thumbnailurl) VALUES ('https://d1vqiwu0adek5c.cloudfront.net/content/0549897390.mp4', '0549897390', 'https://d1vqiwu0adek5c.cloudfront.net/content/thumbnails/0549897390.png');
+INSERT INTO user_table (username, first_name, last_name, email, admin, deleted, password, id)
+VALUES ('spencer', 'Spencer', 'Birch', 'sb@email.com', true, false, 'password', 1);

@@ -73,7 +73,6 @@ public class UserServiceImpl implements UserService {
         }
         user.setProfile(userMapper.requestDtoToEntity(userRequestDto).getProfile());
         user.setCredentials(userMapper.requestDtoToEntity(userRequestDto).getCredentials());
-
         return userMapper.entityToDto(userRepository.saveAndFlush(user));
     }
 

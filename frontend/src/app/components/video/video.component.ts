@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {Video} from "../../interfaces/video";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {VideoService} from "../../services/video.service";
 
 @Component({
@@ -18,7 +18,8 @@ export class VideoComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public videoService: VideoService
+    public videoService: VideoService,
+    private router: Router
   ) {
   }
 
@@ -41,4 +42,7 @@ export class VideoComponent implements OnInit {
       )
   }
 
+  goBack() {
+    this.router.navigate(['/']);
+  }
 }

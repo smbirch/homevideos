@@ -48,7 +48,7 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public List<VideoResponseDto> getPage(int page) {
-        int pageSize = 10;
+        int pageSize = 12;
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<Video> videoPage = videoRepository.findAll(pageable);
         if (videoPage.isEmpty()) {
