@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {Video} from "../../interfaces/video";
 import {ActivatedRoute} from "@angular/router";
@@ -13,7 +13,7 @@ import {VideoService} from "../../services/video.service";
   templateUrl: './video.component.html',
   styleUrl: './video.component.css'
 })
-export class VideoComponent {
+export class VideoComponent implements OnInit {
   public video!: Video;
 
   constructor(
