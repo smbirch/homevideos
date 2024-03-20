@@ -25,7 +25,7 @@ public class Video {
     private String filename;
 
     @Getter
-    private String thumbnailurl;
+    private String description;
 
     @ManyToMany(mappedBy = "likedVideos")
     private List<User> likedByUsers = new ArrayList<>();
