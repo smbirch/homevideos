@@ -36,8 +36,6 @@ public class VideoServiceImpl implements VideoService {
             throw new NotFoundException("Video not found.");
         }
 
-        System.out.println(videoMapper.entityToDto(current.get()));
-
         return videoMapper.entityToDto(current.get());
     }
 
