@@ -1,5 +1,6 @@
 package com.smbirch.homemovies.services.impl;
 
+import com.smbirch.homemovies.dtos.VideoRequestDto;
 import com.smbirch.homemovies.dtos.VideoResponseDto;
 import com.smbirch.homemovies.entities.Video;
 import com.smbirch.homemovies.exceptions.NotFoundException;
@@ -55,5 +56,14 @@ public class VideoServiceImpl implements VideoService {
             throw new NotFoundException("No more pages to fetch");
         }
         return videoMapper.entitiesToDtos(videoPage.getContent());
+    }
+
+    @Override
+    public VideoResponseDto updateVideoTitle(VideoRequestDto videoRequestDto) {
+        Video video = videoRepository.findById(videoRequestDto.getId())
+                .orElseThrow(() -> new NotFoundException("Video not found with ID: " + videoRequestDto.getId()));
+        video.setTitle(videoRequestDto.getTitle());
+
+        return videoMapper.entityToDto(videoRepository.saveAndFlush(video));
     }
 }

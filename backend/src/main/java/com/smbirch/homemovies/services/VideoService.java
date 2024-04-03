@@ -1,5 +1,6 @@
 package com.smbirch.homemovies.services;
 
+import com.smbirch.homemovies.dtos.VideoRequestDto;
 import com.smbirch.homemovies.dtos.VideoResponseDto;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface VideoService {
     List<String> getAllThumbnails();
 
     List<VideoResponseDto> getPage(int page);
+
+    VideoResponseDto updateVideoTitle(VideoRequestDto videoRequestDto);
 }

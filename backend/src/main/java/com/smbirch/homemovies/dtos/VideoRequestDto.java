@@ -5,4 +5,11 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class VideoRequestDto {}
+public class VideoRequestDto {
+    private Long id;
+
+    private String title;
+
+    private String description;
+
+}

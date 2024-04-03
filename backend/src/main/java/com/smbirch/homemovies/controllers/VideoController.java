@@ -1,5 +1,6 @@
 package com.smbirch.homemovies.controllers;
 
+import com.smbirch.homemovies.dtos.VideoRequestDto;
 import com.smbirch.homemovies.dtos.VideoResponseDto;
 import com.smbirch.homemovies.services.VideoService;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,10 @@ public class VideoController {
     @GetMapping("/page")
     public List<VideoResponseDto> getPage(@RequestParam(defaultValue = "0") int page) {
         return videoService.getPage(page);
+    }
+
+    @PatchMapping("/update/title")
+    public VideoResponseDto updateVideoTitle(@RequestBody VideoRequestDto videoRequestDto) {
+        return videoService.updateVideoTitle(videoRequestDto);
     }
 }
