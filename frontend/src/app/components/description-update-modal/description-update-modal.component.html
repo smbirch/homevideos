@@ -1,0 +1,15 @@
+<div class="modal-overlay" *ngIf="isOpen">
+  <div class="modal">
+    <div class="modal-content">
+      <p>Current Description: {{ currentDescription }}</p>
+      <div class="form-group">
+        <label for="newDescription">New Description: </label>
+        <input type="text" id="newDescription" [(ngModel)]="newDescription" required #newDescriptionInput>
+      </div>
+    </div>
+    <div class="modal-buttons">
+      <button [disabled]="newDescription.trim() === ''" (click)="updateDescription()">Accept</button>
+      <button (click)="onCloseModal()">Cancel</button>
+    </div>
+  </div>
+</div>

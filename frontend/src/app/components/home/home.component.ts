@@ -30,10 +30,12 @@ export class HomeComponent {
         // Save user info to local storage
         localStorage.setItem('currentUser', JSON.stringify({
           username: user.username,
-          firstName: user.profile.firstName,
-          lastName: user.profile.lastName,
-          email: user.profile.email,
-          admin: user.profile.admin,
+          profile: {
+            firstName: user.profile.firstName,
+            lastName: user.profile.lastName,
+            email: user.profile.email,
+            admin: user.profile.admin
+          },
           isLoggedIn: true
         }));
 

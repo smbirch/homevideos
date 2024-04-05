@@ -20,6 +20,19 @@
   color: white;
   margin-top: 10px;
   margin-left: 15%;
+  transition: color 0.3s ease;
+}
+
+.video-title:hover, .video-description:hover {
+  color: #deb992;
+  cursor: pointer;
+}
+.video-description {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-left: 15%;
+  color: white;
+  transition: color 0.3s ease;
 }
 
 .back-button {
