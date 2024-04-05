@@ -51,7 +51,7 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public List<VideoResponseDto> getPage(int page) {
         int pageSize = 12;
-        Sort sort = Sort.by(Sort.Direction.ASC, "id"); 
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         Page<Video> videoPage = videoRepository.findAll(pageable);
         if (videoPage.isEmpty()) {
@@ -62,9 +62,16 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public VideoResponseDto updateVideoTitle(VideoRequestDto videoRequestDto) {
-        Video video = videoRepository.findById(videoRequestDto.getId())
-                .orElseThrow(() -> new NotFoundException("Video not found with ID: " + videoRequestDto.getId()));
+        Video video = videoRepository.findById(videoRequestDto.getId()).orElseThrow(() -> new NotFoundException("Video not found with ID: " + videoRequestDto.getId()));
         video.setTitle(videoRequestDto.getTitle());
+
+        return videoMapper.entityToDto(videoRepository.saveAndFlush(video));
+    }
+
+    @Override
+    public VideoResponseDto updateVideoDescription(VideoRequestDto videoRequestDto) {
+        Video video = videoRepository.findById(videoRequestDto.getId()).orElseThrow(() -> new NotFoundException("Video not found with ID: " + videoRequestDto.getId()));
+        video.setDescription(videoRequestDto.getDescription());
 
         return videoMapper.entityToDto(videoRepository.saveAndFlush(video));
     }

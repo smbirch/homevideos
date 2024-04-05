@@ -39,4 +39,9 @@ public class VideoController {
     public VideoResponseDto updateVideoTitle(@RequestBody VideoRequestDto videoRequestDto) {
         return videoService.updateVideoTitle(videoRequestDto);
     }
+
+    @PatchMapping("/update/description")
+    public VideoResponseDto updateVideoDescription(@RequestBody VideoRequestDto videoRequestDto) {
+        return videoService.updateVideoDescription(videoRequestDto);
+    }
 }

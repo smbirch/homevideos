@@ -32,4 +32,8 @@ export class VideoService {
   public updateVideoTitle(videoRequestDto: VideoRequestDto): Observable<Video> {
     return this.http.patch<Video>(`${this.apiServerUrl}/update/title`, videoRequestDto);
   }
+
+  updateVideoDescription(videoRequestDto: VideoRequestDto) {
+    return this.http.patch<Video>(`${this.apiServerUrl}/update/description`, videoRequestDto);
+  }
 }

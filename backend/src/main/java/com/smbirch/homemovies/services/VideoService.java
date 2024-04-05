@@ -16,4 +16,6 @@ public interface VideoService {
     List<VideoResponseDto> getPage(int page);
 
     VideoResponseDto updateVideoTitle(VideoRequestDto videoRequestDto);
+
+    VideoResponseDto updateVideoDescription(VideoRequestDto videoRequestDto);
 }
