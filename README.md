@@ -98,3 +98,17 @@ PATCH /content/update/title
   "description": "not_required"
 }
 ```
+
+#### Update video description
+
+```http request
+PATCH /content/update/description
+```
+
+```json 
+{
+  "id": "video_id_required",
+  "title": "not_required",
+  "description": "new_description"
+}
+```
