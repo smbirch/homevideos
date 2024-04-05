@@ -26,7 +26,11 @@
   <app-description-update-modal
     [isOpen]="isDescriptionModalOpen"
     [currentDescription]="video.description"
-    (closeModal)="onCloseDescriptionModal()">
+    [currentTitle]="video.title"
+    [videoId]="video.id"
+    (closeModal)="onCloseDescriptionModal()"
+    (descriptionUpdated)="updateDescription($event)">
+
   </app-description-update-modal>
 </ng-container>
 <button class="back-button" (click)="goBack()">Back</button>

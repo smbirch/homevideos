@@ -18,10 +18,10 @@ import { Location } from '@angular/common';
 export class TitleUpdateModalComponent {
   @Input() isOpen: boolean = false;
   @Input() currentTitle: string = '';
+  @Input() videoId: number = 0;
   @Output() closeModal = new EventEmitter<void>();
   @Output() titleUpdated = new EventEmitter<string>();
   newTitle: string = '';
-  @Input() videoId: number = 0;
 
   constructor(private videoService: VideoService, private location: Location) {
   }

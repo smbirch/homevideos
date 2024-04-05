@@ -105,4 +105,8 @@ export class VideoComponent implements OnInit {
   updateTitle(newTitle: string) {
     this.video.title = newTitle;
   }
+
+  updateDescription(newDescription: string) {
+    this.video.description = newDescription;
+  }
 }
