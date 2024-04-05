@@ -1,0 +1,35 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  max-width: 80%;
+  width: 400px; /* Adjust width as needed */
+}
+
+.modal-content {
+  text-align: center;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  margin-top: 10px; /* Add space between text box and buttons */
+
+}
+
+.modal-buttons button {
+  margin: 0 5px; /* Add space between buttons */
+}
