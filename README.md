@@ -10,19 +10,19 @@ Digital Ocean at www.homevideos.smbirch.com
 #### Get all users
 
 ```http request
-  GET /users
+GET /users
 ```
 
 #### Get user by username
 
 ```http request
-  GET /users/{username}
+GET /users/{username}
 ```
 
 #### Create new user
 
 ```http request
-  POST /users
+POST /users
 ```
 
 ```json
@@ -43,7 +43,7 @@ Digital Ocean at www.homevideos.smbirch.com
 #### Validate a user
 
 ```http request
-  POST /users/validate
+POST /users/validate
 ```
 
 ```json 
@@ -60,7 +60,7 @@ Digital Ocean at www.homevideos.smbirch.com
 #### Get all videos
 
 ```http request
-  GET /content/all
+GET /content/all
 ```
 
 #### Get video by ID
