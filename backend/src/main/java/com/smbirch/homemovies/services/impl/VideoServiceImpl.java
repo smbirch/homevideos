@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -50,7 +51,8 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public List<VideoResponseDto> getPage(int page) {
         int pageSize = 12;
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Sort sort = Sort.by(Sort.Direction.ASC, "id"); 
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
         Page<Video> videoPage = videoRepository.findAll(pageable);
         if (videoPage.isEmpty()) {
             throw new NotFoundException("No more pages to fetch");

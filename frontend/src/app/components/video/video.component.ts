@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {NgIf} from "@angular/common";
-import {ActivatedRoute, Router} from '@angular/router';
-import {Video} from '../../interfaces/video';
-import {VideoService} from '../../services/video.service';
-import {UserService} from '../../services/user.service';
-import {User} from '../../interfaces/user';
-import {TitleUpdateModalComponent} from "../title-update-modal/title-update-modal.component";
-import {DescriptionUpdateModalComponent} from "../description-update-modal/description-update-modal.component";
+import {Component, OnInit, SimpleChanges} from '@angular/core';
+import { NgIf } from "@angular/common";
+import { ActivatedRoute, Router } from '@angular/router';
+import { Video } from '../../interfaces/video';
+import { VideoService } from '../../services/video.service';
+import { UserService } from '../../services/user.service';
+import { User } from '../../interfaces/user';
+import { TitleUpdateModalComponent } from "../title-update-modal/title-update-modal.component";
+import { DescriptionUpdateModalComponent } from "../description-update-modal/description-update-modal.component";
 
 @Component({
   selector: 'app-video',
@@ -38,6 +38,14 @@ export class VideoComponent implements OnInit {
     this.getCurrentUser();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['video'] && !changes['video'].firstChange) {
+      console.log('Video data changed:', this.video);
+      // Update title or reload data as needed
+      console.log("change detected")
+    }
+  }
+
   public getVideo(): void {
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
@@ -57,10 +65,8 @@ export class VideoComponent implements OnInit {
 
   onClickTitle(): void {
     if (this.currentUser && this.currentUser.profile && this.currentUser.profile.admin) {
-      console.log('User is logged in as admin. Display modal for updating title.');
       this.openTitleModal()
     } else {
-      console.log('User is not logged in as admin or not logged in at all.');
       window.alert('You must be logged in as an admin user to change the title');
     }
   }
@@ -74,7 +80,6 @@ export class VideoComponent implements OnInit {
 
   onClickDescription() {
     if (this.currentUser && this.currentUser.profile && this.currentUser.profile.admin) {
-      console.log('User is logged in as admin. Display modal for updating description.');
       this.openDescriptionModal()
     } else {
       window.alert('You must be logged in as an admin user to change the description');
@@ -95,5 +100,9 @@ export class VideoComponent implements OnInit {
 
   onCloseDescriptionModal() {
     this.isDescriptionModalOpen = false;
+  }
+
+  updateTitle(newTitle: string) {
+    this.video.title = newTitle;
   }
 }

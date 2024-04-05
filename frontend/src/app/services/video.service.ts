@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Video} from "../interfaces/video";
+import {VideoRequestDto} from "../DTOs/video-request-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,9 @@ export class VideoService {
 
   public getPage(pageNumber: number) {
     return this.http.get<Video[]>(`${this.apiServerUrl}/page?page=${pageNumber}`)
+  }
+
+  public updateVideoTitle(videoRequestDto: VideoRequestDto): Observable<Video> {
+    return this.http.patch<Video>(`${this.apiServerUrl}/update/title`, videoRequestDto);
   }
 }

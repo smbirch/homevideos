@@ -12,7 +12,9 @@
   <app-title-update-modal
     [isOpen]="isTitleModalOpen"
     [currentTitle]="video.title"
-    (closeModal)="onCloseTitleModal()">
+    [videoId]="video.id"
+    (closeModal)="onCloseTitleModal()"
+    (titleUpdated)="updateTitle($event)">
   </app-title-update-modal>
 </ng-container>
 
