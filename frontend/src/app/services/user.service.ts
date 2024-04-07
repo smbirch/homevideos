@@ -13,6 +13,22 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  isSessionValid(): boolean {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const userData = JSON.parse(currentUser);
+      const currentTime = new Date().getTime();
+      const sessionTimeout = 24 * 60 * 60 * 1000; // 24 hours
+      if (currentTime - userData.timestamp > sessionTimeout) {
+        // Session has expired - remove expired session data
+        localStorage.removeItem('currentUser');
+        return false;
+      }
+      return true; // Session is still valid
+    }
+    return false;
+  }
+
   validateUser(username: string, password: string): Observable<any> {
     const requestBody = {username, password};
     return this.http.post<any>(`${this.apiServerUrl}/validate`, requestBody, {observe: 'response'});

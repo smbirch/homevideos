@@ -36,7 +36,8 @@ export class HomeComponent {
             email: user.profile.email,
             admin: user.profile.admin
           },
-          isLoggedIn: true
+          isLoggedIn: true,
+          timestamp: new Date().getTime()
         }));
 
         // Navigate based on user role
