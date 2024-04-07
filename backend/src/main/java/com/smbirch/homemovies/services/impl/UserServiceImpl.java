@@ -9,6 +9,7 @@ import com.smbirch.homemovies.exceptions.BadRequestException;
 import com.smbirch.homemovies.exceptions.NotFoundException;
 import com.smbirch.homemovies.mappers.UserMapper;
 import com.smbirch.homemovies.repositories.UserRepository;
+import com.smbirch.homemovies.services.PasswordEncoder;
 import com.smbirch.homemovies.services.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     private User getUserHelper(String username) {
         Optional<User> userToCheckFor = userRepository.findByCredentials_Username(username);
@@ -51,6 +53,7 @@ public class UserServiceImpl implements UserService {
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
         User user = new User();
         CredentialsDto credentials = userRequestDto.getCredentials();
+        credentials.setPassword(passwordEncoder.hashPassword(credentials.getPassword()));
         ProfileDto profile = userRequestDto.getProfile();
 
         if (credentials == null
