@@ -50,7 +50,6 @@ POST /users/validate
 
 ```json 
 {
-  "credentials": {
     "username": "example_username",
     "password": "example_password"
   }
