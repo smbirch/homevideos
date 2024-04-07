@@ -31,6 +31,9 @@ public class User {
     @Embedded
     private Profile profile;
 
+//    @Column(nullable = false)
+//    private String passwordSalt;
+
     @ManyToMany
     @JoinTable(
             name = "user_likes",

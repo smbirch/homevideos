@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
+import java.util.Base64;
+
 @Service
 @RequiredArgsConstructor
 public class PasswordEncoderImpl implements PasswordEncoder {
@@ -20,4 +23,5 @@ public class PasswordEncoderImpl implements PasswordEncoder {
     public boolean verifyPassword(String rawPassword, String encodedPassword) {
         return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
     }
+
 }

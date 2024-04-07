@@ -28,13 +28,14 @@ public class UserController {
         return userService.createUser(userRequestDto);
     }
 
+    @PostMapping("/validate")
+    public UserResponseDto validateUser(@RequestBody CredentialsDto credentialsDto) {
+        return userService.validateUser(credentialsDto);
+    }
+
     @GetMapping("/{username}")
     public UserResponseDto getUserByUsername(@PathVariable("username") String username) {
         return userService.getUserByUsername(username);
     }
 
-    @PostMapping("/validate")
-    public UserResponseDto validateUser(@RequestBody CredentialsDto credentialsDto) {
-        return userService.validateUser(credentialsDto);
-    }
 }
