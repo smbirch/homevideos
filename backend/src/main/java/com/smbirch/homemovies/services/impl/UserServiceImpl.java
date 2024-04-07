@@ -11,13 +11,10 @@ import com.smbirch.homemovies.mappers.UserMapper;
 import com.smbirch.homemovies.repositories.UserRepository;
 import com.smbirch.homemovies.services.PasswordEncoder;
 import com.smbirch.homemovies.services.UserService;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -51,31 +48,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
-        User user = new User();
         CredentialsDto credentials = userRequestDto.getCredentials();
-        credentials.setPassword(passwordEncoder.hashPassword(credentials.getPassword()));
         ProfileDto profile = userRequestDto.getProfile();
 
-        if (credentials == null
-                || profile == null
-                || profile.getEmail() == null
-                || credentials.getPassword() == null
-                || credentials.getUsername() == null) {
+        if (credentials == null || profile == null || profile.getEmail() == null || credentials.getPassword() == null || credentials.getUsername() == null) {
             throw new BadRequestException("A required parameter is missing");
         }
-        for (User userFromRepo : userRepository.findAll()) {
-            if (userFromRepo.getCredentials().getUsername().equals(credentials.getUsername())) {
-                if (userFromRepo.isDeleted()) {
-                    userFromRepo.setDeleted(false);
-                    userRepository.flush();
-                    return userMapper.entityToDto(userFromRepo);
-                } else {
-                    throw new BadRequestException("This username is already in use.");
-                }
-            }
+        if (userRepository.existsByCredentials_Username(credentials.getUsername())) {
+            throw new BadRequestException("This username is already in use.");
         }
+
+        String hashedPassword = passwordEncoder.hashPassword(credentials.getPassword());
+        userRequestDto.getCredentials().setPassword(hashedPassword);
+        User user = new User();
         user.setProfile(userMapper.requestDtoToEntity(userRequestDto).getProfile());
         user.setCredentials(userMapper.requestDtoToEntity(userRequestDto).getCredentials());
+
         return userMapper.entityToDto(userRepository.saveAndFlush(user));
     }
 
@@ -87,8 +75,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto validateUser(CredentialsDto credentialsDto) {
         User userByUsername = getUserHelper(credentialsDto.getUsername());
-        if (!Objects.equals(
-                userByUsername.getCredentials().getPassword(), credentialsDto.getPassword())) {
+
+        boolean doesPasswordMatch = passwordEncoder.verifyPassword(credentialsDto.getPassword(), userByUsername.getCredentials().getPassword());
+
+        if (!doesPasswordMatch) {
             throw new BadRequestException("Username or password is incorrect");
         } else {
             return userMapper.entityToDto(userByUsername);
