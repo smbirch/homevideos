@@ -777,6 +777,9 @@ VALUES ('https://d1vqiwu0adek5c.cloudfront.net/content/0549897390(7).mp4', '0549
         'https://d1vqiwu0adek5c.cloudfront.net/content/thumbnails/0549897390(7).png', '0549897390(7)',
         'This is the description');
 
-
-INSERT INTO user_table (username, first_name, last_name, email, admin, deleted, password, id)
-VALUES ('spencer', 'Spencer', 'Birch', 'sb@email.com', true, false, 'password', 1);
+--
+-- INSERT INTO user_table (username, first_name, last_name, email, admin, deleted, password)
+-- VALUES ('spencer', 'Spencer', 'Birch', 'sb@email.com', true, false, 'password');
+--
+-- INSERT INTO user_table (username, first_name, last_name, email, admin, deleted, password)
+-- VALUES ('mom', 'Bettie', 'Birch', 'hsdiciple@gmail.com', true, false, 'momspassword')
