@@ -1,12 +1,12 @@
 import {Component, OnInit, SimpleChanges} from '@angular/core';
-import { NgIf } from "@angular/common";
-import { ActivatedRoute, Router } from '@angular/router';
-import { Video } from '../../interfaces/video';
-import { VideoService } from '../../services/video.service';
-import { UserService } from '../../services/user.service';
-import { User } from '../../interfaces/user';
-import { TitleUpdateModalComponent } from "../title-update-modal/title-update-modal.component";
-import { DescriptionUpdateModalComponent } from "../description-update-modal/description-update-modal.component";
+import {NgIf} from "@angular/common";
+import {ActivatedRoute, Router} from '@angular/router';
+import {Video} from '../../interfaces/video';
+import {VideoService} from '../../services/video.service';
+import {UserService} from '../../services/user.service';
+import {User} from '../../interfaces/user';
+import {TitleUpdateModalComponent} from "../title-update-modal/title-update-modal.component";
+import {DescriptionUpdateModalComponent} from "../description-update-modal/description-update-modal.component";
 
 @Component({
   selector: 'app-video',
@@ -19,6 +19,7 @@ import { DescriptionUpdateModalComponent } from "../description-update-modal/des
     DescriptionUpdateModalComponent
   ]
 })
+
 export class VideoComponent implements OnInit {
   public video!: Video;
   public currentUser: User | null = null;
@@ -36,14 +37,6 @@ export class VideoComponent implements OnInit {
   ngOnInit(): void {
     this.getVideo();
     this.getCurrentUser();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['video'] && !changes['video'].firstChange) {
-      console.log('Video data changed:', this.video);
-      // Update title or reload data as needed
-      console.log("change detected")
-    }
   }
 
   public getVideo(): void {
@@ -64,6 +57,7 @@ export class VideoComponent implements OnInit {
   }
 
   onClickTitle(): void {
+    this.getCurrentUser();
     if (this.currentUser && this.currentUser.profile && this.currentUser.profile.admin) {
       this.openTitleModal()
     } else {
@@ -74,7 +68,12 @@ export class VideoComponent implements OnInit {
   getCurrentUser(): void {
     const currentUserString = localStorage.getItem('currentUser');
     if (currentUserString) {
-      this.currentUser = JSON.parse(currentUserString);
+      if (this.userService.isSessionValid()) {
+        this.currentUser = JSON.parse(currentUserString);
+      } else {
+        this.currentUser = null;
+        console.log("Current user does not exist or session has expired");
+      }
     }
   }
 
@@ -94,7 +93,7 @@ export class VideoComponent implements OnInit {
     this.isTitleModalOpen = false;
   }
 
-  private openDescriptionModal() {
+  openDescriptionModal() {
     this.isDescriptionModalOpen = true;
   }
 
