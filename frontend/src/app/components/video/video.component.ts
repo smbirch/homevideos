@@ -22,7 +22,7 @@ import {DescriptionUpdateModalComponent} from "../description-update-modal/descr
 
 export class VideoComponent implements OnInit {
   public video!: Video;
-  public currentUser: User | null = null;
+  public currentUser: null | undefined = null;
   isTitleModalOpen: boolean = false;
   isDescriptionModalOpen: boolean = false;
 
@@ -36,7 +36,7 @@ export class VideoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getVideo();
-    this.getCurrentUser();
+    this.userService.getCurrentUser()
   }
 
   public getVideo(): void {
@@ -57,8 +57,8 @@ export class VideoComponent implements OnInit {
   }
 
   onClickTitle(): void {
-    this.getCurrentUser();
-    if (this.currentUser && this.currentUser.profile && this.currentUser.profile.admin) {
+    this.currentUser = this.userService.getCurrentUser()
+    if (this.currentUser && this.currentUser["profile"]["admin"]) {
       this.openTitleModal()
     } else {
       window.alert('You must be logged in as an admin user to change the title');
@@ -78,7 +78,8 @@ export class VideoComponent implements OnInit {
   }
 
   onClickDescription() {
-    if (this.currentUser && this.currentUser.profile && this.currentUser.profile.admin) {
+    this.currentUser = this.userService.getCurrentUser()
+    if (this.currentUser && this.currentUser["profile"]["admin"]) {
       this.openDescriptionModal()
     } else {
       window.alert('You must be logged in as an admin user to change the description');

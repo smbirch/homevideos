@@ -9,9 +9,23 @@ import {User} from "../interfaces/user";
 })
 export class UserService {
   private apiServerUrl = 'http://localhost:8080/users';
+  public currentUser: null | undefined;
 
   constructor(private http: HttpClient) {
   }
+
+  getCurrentUser = ():null | undefined  => {
+    const currentUserString = localStorage.getItem('currentUser');
+    if (currentUserString) {
+      if (this.isSessionValid()) {
+        this.currentUser = JSON.parse(currentUserString);
+      } else {
+        this.currentUser = null;
+        console.log("Current user does not exist or session has expired");
+      }
+    }
+    return this.currentUser;
+  };
 
   isSessionValid(): boolean {
     const currentUser = localStorage.getItem('currentUser');
