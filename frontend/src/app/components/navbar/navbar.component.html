@@ -17,6 +17,8 @@
 <div class="modal" *ngIf="showModal">
   <a class="modal-link" (click)="goHome()">Home</a>
   <a class="modal-link" (click)="closeModal()" routerLink="/about">About</a>
-  <a class="modal-link" (click)="closeModal()" routerLink="/home">Login</a>
-  <a class="modal-link" (click)="logout(); closeModal()">Logout</a>
+  <a *ngIf="isLoggedIn()" class="modal-link" (click)="closeModal()" routerLink="/profile">User Profile</a>
+  <a *ngIf="!isLoggedIn()" class="modal-link" (click)="closeModal()" routerLink="/home">Login</a>
+  <a *ngIf="!isLoggedIn()" class="modal-link" (click)="closeModal()" routerLink="/signup">Create an Account</a>
+  <a *ngIf="isLoggedIn()" class="modal-link" (click)="logout(); closeModal()">Logout</a>
 </div>

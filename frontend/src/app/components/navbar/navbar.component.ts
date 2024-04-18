@@ -53,4 +53,8 @@ export class NavbarComponent {
       this.router.navigate(['/videoshome']);
     }
   }
+
+  isLoggedIn(): boolean {
+    return this.userService.isSessionValid();
+  }
 }
