@@ -3,7 +3,7 @@
 A home video viewing site incorporating Spring Boot, Maven, PostgreSQL, Angular, Typescript, S3, and self-hosted with Docker on
 Digital Ocean at www.homevideos.smbirch.com.
 
-
+![](https://github.com/smbirch/homevideos/blob/main/media/Screenshot%202024-04-17%20at%205.27.57%E2%80%AFPM.png)
 
 ## API Reference
 
