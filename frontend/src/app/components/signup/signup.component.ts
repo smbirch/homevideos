@@ -4,18 +4,21 @@ import {FormBuilder, FormsModule} from "@angular/forms";
 import {CredentialsDto} from "../../DTOs/credentialsDto";
 import {User} from "../../interfaces/user";
 import {Router} from "@angular/router";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
   formData: any = {};
+  loginError: boolean = false;
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -52,8 +55,10 @@ export class SignupComponent {
         // Optionally, you can redirect the user to a different page after successful signup
       },
       (error) => {
-        console.error('Error creating user:', error);
-        // Handle error, show error message to user, etc.
+        this.loginError = true;
+        setTimeout(() => {
+          this.loginError = false;
+        }, 5000);
       }
     );
     // Optionally, you can reset the form after submission
@@ -80,8 +85,10 @@ export class SignupComponent {
         // Redirect to /videoshome
       },
       (error) => {
-        console.error('Error logging in user:', error);
-        // Handle error, show error message to user, etc.
+        this.loginError = true;
+        setTimeout(() => {
+          this.loginError = false;
+        }, 5000);
       }
     );
   }

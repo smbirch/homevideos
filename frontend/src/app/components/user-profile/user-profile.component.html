@@ -1,10 +1,12 @@
 <div class="user-profile">
-  <h2>User Profile</h2>
-  <div>
-    <p><strong>Username:</strong> {{ userProfile.username }}</p>
-    <p><strong>First Name:</strong> {{ userProfile.profile.firstName }}</p>
-    <p><strong>Last Name:</strong> {{ userProfile.profile.lastName }}</p>
-    <p><strong>Email:</strong> {{ userProfile.profile.email }}</p>
-    <p><strong>Admin:</strong> {{ userProfile.profile.admin ? 'Yes' : 'No' }}</p>
+  <div class="header">
+    <h1>User Profile</h1>
+  </div>
+  <div class="user-info">
+      <p><span class="itemlabel">Username:</span> {{ userProfile.username }}</p>
+      <p><span class="itemlabel">First Name:</span> {{ userProfile.profile.firstName }}</p>
+      <p><span class="itemlabel">Last Name:</span> {{ userProfile.profile.lastName }}</p>
+      <p><span class="itemlabel">Email:</span> {{ userProfile.profile.email }}</p>
+      <p><span class="itemlabel">Admin:</span> {{ userProfile.profile.admin ? 'Yes' : 'No' }}</p>
   </div>
 </div>
