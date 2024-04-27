@@ -2,6 +2,8 @@
   There was an error creating a new user, please try again
 </div>
 
+<div *ngIf="formError" class="alert alert-danger fade-out" role="alert">One or more fields are not filled out</div>
+
 
 <div class="signup-container">
   <div class="header">

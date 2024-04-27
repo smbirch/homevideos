@@ -19,14 +19,19 @@ import {NgIf} from "@angular/common";
 export class SignupComponent {
   formData: any = {};
   loginError: boolean = false;
+  formError: boolean = false;
 
   constructor(private userService: UserService, private router: Router) {
   }
 
   onSubmit() {
-    // TODO: alert on screen if passwords do not match
     if (this.formData.password !== this.formData.confirmPassword) {
-      console.log('Passwords do not match');
+      this.loginError = true;
+      return;
+    }
+
+    if (!this.formData.username || !this.formData.password || !this.formData.firstName || !this.formData.lastName) {
+      this.formError = true;
       return;
     }
 
@@ -37,7 +42,6 @@ export class SignupComponent {
       this.formData.lastName
     ).subscribe(
       (user) => {
-        console.log('User created successfully:', user);
 
         localStorage.setItem('currentUser', JSON.stringify({
           username: user.username,
@@ -52,7 +56,7 @@ export class SignupComponent {
         }));
         this.router.navigate(['/videoshome']);
 
-        // Optionally, you can redirect the user to a different page after successful signup
+
       },
       (error) => {
         this.loginError = true;
@@ -61,8 +65,6 @@ export class SignupComponent {
         }, 5000);
       }
     );
-    // Optionally, you can reset the form after submission
-    // form.reset(); // No need to pass form to reset() since we're using ngModel
     this.formData = {}; // Reset formData object
   }
 
@@ -72,7 +74,6 @@ export class SignupComponent {
       password: password
     };
 
-    // Check if both username and password are provided
     if (!credentials.username || !credentials.password) {
       console.log(credentials);
       console.error('Username or password is missing.');
@@ -81,7 +82,7 @@ export class SignupComponent {
 
     this.userService.login(credentials).subscribe(
       (user: User) => {
-        console.log('User logged in successfully:', user);
+        this.router.navigate(['/videoshome']);
         // Redirect to /videoshome
       },
       (error) => {
