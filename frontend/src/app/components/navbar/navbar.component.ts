@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {NgIf} from "@angular/common";
@@ -13,10 +13,23 @@ import {NgIf} from "@angular/common";
   ],
   standalone: true
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   showModal: boolean = false;
+  userProfile: any;
 
   constructor(private userService: UserService, private router: Router) {
+  }
+
+  ngOnInit(): void {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      this.userProfile = JSON.parse(currentUser);
+    } else {
+      // @ts-ignore
+      this.userService.getCurrentUser().subscribe((data: any) => {
+        this.userProfile = data;
+      });
+    }
   }
 
   isCurrentRoute(route: string): boolean {

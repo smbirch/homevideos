@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
 
 @Component({
@@ -8,7 +8,7 @@ import {UserService} from "../../services/user.service";
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
-export class UserProfileComponent {
+export class UserProfileComponent implements OnInit {
   userProfile: any;
 
   constructor(private userService: UserService) {

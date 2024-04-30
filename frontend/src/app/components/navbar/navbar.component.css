@@ -69,7 +69,8 @@
 }
 
 .modal-link,
-.logout-button {
+.logout-button,
+.profile-name {
   padding: 12px 20px;
   font-size: 18px;
   color: #1ba098;
@@ -84,6 +85,7 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
 
 .admin {
   color: #1ba098;
