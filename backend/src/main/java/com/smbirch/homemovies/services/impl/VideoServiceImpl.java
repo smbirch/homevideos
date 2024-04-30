@@ -45,6 +45,9 @@ public class VideoServiceImpl implements VideoService {
     public List<String> getAllThumbnails() {
         List<Video> videos = videoRepository.findAll();
         List<String> videoThumbnailUrls = new ArrayList<>();
+        for (Video video: videos) {
+            videoThumbnailUrls.add(video.getUrl());
+        }
         return videoThumbnailUrls;
     }
 

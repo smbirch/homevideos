@@ -1,6 +1,6 @@
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Change from 5 to 3 thumbnails per row */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 20px;
   margin-left: 5%;
   margin-right: 5%;
