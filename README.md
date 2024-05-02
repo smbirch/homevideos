@@ -53,7 +53,6 @@ POST /users/validate
     "username": "example_username",
     "password": "example_password"
   }
-}
 ```
 
 ## Videos

@@ -4,33 +4,34 @@
     Your browser does not support the video tag.
   </video>
 </div>
-<div *ngIf="video" class="video-title" (click)="onClickTitle()" title="Change the title as an admin user">
-  {{ video.title }}
+<div class="info-section">
+  <div *ngIf="video" class="video-title" (click)="onClickTitle()" title="Change the title as an admin user">
+    {{ video.title }}
+  </div>
+  <ng-container *ngIf="video">
+    <app-title-update-modal
+      [isOpen]="isTitleModalOpen"
+      [currentTitle]="video.title"
+      [videoId]="video.id"
+      (closeModal)="onCloseTitleModal()"
+      (titleUpdated)="updateTitle($event)">
+    </app-title-update-modal>
+  </ng-container>
+
+  <div *ngIf="video" class="video-description" (click)="onClickDescription()"
+       title="Change the description as an admin user">{{ video.description }}
+  </div>
+
+  <ng-container *ngIf="video">
+    <app-description-update-modal
+      [isOpen]="isDescriptionModalOpen"
+      [currentDescription]="video.description"
+      [currentTitle]="video.title"
+      [videoId]="video.id"
+      (closeModal)="onCloseDescriptionModal()"
+      (descriptionUpdated)="updateDescription($event)">
+
+    </app-description-update-modal>
+  </ng-container>
 </div>
-
-<ng-container *ngIf="video">
-  <app-title-update-modal
-    [isOpen]="isTitleModalOpen"
-    [currentTitle]="video.title"
-    [videoId]="video.id"
-    (closeModal)="onCloseTitleModal()"
-    (titleUpdated)="updateTitle($event)">
-  </app-title-update-modal>
-</ng-container>
-
-<div *ngIf="video" class="video-description" (click)="onClickDescription()"
-     title="Change the description as an admin user">{{ video.description }}
-</div>
-
-<ng-container *ngIf="video">
-  <app-description-update-modal
-    [isOpen]="isDescriptionModalOpen"
-    [currentDescription]="video.description"
-    [currentTitle]="video.title"
-    [videoId]="video.id"
-    (closeModal)="onCloseDescriptionModal()"
-    (descriptionUpdated)="updateDescription($event)">
-
-  </app-description-update-modal>
-</ng-container>
 <button class="back-button" (click)="goBack()">Back</button>
