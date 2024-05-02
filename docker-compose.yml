@@ -1,0 +1,44 @@
+services:
+  database:
+    image: postgres
+    container_name: homevideos-db
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: bondstone
+#    ports:
+#      - "5433:5432"
+#    volumes:
+#      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+#    command: [ "postgres", "-c", "config_file=/etc/postgresql/postgresql.conf" ]
+
+
+  backend:
+    image: homevideos-backend-image
+    container_name: homevideos-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: bondstone
+      SPRING_JPA_DEFER-DATASOURCE-INITIALIZATION: "true"
+      SPRING_SQL_INIT_MODE: "always"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_JPA_HIBERNATE_DDL-AUTO: update
+      SERVER_ADDRESS: 0.0.0.0
+
+  angular:
+    image: homevideos-frontend-image
+    container_name: homevideos-frontend
+    restart: always
+    ports:
+      - "4200:8080"
+    depends_on:
+      - backend
+    environment:
+      API_URL: http://backend:8080
