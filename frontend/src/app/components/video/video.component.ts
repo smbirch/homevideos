@@ -57,9 +57,8 @@ export class VideoComponent implements OnInit {
   }
 
   onClickTitle(): void {
-    this.currentUser = this.userService.getCurrentUser()
-    if (this.currentUser && this.currentUser["profile"]["admin"]) {
-      this.openTitleModal()
+    if (this.checkIfAdmin()) {
+      this.openDescriptionModal()
     } else {
       window.alert('You must be logged in as an admin user to change the title');
     }
@@ -78,12 +77,16 @@ export class VideoComponent implements OnInit {
   }
 
   onClickDescription() {
-    this.currentUser = this.userService.getCurrentUser()
-    if (this.currentUser && this.currentUser["profile"]["admin"]) {
+    if (this.checkIfAdmin()) {
       this.openDescriptionModal()
     } else {
       window.alert('You must be logged in as an admin user to change the description');
     }
+  }
+
+  checkIfAdmin(): boolean {
+    this.currentUser = this.userService.getCurrentUser()
+    return !!(this.currentUser && this.currentUser["profile"]["admin"]);
   }
 
   openTitleModal(): void {
@@ -108,5 +111,13 @@ export class VideoComponent implements OnInit {
 
   updateDescription(newDescription: string) {
     this.video.description = newDescription;
+  }
+
+  allowDownload(): boolean {
+    if (!this.checkIfAdmin()) {
+      window.alert('Only admins may download this video')
+      return false;
+    }
+    else return true;
   }
 }
