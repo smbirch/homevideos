@@ -3,7 +3,6 @@ package com.smbirch.homemovies.entities;
 import jakarta.persistence.*;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -30,5 +29,9 @@ public class Video {
 
     @ManyToMany(mappedBy = "likedVideos")
     private List<User> likedByUsers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
 
 }

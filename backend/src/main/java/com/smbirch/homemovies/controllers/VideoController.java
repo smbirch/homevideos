@@ -1,5 +1,7 @@
 package com.smbirch.homemovies.controllers;
 
+import com.smbirch.homemovies.dtos.CommentRequestDto;
+import com.smbirch.homemovies.dtos.CommentResponseDto;
 import com.smbirch.homemovies.dtos.VideoRequestDto;
 import com.smbirch.homemovies.dtos.VideoResponseDto;
 import com.smbirch.homemovies.services.VideoService;
@@ -43,5 +45,10 @@ public class VideoController {
     @PatchMapping("/update/description")
     public VideoResponseDto updateVideoDescription(@RequestBody VideoRequestDto videoRequestDto) {
         return videoService.updateVideoDescription(videoRequestDto);
+    }
+
+    @PostMapping("/post/comment")
+    public CommentResponseDto postVideoComment(@RequestBody CommentRequestDto commentRequestDto) {
+        return videoService.postVideoComment(commentRequestDto);
     }
 }
