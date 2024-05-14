@@ -1,5 +1,7 @@
 package com.smbirch.homemovies.services;
 
+import com.smbirch.homemovies.dtos.CommentRequestDto;
+import com.smbirch.homemovies.dtos.CommentResponseDto;
 import com.smbirch.homemovies.dtos.VideoRequestDto;
 import com.smbirch.homemovies.dtos.VideoResponseDto;
 
@@ -18,4 +20,6 @@ public interface VideoService {
     VideoResponseDto updateVideoTitle(VideoRequestDto videoRequestDto);
 
     VideoResponseDto updateVideoDescription(VideoRequestDto videoRequestDto);
+
+    CommentResponseDto postVideoComment(CommentRequestDto commentRequestDto);
 }
