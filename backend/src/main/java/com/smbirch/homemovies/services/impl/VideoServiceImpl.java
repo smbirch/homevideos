@@ -91,12 +91,7 @@ public class VideoServiceImpl implements VideoService {
     public CommentResponseDto postVideoComment(CommentRequestDto commentRequestDto) {
         // Fetch the video from the database based on the comment's video id
         Video video = videoRepository.findById(commentRequestDto.getVideoId()).orElseThrow(() -> new NotFoundException("Video not found with ID: " + commentRequestDto.getVideoId()));
-        if (video == null) {
-            System.out.println("video not found when posting comment");
-            return null; // TODO: Handle this error
-        }
 
-        // get user
         User user = getUserHelper(commentRequestDto.getAuthor());
 
         Comment comment = new Comment();

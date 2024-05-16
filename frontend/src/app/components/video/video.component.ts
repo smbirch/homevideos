@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Video} from '../../interfaces/video';
 import {VideoService} from '../../services/video.service';
 import {UserService} from '../../services/user.service';
-import {User} from '../../interfaces/user';
 import {TitleUpdateModalComponent} from "../title-update-modal/title-update-modal.component";
 import {DescriptionUpdateModalComponent} from "../description-update-modal/description-update-modal.component";
 
