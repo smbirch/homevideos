@@ -27,4 +27,10 @@ public class CommentController {
     public List<Comment> getVideoComments(@PathVariable Long videoId) {
         return commentService.getVideoComments(videoId);
     }
+
+    // only requires commentId in commentRequestDto
+    @DeleteMapping("/delete")
+    public CommentResponseDto deleteComment(@RequestBody CommentRequestDto commentRequestDto) {
+        return commentService.deleteComment(commentRequestDto);
+    }
 }
