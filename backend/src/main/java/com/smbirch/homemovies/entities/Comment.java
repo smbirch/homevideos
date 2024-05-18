@@ -1,5 +1,6 @@
 package com.smbirch.homemovies.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,5 +30,6 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "video_id")
+    @JsonBackReference
     private Video video;
 }

@@ -10,7 +10,5 @@ import java.util.List;
 public interface VideoMapper {
     VideoResponseDto entityToDto(Video video);
 
-    Video dtoToEntity(VideoResponseDto video);
-
     List<VideoResponseDto> entitiesToDtos(List<Video> videos);
 }

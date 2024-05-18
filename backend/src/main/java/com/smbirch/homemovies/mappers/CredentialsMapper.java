@@ -9,6 +9,4 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CredentialsMapper {
     CredentialsDto entityToDto(Credentials entity);
-
-    List<CredentialsDto> entitiesToDtos(List<Credentials> entities);
 }

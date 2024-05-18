@@ -20,6 +20,4 @@ public interface VideoService {
     VideoResponseDto updateVideoTitle(VideoRequestDto videoRequestDto);
 
     VideoResponseDto updateVideoDescription(VideoRequestDto videoRequestDto);
-
-    CommentResponseDto postVideoComment(CommentRequestDto commentRequestDto);
 }

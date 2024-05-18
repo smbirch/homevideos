@@ -19,7 +19,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +29,6 @@ public class VideoServiceImpl implements VideoService {
 
     private final VideoRepository videoRepository;
     private final VideoMapper videoMapper;
-    private final UserRepository userRepository;
 
 
     @Override
@@ -87,44 +85,6 @@ public class VideoServiceImpl implements VideoService {
         return videoMapper.entityToDto(videoRepository.saveAndFlush(video));
     }
 
-    @Override
-    public CommentResponseDto postVideoComment(CommentRequestDto commentRequestDto) {
-        // Fetch the video from the database based on the comment's video id
-        Video video = videoRepository.findById(commentRequestDto.getVideoId()).orElseThrow(() -> new NotFoundException("Video not found with ID: " + commentRequestDto.getVideoId()));
 
-        User user = getUserHelper(commentRequestDto.getAuthor());
 
-        Comment comment = new Comment();
-        comment.setText(commentRequestDto.getText());
-        comment.setAuthor(user.getCredentials().getUsername());
-        comment.setUser(user);
-        comment.setCreatedAt(LocalDateTime.now());
-        comment.setVideo(video);
-        comment.setDeleted(false);
-
-        // Add the comment to the video's list of comments
-        video.getComments().add(comment);
-
-        // Save the updated video with the new comment
-        videoRepository.saveAndFlush(video);
-
-        // create responseDto and return it
-        CommentResponseDto commentResponseDto = new CommentResponseDto();
-        commentResponseDto.setId(comment.getId());
-        commentResponseDto.setText(comment.getText());
-        commentResponseDto.setCreatedAt(comment.getCreatedAt());
-        commentResponseDto.setAuthor(comment.getAuthor());
-        commentResponseDto.setDeleted(false);
-
-        return commentResponseDto;
-    }
-
-    private User getUserHelper(String username) {
-        Optional<User> userToCheckFor = userRepository.findByCredentials_Username(username);
-
-        if (userToCheckFor.isEmpty() || userToCheckFor.get().isDeleted()) {
-            throw new NotFoundException("No user found with username: '" + username + "'");
-        }
-        return userToCheckFor.get();
-    }
 }

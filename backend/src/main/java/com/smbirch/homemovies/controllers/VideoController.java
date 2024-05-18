@@ -46,9 +46,4 @@ public class VideoController {
     public VideoResponseDto updateVideoDescription(@RequestBody VideoRequestDto videoRequestDto) {
         return videoService.updateVideoDescription(videoRequestDto);
     }
-
-    @PostMapping("/post/comment")
-    public CommentResponseDto postVideoComment(@RequestBody CommentRequestDto commentRequestDto) {
-        return videoService.postVideoComment(commentRequestDto);
-    }
 }

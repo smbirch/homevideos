@@ -10,5 +10,4 @@ import java.util.List;
 public interface ProfileMapper {
     ProfileDto entityToDto(Profile entity);
 
-    List<ProfileDto> entitiesToDtos(List<Profile> entities);
 }
