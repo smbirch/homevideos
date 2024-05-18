@@ -1,5 +1,6 @@
 package com.smbirch.homemovies.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import lombok.Data;
@@ -31,6 +32,7 @@ public class Video {
     private List<User> likedByUsers = new ArrayList<>();
 
     @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Comment> comments = new ArrayList<>();
 
 
