@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,7 +71,27 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> getVideoComments(Long videoId) {
-        return commentRepository.findByVideoId(videoId);
+        ArrayList<Comment> commentList = commentRepository.findByVideoId(videoId);
+        commentList.removeIf(Comment::isDeleted);
+        return commentList;
+    }
+
+    @Override
+    public CommentResponseDto deleteComment(CommentRequestDto commentRequestDto) {
+        Comment comment = commentRepository.findById(commentRequestDto.getCommentId())
+                .orElseThrow(() -> new NotFoundException("Comment not found with ID: " + commentRequestDto.getCommentId()));
+
+        comment.setDeleted(true);
+        commentRepository.saveAndFlush(comment);
+
+        CommentResponseDto commentResponseDto = new CommentResponseDto();
+        commentResponseDto.setId(comment.getId());
+        commentResponseDto.setText(comment.getText());
+        commentResponseDto.setCreatedAt(comment.getCreatedAt());
+        commentResponseDto.setAuthor(comment.getAuthor());
+        commentResponseDto.setDeleted(comment.isDeleted());
+
+        return commentResponseDto;
     }
 
 
