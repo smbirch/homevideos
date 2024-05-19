@@ -12,4 +12,6 @@ public interface CommentService {
     List<Comment> getVideoComments(Long videoId);
 
     CommentResponseDto deleteComment(CommentRequestDto commentRequestDto);
+
+    CommentResponseDto updateComment(CommentRequestDto commentRequestDto);
 }

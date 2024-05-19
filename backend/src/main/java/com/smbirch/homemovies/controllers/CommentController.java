@@ -1,4 +1,4 @@
-package com.smbirch.homemovies.controllers.advice;
+package com.smbirch.homemovies.controllers;
 
 
 import com.smbirch.homemovies.dtos.CommentRequestDto;
@@ -32,5 +32,10 @@ public class CommentController {
     @DeleteMapping("/delete")
     public CommentResponseDto deleteComment(@RequestBody CommentRequestDto commentRequestDto) {
         return commentService.deleteComment(commentRequestDto);
+    }
+
+    @PatchMapping("/update")
+    public CommentResponseDto updateComment(@RequestBody CommentRequestDto commentRequestDto) {
+        return commentService.updateComment(commentRequestDto);
     }
 }

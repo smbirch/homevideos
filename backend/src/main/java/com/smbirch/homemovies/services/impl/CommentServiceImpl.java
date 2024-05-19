@@ -5,6 +5,7 @@ import com.smbirch.homemovies.dtos.CommentResponseDto;
 import com.smbirch.homemovies.entities.Comment;
 import com.smbirch.homemovies.entities.User;
 import com.smbirch.homemovies.entities.Video;
+import com.smbirch.homemovies.exceptions.BadRequestException;
 import com.smbirch.homemovies.exceptions.NotFoundException;
 import com.smbirch.homemovies.repositories.CommentRepository;
 import com.smbirch.homemovies.repositories.UserRepository;
@@ -35,6 +36,16 @@ public class CommentServiceImpl implements CommentService {
         return userToCheckFor.get();
     }
 
+    private CommentResponseDto convertToResponseDto(Comment comment) {
+        CommentResponseDto commentResponseDto = new CommentResponseDto();
+        commentResponseDto.setId(comment.getId());
+        commentResponseDto.setText(comment.getText());
+        commentResponseDto.setCreatedAt(comment.getCreatedAt());
+        commentResponseDto.setAuthor(comment.getAuthor());
+        commentResponseDto.setDeleted(comment.isDeleted());
+        return commentResponseDto;
+    }
+
 
     @Override
     public CommentResponseDto postVideoComment(CommentRequestDto commentRequestDto) {
@@ -52,21 +63,11 @@ public class CommentServiceImpl implements CommentService {
         comment.setVideo(video);
         comment.setDeleted(false);
 
-        // Add the comment to the video's list of comments
         video.getComments().add(comment);
 
-        // Save the updated video with the new comment
         videoRepository.saveAndFlush(video);
 
-        // create responseDto and return it
-        CommentResponseDto commentResponseDto = new CommentResponseDto();
-        commentResponseDto.setId(comment.getId());
-        commentResponseDto.setText(comment.getText());
-        commentResponseDto.setCreatedAt(comment.getCreatedAt());
-        commentResponseDto.setAuthor(comment.getAuthor());
-        commentResponseDto.setDeleted(false);
-
-        return commentResponseDto;
+        return convertToResponseDto(comment);
     }
 
     @Override
@@ -78,20 +79,34 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentResponseDto deleteComment(CommentRequestDto commentRequestDto) {
-        Comment comment = commentRepository.findById(commentRequestDto.getCommentId())
-                .orElseThrow(() -> new NotFoundException("Comment not found with ID: " + commentRequestDto.getCommentId()));
+        Comment comment = commentRepository.findById(commentRequestDto.getCommentId()).orElseThrow(() -> new NotFoundException("Comment not found with ID: " + commentRequestDto.getCommentId()));
 
         comment.setDeleted(true);
         commentRepository.saveAndFlush(comment);
 
-        CommentResponseDto commentResponseDto = new CommentResponseDto();
-        commentResponseDto.setId(comment.getId());
-        commentResponseDto.setText(comment.getText());
-        commentResponseDto.setCreatedAt(comment.getCreatedAt());
-        commentResponseDto.setAuthor(comment.getAuthor());
-        commentResponseDto.setDeleted(comment.isDeleted());
+        return convertToResponseDto(comment);
+    }
 
-        return commentResponseDto;
+    @Override
+    public CommentResponseDto updateComment(CommentRequestDto commentRequestDto) {
+        // Fetch the existing comment from the database
+        Comment comment = commentRepository.findById(commentRequestDto.getCommentId()).orElseThrow(() -> new NotFoundException("Comment not found with ID: " + commentRequestDto.getCommentId()));
+
+        // Check if the comment is marked as deleted
+        if (comment.isDeleted()) {
+            throw new NotFoundException("Comment with ID: " + commentRequestDto.getCommentId() + " is deleted and cannot be updated");
+        }
+
+        // Update fields if they are provided
+        if (commentRequestDto.getText() != null && !commentRequestDto.getText().trim().isEmpty()) {
+            comment.setText(commentRequestDto.getText());
+        } else throw new BadRequestException("You cannot have a comment with a null or empty text field");
+
+        // Save the updated comment
+        commentRepository.saveAndFlush(comment);
+
+        // Convert to Response DTO and return
+        return convertToResponseDto(comment);
     }
 
 

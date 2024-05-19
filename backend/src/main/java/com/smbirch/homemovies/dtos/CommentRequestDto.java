@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 public class CommentRequestDto {
     private Long videoId;
 
-    //neccesary for deletion / update
     private Long commentId;
 
     private String text;
