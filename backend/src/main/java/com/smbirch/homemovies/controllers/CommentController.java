@@ -18,7 +18,7 @@ public class CommentController {
     private final CommentService commentService;
 
 
-    @PostMapping("/post/comment")
+    @PostMapping("/post")
     public CommentResponseDto postVideoComment(@RequestBody CommentRequestDto commentRequestDto) {
         return commentService.postVideoComment(commentRequestDto);
     }

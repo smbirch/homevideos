@@ -6,6 +6,7 @@ import {VideoService} from '../../services/video.service';
 import {UserService} from '../../services/user.service';
 import {TitleUpdateModalComponent} from "../title-update-modal/title-update-modal.component";
 import {DescriptionUpdateModalComponent} from "../description-update-modal/description-update-modal.component";
+import {CommentsComponent} from "../comments/comments.component";
 
 @Component({
   selector: 'app-video',
@@ -15,7 +16,8 @@ import {DescriptionUpdateModalComponent} from "../description-update-modal/descr
   imports: [
     NgIf,
     TitleUpdateModalComponent,
-    DescriptionUpdateModalComponent
+    DescriptionUpdateModalComponent,
+    CommentsComponent
   ]
 })
 
