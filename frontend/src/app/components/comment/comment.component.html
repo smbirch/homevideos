@@ -1,0 +1,12 @@
+<div class="comment">
+  <p>{{ comment.text }}</p>
+  <small>By {{ comment.author }} on {{ comment.createdAt }}</small>
+  <button *ngIf="!comment.deleted" (click)="onEdit()">Edit</button>
+  <button *ngIf="!comment.deleted" (click)="onDelete()">Delete</button>
+</div>
+
+<div *ngIf="isEditing">
+  <textarea [(ngModel)]="editedText"></textarea>
+  <button (click)="saveEdit()">Save</button>
+  <button (click)="cancelEdit()">Cancel</button>
+</div>

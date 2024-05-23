@@ -1,11 +1,12 @@
-import {Component, OnInit, SimpleChanges} from '@angular/core';
-import {NgIf} from "@angular/common";
-import {ActivatedRoute, Router} from '@angular/router';
-import {Video} from '../../interfaces/video';
-import {VideoService} from '../../services/video.service';
-import {UserService} from '../../services/user.service';
-import {TitleUpdateModalComponent} from "../title-update-modal/title-update-modal.component";
-import {DescriptionUpdateModalComponent} from "../description-update-modal/description-update-modal.component";
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Video } from '../../interfaces/video';
+import { VideoService } from '../../services/video.service';
+import { UserService } from '../../services/user.service';
+import { TitleUpdateModalComponent } from '../title-update-modal/title-update-modal.component';
+import { DescriptionUpdateModalComponent } from '../description-update-modal/description-update-modal.component';
+import { CommentsComponent } from '../comments/comments.component';
 
 @Component({
   selector: 'app-video',
@@ -13,12 +14,12 @@ import {DescriptionUpdateModalComponent} from "../description-update-modal/descr
   standalone: true,
   styleUrls: ['./video.component.css'],
   imports: [
-    NgIf,
+    CommonModule,
     TitleUpdateModalComponent,
-    DescriptionUpdateModalComponent
+    DescriptionUpdateModalComponent,
+    CommentsComponent
   ]
 })
-
 export class VideoComponent implements OnInit {
   public video!: Video;
   public currentUser: null | undefined = null;
@@ -30,12 +31,11 @@ export class VideoComponent implements OnInit {
     public videoService: VideoService,
     private router: Router,
     private userService: UserService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getVideo();
-    this.userService.getCurrentUser()
+    this.userService.getCurrentUser();
   }
 
   public getVideo(): void {
@@ -57,7 +57,7 @@ export class VideoComponent implements OnInit {
 
   onClickTitle(): void {
     if (this.checkIfAdmin()) {
-      this.openDescriptionModal()
+      this.openDescriptionModal();
     } else {
       window.alert('You must be logged in as an admin user to change the title');
     }
@@ -77,14 +77,14 @@ export class VideoComponent implements OnInit {
 
   onClickDescription() {
     if (this.checkIfAdmin()) {
-      this.openDescriptionModal()
+      this.openDescriptionModal();
     } else {
       window.alert('You must be logged in as an admin user to change the description');
     }
   }
 
   checkIfAdmin(): boolean {
-    this.currentUser = this.userService.getCurrentUser()
+    this.currentUser = this.userService.getCurrentUser();
     return !!(this.currentUser && this.currentUser["profile"]["admin"]);
   }
 
@@ -114,9 +114,9 @@ export class VideoComponent implements OnInit {
 
   allowDownload(): boolean {
     if (!this.checkIfAdmin()) {
-      window.alert('Only admins may download this video')
+      window.alert('Only admins may download this video');
       return false;
     }
-    else return true;
+    return true;
   }
 }
