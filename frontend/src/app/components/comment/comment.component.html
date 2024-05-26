@@ -7,7 +7,7 @@
 </div>
 
 <div *ngIf="isEditing" class="editing">
-  <textarea [(ngModel)]="editedText"></textarea>
+<textarea [(ngModel)]="editedText"></textarea>
   <br>
   <button (click)="saveEdit()">Save</button>
   <button (click)="cancelEdit()">Cancel</button>
