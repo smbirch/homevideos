@@ -19,7 +19,6 @@
   text-decoration: none;
   color: white;
   margin-top: 10px;
-  /*margin-left: 15%;*/
   transition: color 0.3s ease;
 }
 
@@ -30,7 +29,6 @@
 .video-description {
   font-size: 12px;
   margin-top: 10px;
-  /*margin-left: 15%;*/
   color: white;
   transition: color 0.3s ease;
 }
@@ -38,10 +36,10 @@
 .info-section {
   border-radius: 15px;
   margin-left: 15%;
+  margin-right: 15%;
   border: double #deb992;
   padding-left: 2%;
   padding-bottom: 1%;
-  margin-right: 15%;
 
 }
 
