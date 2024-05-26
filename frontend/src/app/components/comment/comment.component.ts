@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Comment } from '../../interfaces/comment';
-import {NgIf} from "@angular/common";
+import {DatePipe, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
@@ -9,7 +9,8 @@ import {FormsModule} from "@angular/forms";
   standalone: true,
   imports: [
     NgIf,
-    FormsModule
+    FormsModule,
+    DatePipe
   ],
   styleUrls: ['./comment.component.css']
 })

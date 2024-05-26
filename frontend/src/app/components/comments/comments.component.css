@@ -13,7 +13,7 @@
 }
 
 .comments-section textarea {
-  width: 100%;
+  width: 40%;
   height: 60px;
   margin-bottom: 10px;
 }
@@ -29,4 +29,8 @@
 
 .comments-section button:hover {
   background-color: #deb992;
+}
+
+.nocomment {
+  color: #1a9f97;
 }
