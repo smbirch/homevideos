@@ -34,3 +34,8 @@
 .nocomment {
   color: #1a9f97;
 }
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}

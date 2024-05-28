@@ -11,6 +11,10 @@
     <p class="nocomment">No comments yet. Be the first to comment!</p>
   </ng-template>
 
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
   <form (ngSubmit)="addComment()">
     <textarea [(ngModel)]="newCommentText" name="commentText" placeholder="Leave a comment!" required></textarea>
     <br><button type="submit">Add Comment</button>

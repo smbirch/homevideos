@@ -1,12 +1,11 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {Comment} from '../../interfaces/comment';
-import {CommentService} from '../../services/comment.service';
-import {ActivatedRoute} from '@angular/router';
-import {NgForOf, NgIf} from "@angular/common";
-import {CommentComponent} from "../comment/comment.component";
-import {FormsModule} from "@angular/forms";
-import {UserService} from "../../services/user.service";
-import {User} from "../../interfaces/user";
+import { Component, OnInit, Input } from '@angular/core';
+import { Comment } from '../../interfaces/comment';
+import { CommentService } from '../../services/comment.service';
+import { ActivatedRoute } from '@angular/router';
+import { NgForOf, NgIf } from "@angular/common";
+import { CommentComponent } from "../comment/comment.component";
+import { FormsModule } from "@angular/forms";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: 'app-comments',
@@ -27,7 +26,7 @@ export class CommentsComponent implements OnInit {
   public currentUser: string | null = null;
   currentUsername: string = '';
   private userProfile: any;
-
+  errorMessage: string = '';
 
   constructor(
     private commentService: CommentService,
@@ -63,20 +62,33 @@ export class CommentsComponent implements OnInit {
   }
 
   addComment(): void {
+    if (!this.currentUser) {
+      this.errorMessage = 'You must be logged in to add a comment.';
+      return;
+    }
+
     if (this.newCommentText.trim()) {
       this.commentService.addComment(this.videoId, this.newCommentText, this.currentUsername).subscribe(
         (comment: Comment) => {
           this.comments.push(comment);
           this.newCommentText = '';
+          this.errorMessage = '';
         },
         (error) => {
           console.log('Error adding comment:', error);
+          if (error.status === 404) {
+            this.errorMessage = 'You must be logged in to add a comment.';
+          }
         }
       );
     }
   }
 
   deleteComment(commentId: number): void {
+    if (!this.currentUser) {
+      this.errorMessage = 'You must be logged in to add a comment.';
+      return;
+    }
     this.commentService.deleteComment(commentId).subscribe(
       () => {
         this.comments = this.comments.filter(comment => comment.id !== commentId);
@@ -88,7 +100,13 @@ export class CommentsComponent implements OnInit {
   }
 
   editComment(updatedComment: Comment): void {
-    this.commentService.updateComment(updatedComment).subscribe(
+    console.log(updatedComment);
+    const commentToSend: { commentId: number; text: string } = {
+      commentId: updatedComment.id,
+      text: updatedComment.text,
+    };
+
+    this.commentService.updateComment(commentToSend).subscribe(
       (comment: Comment) => {
         const index = this.comments.findIndex(c => c.id === comment.id);
         if (index !== -1) {

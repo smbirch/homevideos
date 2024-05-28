@@ -28,7 +28,7 @@ export class CommentService {
   }
 
 
-  updateComment(comment: Comment): Observable<Comment> {
+  updateComment(comment: { commentId: number; text: string }): Observable<Comment> {
     return this.http.patch<Comment>(`${this.apiUrl}/update`, comment);
   }
 }
