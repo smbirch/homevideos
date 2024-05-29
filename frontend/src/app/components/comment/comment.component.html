@@ -2,8 +2,8 @@
   <p>{{ comment.text }}</p>
   <small>>> {{ comment.author }} on {{ comment.createdAt | date: 'MM/dd/yy' }}</small>
   <br>
-  <button *ngIf="isAdmin && !comment.deleted && !isEditing" (click)="onEdit()">Edit</button>
-  <button *ngIf="isAdmin && !comment.deleted && !isEditing" (click)="onDelete()">Delete</button>
+  <button *ngIf="isAdmin" (click)="onEdit()">Edit</button>
+  <button *ngIf="isAdmin" (click)="onDelete()">Delete</button>
 </div>
 
 <div *ngIf="isEditing" class="editing">

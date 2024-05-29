@@ -34,7 +34,7 @@ export class CommentComponent implements OnInit {
     if (this.currentUser) {
       this.userProfile = JSON.parse(this.currentUser);
 
-      if (this.userProfile && this.userProfile.admin) {
+      if (this.userProfile && this.userProfile["profile"]["admin"]) {
         this.isAdmin = true;
       }
     }
@@ -46,8 +46,11 @@ export class CommentComponent implements OnInit {
   }
 
   saveEdit(): void {
-    // Implementation for saving the edited comment
-    this.isEditing = false;
+    if (this.editedText.trim()) {
+      const updatedComment = { ...this.comment, text: this.editedText };
+      this.editComment.emit(updatedComment);
+      this.isEditing = false;
+    }
   }
 
   cancelEdit(): void {
@@ -55,6 +58,6 @@ export class CommentComponent implements OnInit {
   }
 
   onDelete(): void {
-    // Implementation for deleting the comment
+    this.deleteComment.emit(this.comment.id);
   }
 }
