@@ -108,4 +108,3 @@ e2e/*.map
 
 # System Files
 .DS_Store/!/target/
-target/

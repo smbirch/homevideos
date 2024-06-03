@@ -1,5 +1,5 @@
 # Use an OpenJDK base image
-FROM openjdk:latest
+FROM openjdk:21-jdk-slim
 
 # Copy the Spring Boot JAR file into the container
 COPY target/homemovies-0.0.1-SNAPSHOT.jar /app/homemovies-0.0.1-SNAPSHOT.jar
