@@ -81,8 +81,7 @@ fabric.properties
 ## Angular ##
 # compiled output
 tmp/
-app/**/*.js
-app/**/*.js.map
+
 
 # dependencies
 node_modules/
@@ -102,8 +101,8 @@ typings/
 .angular/
 
 # e2e
-e2e/*.js
-e2e/*.map
+e2e/
+e2e/
 
 # System Files
 .DS_Store/!/target/
