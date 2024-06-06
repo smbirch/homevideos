@@ -14,7 +14,7 @@ services:
 
   backend:
     build: ./backend
-    container_name: hpmevideos_backend
+    container_name: homevideos_backend
     depends_on:
       - db
     ports:
@@ -30,4 +30,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "80:8002"
+      - "8081:8002"
+
+volumes:
+  postgres_data:
