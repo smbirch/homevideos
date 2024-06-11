@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-05T20:40:04-0700",
-    comments = "version: 1.4.1.Final, compiler: javac, environment: Java 22 (Homebrew)"
+    date = "2024-06-10T19:02:28-0700",
+    comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 @Component
 public class CommentMapperImpl implements CommentMapper {

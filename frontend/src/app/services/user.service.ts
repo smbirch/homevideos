@@ -3,12 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, catchError, throwError} from 'rxjs';
 import {CredentialsDto} from "../DTOs/credentialsDto";
 import {User} from "../interfaces/user";
+import { environment} from "../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiServerUrl = 'http://localhost:8080/users';
+  private apiServerUrl = `${environment.apiServerUrl}/users`;
   public currentUser: null | undefined;
 
   constructor(private http: HttpClient) {

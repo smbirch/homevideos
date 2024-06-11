@@ -3,12 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Video} from "../interfaces/video";
 import {VideoRequestDto} from "../DTOs/video-request-dto";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoService {
-  private apiServerUrl = 'http://localhost:8080/content';
+  private apiServerUrl = `${environment.apiServerUrl}/content`;
 
   constructor(private http: HttpClient) {}
 
