@@ -21,7 +21,7 @@ public class HomemoviesApplication {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200", "http://homevideos.smbirch.com", "https://homevideos.smbirch.com", "http://www.homevideos.smbirch.com", "https://www.homevideos.smbirch.com"));
         corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
         corsConfiguration.setExposedHeaders(Arrays.asList("*"));
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
