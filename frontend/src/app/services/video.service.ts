@@ -9,32 +9,32 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class VideoService {
-  private apiServerUrl = `${environment.apiServerUrl}/content`;
+  private apiServerUrl = environment.apiServerUrl;
 
   constructor(private http: HttpClient) {}
 
 
   public getVideos(): Observable<Video[]> {
-    return this.http.get<Video[]>(`${this.apiServerUrl}/all`);
+    return this.http.get<Video[]>(`${this.apiServerUrl}/content/all`);
   }
 
   public getThumbnails(): Observable<String[]> {
-    return this.http.get<String[]>(`${this.apiServerUrl}/all/thumbnails`)
+    return this.http.get<String[]>(`${this.apiServerUrl}/content/all/thumbnails`)
   }
 
   public getVideoById(id: number): Observable<Video> {
-    return this.http.get<Video>(`${this.apiServerUrl}/${id}`);
+    return this.http.get<Video>(`${this.apiServerUrl}/content/${id}`);
   }
 
   public getPage(pageNumber: number) {
-    return this.http.get<Video[]>(`${this.apiServerUrl}/page?page=${pageNumber}`)
+    return this.http.get<Video[]>(`${this.apiServerUrl}/content/page?page=${pageNumber}`)
   }
 
   public updateVideoTitle(videoRequestDto: VideoRequestDto): Observable<Video> {
-    return this.http.patch<Video>(`${this.apiServerUrl}/update/title`, videoRequestDto);
+    return this.http.patch<Video>(`${this.apiServerUrl}/content/update/title`, videoRequestDto);
   }
 
   updateVideoDescription(videoRequestDto: VideoRequestDto) {
-    return this.http.patch<Video>(`${this.apiServerUrl}/update/description`, videoRequestDto);
+    return this.http.patch<Video>(`${this.apiServerUrl}/content/update/description`, videoRequestDto);
   }
 }

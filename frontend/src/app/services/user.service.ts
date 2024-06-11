@@ -10,7 +10,7 @@ import { environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class UserService {
-  private apiServerUrl = `${environment.apiServerUrl}/users`;
+  private apiServerUrl = environment.apiServerUrl;
   public currentUser: null | undefined;
 
   constructor(private http: HttpClient) {
@@ -50,12 +50,12 @@ export class UserService {
   // calls API to test username/password. TODO: is this different than 'login'?
   validateUser(username: string, password: string): Observable<any> {
     const requestBody = {username, password};
-    return this.http.post<any>(`${this.apiServerUrl}/validate`, requestBody, {observe: 'response'});
+    return this.http.post<any>(`${this.apiServerUrl}/users/validate`, requestBody, {observe: 'response'});
   }
 
   public login(credentials: CredentialsDto): Observable<User> {
     // @ts-ignore
-    return this.http.post<User>(`${this.apiServerUrl}/validate`, credentials).pipe(
+    return this.http.post<User>(`${this.apiServerUrl}/users/validate`, credentials).pipe(
       catchError(error => {
         return throwError(error);
       })
@@ -76,7 +76,7 @@ export class UserService {
       }
     };
 
-    return this.http.post<User>(`${this.apiServerUrl}`, requestBody).pipe(
+    return this.http.post<User>(`${this.apiServerUrl}/users`, requestBody).pipe(
       catchError(error => {
         return throwError(error);
       })
