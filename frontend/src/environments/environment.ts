@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiServerUrl: 'homevideos.smbirch.com/api'
+  apiServerUrl: 'https://homevideos.smbirch.com/api'
 };
