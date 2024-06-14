@@ -57,7 +57,7 @@ export class VideoComponent implements OnInit {
 
   onClickTitle(): void {
     if (this.checkIfAdmin()) {
-      this.openDescriptionModal();
+      this.openTitleModal();
     } else {
       window.alert('You must be logged in as an admin user to change the title');
     }
