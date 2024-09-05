@@ -1,18 +1,15 @@
 package com.smbirch.homemovies.controllers;
 
-import com.smbirch.homemovies.dtos.CommentRequestDto;
-import com.smbirch.homemovies.dtos.CommentResponseDto;
 import com.smbirch.homemovies.dtos.VideoRequestDto;
 import com.smbirch.homemovies.dtos.VideoResponseDto;
 import com.smbirch.homemovies.services.VideoService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/content")
+@RequestMapping("/video")
 public class VideoController {
 
     private final VideoService videoService;
@@ -27,7 +24,7 @@ public class VideoController {
         return videoService.getVideoById(id);
     }
 
-    @GetMapping("/all/thumbnails")
+    @GetMapping("/thumbnail/all")
     public List<String> getAllThumbnails() {
         return videoService.getAllThumbnails();
     }

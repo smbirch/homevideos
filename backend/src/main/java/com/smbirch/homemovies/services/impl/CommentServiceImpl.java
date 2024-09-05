@@ -79,7 +79,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentResponseDto deleteComment(CommentRequestDto commentRequestDto) {
-        Comment comment = commentRepository.findById(commentRequestDto.getCommentId()).orElseThrow(() -> new NotFoundException("Comment not found with ID: " + commentRequestDto.getCommentId()));
+        Comment comment = commentRepository.findById(commentRequestDto.getCommentId()).orElseThrow(() -> new NotFoundException("Comment with ID: " + commentRequestDto.getCommentId() + " not found"));
 
         comment.setDeleted(true);
         commentRepository.saveAndFlush(comment);

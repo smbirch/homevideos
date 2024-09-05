@@ -5,37 +5,37 @@ import com.smbirch.homemovies.dtos.CommentRequestDto;
 import com.smbirch.homemovies.dtos.CommentResponseDto;
 import com.smbirch.homemovies.entities.Comment;
 import com.smbirch.homemovies.services.CommentService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/comments")
+@RequestMapping("/comments")
 public class CommentController {
 
     private final CommentService commentService;
 
-
-    @PostMapping("/post")
-    public CommentResponseDto postVideoComment(@RequestBody CommentRequestDto commentRequestDto) {
-        return commentService.postVideoComment(commentRequestDto);
-    }
-
-    @GetMapping("/get/{videoId}")
+    @GetMapping("/{videoId}")
     public List<Comment> getVideoComments(@PathVariable Long videoId) {
         return commentService.getVideoComments(videoId);
     }
 
-    // only requires commentId in commentRequestDto
-    @DeleteMapping("/delete")
-    public CommentResponseDto deleteComment(@RequestBody CommentRequestDto commentRequestDto) {
-        return commentService.deleteComment(commentRequestDto);
+    @PostMapping("/new")
+    public CommentResponseDto postVideoComment(@RequestBody CommentRequestDto commentRequestDto) {
+        return commentService.postVideoComment(commentRequestDto);
     }
 
     @PatchMapping("/update")
     public CommentResponseDto updateComment(@RequestBody CommentRequestDto commentRequestDto) {
         return commentService.updateComment(commentRequestDto);
     }
+    
+    // only requires commentId in commentRequestDto
+    @DeleteMapping("/delete")
+    public CommentResponseDto deleteComment(@RequestBody CommentRequestDto commentRequestDto) {
+        return commentService.deleteComment(commentRequestDto);
+    }
+
+
 }
