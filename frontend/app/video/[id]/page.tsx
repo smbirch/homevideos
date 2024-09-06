@@ -2,14 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-
-interface Video {
-  id: number;
-  title: string;
-  url: string;
-  thumbnailurl: string;
-  description: string;
-}
+import { Video } from '../../types/video';
 
 export default function VideoPage() {
   const params = useParams();
@@ -47,15 +40,18 @@ export default function VideoPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">{video.title}</h1>
-      <div className="aspect-w-16 aspect-h-9 mb-4">
-        <video
-          src={video.url}
-          controls
-          className="w-full h-full object-cover"
-        >
-        </video>
+      <div className="mb-4">
+        <div className="relative w-auto " style={{paddingTop: '56.25%'}}> {/* 16:9 Aspect Ratio */}
+          <video
+            src={video.url}
+            controls
+            className="absolute top-0 left-0 w-full h-full object-contain"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
+      <h1 className="text-3xl font-bold mb-4">{video.title}</h1>
       <p className="text-gray-700 mb-4">{video.description}</p>
       {/* You can add more details here, such as upload date, view count, etc. */}
     </div>

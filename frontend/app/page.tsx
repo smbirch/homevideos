@@ -3,14 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-
-interface Video {
-  id: number;
-  title: string;
-  videourl: string;
-  thumbnailurl: string;
-  description: string;
-}
+import { Video } from '@/app/types/video';
 
 export default function HomePage() {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -48,8 +41,7 @@ export default function HomePage() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">HomeVideos</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {videos.map((video) => (
           <Link href={`/video/${video.id}`} key={video.id}>
             <div className="bg-black rounded-lg shadow-md overflow-hidden cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-800">
