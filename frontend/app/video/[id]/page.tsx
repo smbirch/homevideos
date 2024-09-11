@@ -4,10 +4,10 @@ import React, {useState, useEffect} from 'react';
 import {useParams} from 'next/navigation';
 import {Video} from '../../types/video';
 import {getVideoById} from "@/app/services/videoService";
-import CommentSection from "@/app/components/commentSection";
+import CommentSection from "@/app/components/CommentSection";
 import {getCommentsByVideoId} from "@/app/services/commentService";
 import {Comment} from "@/app/types/comment";
-import VideoPlayer from "@/app/components/videoPlayer";
+import VideoPlayer from "@/app/components/VideoPlayer";
 
 
 
@@ -46,8 +46,8 @@ export default function VideoPage() {
   };
 
   useEffect(() => {
-    loadComments();
     loadVideo();
+    loadComments();
   }, [params.id]);
 
   if (loading) {

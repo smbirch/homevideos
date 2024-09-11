@@ -1,5 +1,3 @@
-import {User} from "@/app/types/user";
-
 const API_BASE_URL = 'http://localhost:8080';
 
 export async function getCommentsByVideoId(videoId: string): Promise<Comment[]> {
