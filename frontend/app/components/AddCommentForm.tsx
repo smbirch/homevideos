@@ -37,20 +37,20 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ videoId, onCommentAdded
         <textarea
           id="comment"
           rows={3}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black"
+          className="mt-1 block w-half rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black"
           value={text}
           onChange={(e) => setText(e.target.value)}
           required
         />
       </div>
       <div>
-        <label htmlFor="author" className="block text-sm font-medium text-black">
-          Name
+        <label htmlFor="author" className="block text-sm font-medium text-white">
+          Username
         </label>
         <input
           type="text"
           id="author"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black"
+          className="mt-1 block w-half rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           required
