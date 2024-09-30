@@ -1,13 +1,13 @@
 "use client";
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 interface AddCommentFormProps {
   videoId: number;
   onCommentAdded: (text: string, author: string) => Promise<void>;
 }
 
-const AddCommentForm: React.FC<AddCommentFormProps> = ({videoId, onCommentAdded}) => {
+const AddCommentForm: React.FC<AddCommentFormProps> = ({ videoId, onCommentAdded }) => {
   const [text, setText] = useState('');
   const [author, setAuthor] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,13 +31,13 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({videoId, onCommentAdded}
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="comment" className="block pt-4 text-sm font-medium text-gray-300">
-          Add a new comment
+        <label htmlFor="comment" className="block text-sm font-medium text-white">
+          Comment
         </label>
         <textarea
           id="comment"
           rows={3}
-          className="mt-1 block w-half rounded-md border-gray-300 shadow-sm text-white bg-gray-700 outline-none"
+          className="mt-1 block w-half rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black"
           value={text}
           onChange={(e) => setText(e.target.value)}
           required
@@ -50,7 +50,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({videoId, onCommentAdded}
         <input
           type="text"
           id="author"
-          className="mt-1 block w-half rounded-md border-gray-300 shadow-sm focus:border-gray-400 focus:ring-0 text-black"
+          className="mt-1 block w-half rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           required
@@ -59,7 +59,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({videoId, onCommentAdded}
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex justify-center rounded-md border border-transparent bg-gray-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-white-500 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+        className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
         {isSubmitting ? 'Posting...' : 'Post Comment'}
       </button>

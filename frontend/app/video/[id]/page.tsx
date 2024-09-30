@@ -69,8 +69,8 @@ export default function VideoPage() {
       </div>
       <h1 className="text-3xl font-bold mb-4">{video.title}</h1>
       <p className="text-gray-700 mb-4">{video.description}</p>
-      <CommentSection videoId={video.id} comments={comments}/>
       <AddCommentForm videoId={video.id} onCommentAdded={handleAddComment}/>
+      <CommentSection videoId={video.id} comments={comments}/>
     </div>
   );
 }
