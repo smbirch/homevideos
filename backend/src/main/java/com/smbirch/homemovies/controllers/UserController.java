@@ -1,16 +1,16 @@
 package com.smbirch.homemovies.controllers;
 
-import com.smbirch.homemovies.dtos.CredentialsDto;
 import com.smbirch.homemovies.dtos.UserRequestDto;
 import com.smbirch.homemovies.dtos.UserResponseDto;
 import com.smbirch.homemovies.services.UserService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/api/auth")
 public class UserController {
 
   private final UserService userService;
@@ -25,13 +25,19 @@ public class UserController {
     return userService.getUserByUsername(username);
   }
 
-  @PostMapping
+  @PostMapping("/register")
   public UserResponseDto createUser(@RequestBody UserRequestDto userRequestDto) {
     return userService.createUser(userRequestDto);
   }
 
-  @PostMapping("/validate")
-  public UserResponseDto validateUser(@RequestBody CredentialsDto credentialsDto) {
-    return userService.validateUser(credentialsDto);
+  @PostMapping("/login")
+  public UserResponseDto login(@RequestBody UserRequestDto userRequestDto) {
+    return userService.login(userRequestDto);
+  }
+
+  @PostMapping("/validate/{username}")
+  public ResponseEntity<?> validateUser(
+      @PathVariable String username, @RequestHeader("Authorization") String authHeader) {
+    return userService.validateUser(authHeader, username);
   }
 }

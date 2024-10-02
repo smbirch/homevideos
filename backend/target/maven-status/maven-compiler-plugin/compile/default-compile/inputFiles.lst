@@ -13,6 +13,7 @@
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/dtos/CommentResponseDto.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/dtos/ProfileDto.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/controllers/advice/HomeMoviesAdvice.java
+/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/services/impl/JwtServiceImpl.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/dtos/UserRequestDto.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/entities/User.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/services/impl/UserServiceImpl.java
@@ -36,3 +37,4 @@
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/controllers/UserController.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/services/impl/VideoServiceImpl.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/services/impl/PasswordEncoderImpl.java
+/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/services/JwtService.java
