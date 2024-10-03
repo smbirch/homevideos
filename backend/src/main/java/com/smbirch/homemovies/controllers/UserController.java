@@ -1,5 +1,6 @@
 package com.smbirch.homemovies.controllers;
 
+import com.smbirch.homemovies.dtos.AuthDto;
 import com.smbirch.homemovies.dtos.UserRequestDto;
 import com.smbirch.homemovies.dtos.UserResponseDto;
 import com.smbirch.homemovies.services.UserService;
@@ -36,8 +37,12 @@ public class UserController {
   }
 
   @PostMapping("/validate/{username}")
-  public ResponseEntity<?> validateUser(
-      @PathVariable String username, @RequestHeader("Authorization") String authHeader) {
+  public ResponseEntity<AuthDto> validateUser(@PathVariable String username, @RequestHeader("Authorization") String authHeader) {
     return userService.validateUser(authHeader, username);
+  }
+
+  @PostMapping("/logout/{username}")
+  public ResponseEntity<AuthDto> logout(@PathVariable String username, @RequestHeader("Authorization") String authHeader) {
+    return userService.logoutUser(authHeader, username);
   }
 }

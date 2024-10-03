@@ -11,4 +11,3 @@ public class UserResponseDto {
   private String token;
   private ProfileDto profile;
 }
-// updating userresponseDto to include JWT

@@ -16,9 +16,15 @@ public interface JwtService {
 
   <T> T extractClaim(String token, Function<Claims, T> claimsResolver);
 
-  Boolean isTokenExpired(String token);
+  boolean isTokenExpired(String token);
 
-  Boolean validateToken(String token);
+  boolean validateToken(String token);
 
-  Boolean validateTokenAndUser(String token, String username);
+  boolean validateTokenAndUser(String token, String username);
+
+  boolean blacklistToken(String token);
+
+  boolean isBlacklisted(String token);
+
+  String getTokenSubString(String token);
 }

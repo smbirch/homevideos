@@ -16,24 +16,25 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice(basePackages = "com.smbirch.homemovies.controllers")
 @ResponseBody
 public class HomeMoviesAdvice {
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
     public ErrorDto handleBadRequestException(
             HttpServletRequest request, BadRequestException badRequestException) {
-        return new ErrorDto(badRequestException.getMessage());
+        return new ErrorDto(false, badRequestException.getMessage());
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(NotAuthorizedException.class)
     public ErrorDto handleNotAuthorizedException(
             HttpServletRequest request, NotAuthorizedException notAuthorizedException) {
-        return new ErrorDto(notAuthorizedException.getMessage());
+        return new ErrorDto(false, notAuthorizedException.getMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ErrorDto handleNotFoundException(
             HttpServletRequest request, NotFoundException notFoundException) {
-        return new ErrorDto(notFoundException.getMessage());
+        return new ErrorDto(false, notFoundException.getMessage());
     }
 }

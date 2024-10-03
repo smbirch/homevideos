@@ -1,9 +1,6 @@
 package com.smbirch.homemovies.services.impl;
 
-import com.smbirch.homemovies.dtos.CredentialsDto;
-import com.smbirch.homemovies.dtos.ProfileDto;
-import com.smbirch.homemovies.dtos.UserRequestDto;
-import com.smbirch.homemovies.dtos.UserResponseDto;
+import com.smbirch.homemovies.dtos.*;
 import com.smbirch.homemovies.entities.User;
 import com.smbirch.homemovies.exceptions.BadRequestException;
 import com.smbirch.homemovies.exceptions.NotFoundException;
@@ -111,26 +108,39 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public ResponseEntity<?> validateUser(String authHeader, String username) {
+  public ResponseEntity<AuthDto> validateUser(String authHeader, String username) {
     try {
-      String token = authHeader.substring(7); // Remove "Bearer " prefix
+      String token = jwtService.getTokenSubString(authHeader);
       boolean isValid = jwtService.validateTokenAndUser(token, username);
       if (isValid) {
-        return ResponseEntity.ok(new AuthResponse(true, "Token is valid"));
+        return ResponseEntity.ok(new AuthDto(true, "Token is valid"));
       } else {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-            .body(new AuthResponse(false, "Invalid token"));
+            .body(new AuthDto(false, "Invalid token"));
       }
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-          .body(new AuthResponse(false, "Error validating token"));
+          .body(new AuthDto(false, "Error validating token"));
     }
   }
 
-  @Data
-  @AllArgsConstructor
-  static class AuthResponse {
-    private boolean valid;
-    private String message;
+  @Override
+  public ResponseEntity<AuthDto> logoutUser(String authHeader, String username) {
+    try {
+      String token = jwtService.getTokenSubString(authHeader);
+      boolean isValidToken = jwtService.validateTokenAndUser(token, username);
+
+      if (isValidToken) {
+        if (jwtService.blacklistToken(token)) {
+          return ResponseEntity.ok(new AuthDto(true, "Token has been invalidated"));
+        } else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new AuthDto(false, "Server error: Token cannot be invalidated"));
+      } else {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            .body(new AuthDto(false, "Invalid token"));
+      }
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+          .body(new AuthDto(false, "Error validating token"));
+    }
   }
 }

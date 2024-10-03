@@ -3,9 +3,9 @@ package com.smbirch.homemovies.dtos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@AllArgsConstructor
 @Data
-public class ErrorDto {
-    private boolean success;
+@AllArgsConstructor
+public class AuthDto {
+    private boolean valid;
     private String message;
 }
