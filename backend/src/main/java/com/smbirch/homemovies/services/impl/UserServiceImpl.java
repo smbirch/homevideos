@@ -11,15 +11,15 @@ import com.smbirch.homemovies.services.PasswordEncoder;
 import com.smbirch.homemovies.services.UserService;
 import java.util.List;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserResponseDto createUser(UserRequestDto userRequestDto) {
+    log.info("Creating new user: {}", userRequestDto);
     CredentialsDto credentials = userRequestDto.getCredentials();
     ProfileDto profile = userRequestDto.getProfile();
 
@@ -58,9 +59,12 @@ public class UserServiceImpl implements UserService {
         || profile.getEmail() == null
         || credentials.getPassword() == null
         || credentials.getUsername() == null) {
+      log.warn("createUser FAIL - A required parameter is missing {}", userRequestDto);
       throw new BadRequestException("A required parameter is missing");
     }
     if (userRepository.existsByCredentials_Username(credentials.getUsername())) {
+      log.warn(
+          "createUser FAIL - User with username: '{}' already exists", credentials.getUsername());
       throw new BadRequestException("This username is already in use.");
     }
 
@@ -72,6 +76,11 @@ public class UserServiceImpl implements UserService {
 
     String newJwtToken = jwtService.generateToken(credentials.getUsername());
     user = userRepository.saveAndFlush(user);
+    log.info(
+        "New user created successfully with ID: '{}' and username: '{}'",
+        user.getId(),
+        user.getCredentials().getUsername());
+
     UserResponseDto userResponseDto = new UserResponseDto();
     userResponseDto.setId(user.getId());
     userResponseDto.setUsername(credentials.getUsername());
@@ -88,6 +97,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserResponseDto login(UserRequestDto userRequestDto) {
+    log.info("Logging-in user: {}", userRequestDto.getCredentials().getUsername());
     User user = getUserHelper(userRequestDto.getCredentials().getUsername());
 
     boolean doesPasswordMatch =
@@ -95,6 +105,7 @@ public class UserServiceImpl implements UserService {
             userRequestDto.getCredentials().getPassword(), user.getCredentials().getPassword());
 
     if (!doesPasswordMatch) {
+      log.warn("FAIL login - '{}' submitted an incorrect password", userRequestDto.getCredentials().getUsername());
       throw new BadRequestException("Username or password is incorrect");
     }
 
@@ -104,6 +115,7 @@ public class UserServiceImpl implements UserService {
     userResponseDto.setUsername(user.getCredentials().getUsername());
     userResponseDto.setProfile(userRequestDto.getProfile());
     userResponseDto.setToken(newJwtToken);
+
     return userResponseDto;
   }
 
@@ -115,10 +127,12 @@ public class UserServiceImpl implements UserService {
       if (isValid) {
         return ResponseEntity.ok(new AuthDto(true, "Token is valid"));
       } else {
+        log.warn("Token is invalid for user '{}'", username);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
             .body(new AuthDto(false, "Invalid token"));
       }
     } catch (Exception e) {
+      log.warn("error validating token for user '{}'", username);
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
           .body(new AuthDto(false, "Error validating token"));
     }
@@ -126,6 +140,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public ResponseEntity<AuthDto> logoutUser(String authHeader, String username) {
+    log.info("Logging out user: '{}'", username);
     try {
       String token = jwtService.getTokenSubString(authHeader);
       boolean isValidToken = jwtService.validateTokenAndUser(token, username);
@@ -133,7 +148,9 @@ public class UserServiceImpl implements UserService {
       if (isValidToken) {
         if (jwtService.blacklistToken(token)) {
           return ResponseEntity.ok(new AuthDto(true, "Token has been invalidated"));
-        } else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new AuthDto(false, "Server error: Token cannot be invalidated"));
+        } else
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+              .body(new AuthDto(false, "Server error: Token cannot be invalidated"));
       } else {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
             .body(new AuthDto(false, "Invalid token"));

@@ -11,11 +11,14 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import javax.crypto.SecretKey;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class JwtServiceImpl implements JwtService {
 
   @Value("${jwt.secret}")
@@ -32,6 +35,7 @@ public class JwtServiceImpl implements JwtService {
 
   @Override
   public String generateToken(String username) {
+    log.info("Generating JWT token for {}", username);
     Map<String, Object> claims = new HashMap<>();
     return generateToken(claims, username);
   }
@@ -85,7 +89,7 @@ public class JwtServiceImpl implements JwtService {
       Jwts.parser().verifyWith(signInKeyHelper()).build().parseSignedClaims(token);
       return true;
     } catch (Exception e) {
-      System.out.println("Invalid token: " + e.getMessage()); // TODO: implement logging for these
+      log.warn("Invalid JWT token: {}", e.getMessage());
       return false;
     }
   }
@@ -106,7 +110,7 @@ public class JwtServiceImpl implements JwtService {
     try {
       redisTemplate.opsForValue().set(key, "blacklisted", expiresIn, TimeUnit.MILLISECONDS);
     } catch (Exception e) {
-      System.out.println("Error blacklisting token: " + e.getMessage()); // TODO: implement logging for these
+      log.warn("Error while blacklisting token: {}", e.getMessage());
     }
     return true;
   }
