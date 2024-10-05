@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import javax.crypto.SecretKey;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -36,23 +35,20 @@ public class JwtServiceImpl implements JwtService {
   @Override
   public String generateToken(String username) {
     log.info("Generating JWT token for {}", username);
-    Map<String, Object> claims = new HashMap<>();
-    return generateToken(claims, username);
+    return generateToken(new HashMap<>(), username);
   }
 
   @Override
   public String generateToken(Map<String, Object> claims, String userName) {
     long now = System.currentTimeMillis();
-    Date nowDate = new Date(now);
     return Jwts.builder()
-        .claims(claims)
-        .subject(userName)
-        .issuedAt(nowDate)
-        .expiration(new Date(now + jwtExpiration))
-        .signWith(signInKeyHelper())
-        .compact();
+            .claims(claims)
+            .subject(userName)
+            .issuedAt(new Date(now))
+            .expiration(new Date(now + jwtExpiration))
+            .signWith(signInKeyHelper())
+            .compact();
   }
-
   @Override
   public String extractUsername(String token) {
     return extractClaim(token, Claims::getSubject);
@@ -71,25 +67,25 @@ public class JwtServiceImpl implements JwtService {
 
   @Override
   public boolean isTokenExpired(String token) {
-    Date expiration = extractExpiration(token);
-    if (expiration.after(new Date())) {
-      return false;
-    } else {
-      blacklistToken(token);
+    try {
+      Date expiration = extractExpiration(token);
+      return expiration != null && expiration.before(new Date());
+    } catch (Exception e) {
+      log.warn("Error checking token expiration: {}", e.getMessage());
       return true;
     }
   }
 
   @Override
   public boolean validateToken(String token) {
-    if (isTokenExpired(token) || isBlacklisted(token)) {
+    if (isBlacklisted(token)) {
       return false;
     }
     try {
       Jwts.parser().verifyWith(signInKeyHelper()).build().parseSignedClaims(token);
-      return true;
+      return !isTokenExpired(token);
     } catch (Exception e) {
-      log.warn("Invalid JWT token: {}", e.getMessage());
+      log.warn("FAIL: Validating Token: {}", e.getMessage());
       return false;
     }
   }
@@ -99,31 +95,42 @@ public class JwtServiceImpl implements JwtService {
     if (!validateToken(token)) {
       return false;
     }
-    return extractUsername(token).equals(username);
-  }
-
-  @Override
-  public boolean blacklistToken(String token) {
-    String key = "blacklist:" + token;
-    Date expiration = extractExpiration(token);
-    long expiresIn = expiration.getTime();
-    try {
-      redisTemplate.opsForValue().set(key, "blacklisted", expiresIn, TimeUnit.MILLISECONDS);
-    } catch (Exception e) {
-      log.warn("Error while blacklisting token: {}", e.getMessage());
+    String extractedUsername = extractUsername(token);
+    if (!extractedUsername.equals(username)) {
+      log.warn("FAIL: Validating Token and Username mismatch");
+      return false;
     }
     return true;
   }
 
   @Override
+  public boolean blacklistToken(String token) {
+    String key = "blacklist:" + token;
+    try {
+      Date expiration = extractExpiration(token);
+      if (expiration != null) {
+        long expiresIn = expiration.getTime() - System.currentTimeMillis();
+        redisTemplate.opsForValue().set(key, "blacklisted", expiresIn, TimeUnit.MILLISECONDS);
+        log.info("Token blacklisted successfully");
+        return true;
+      }
+    } catch (Exception e) {
+      log.warn("Error while blacklisting token: {}", e.getMessage());
+    }
+    return false;
+  }
+
+  @Override
   public boolean isBlacklisted(String token) {
     String key = "blacklist:" + token;
-    return Boolean.TRUE.equals(redisTemplate.hasKey(key));
+    boolean isBlacklisted = redisTemplate.opsForValue().get(key) != null;
+    log.info("Token is {}blacklisted: '{}'", isBlacklisted ? "" : "not ", token);
+    return isBlacklisted;
   }
 
   @Override
   public String getTokenSubString(String token) {
-    return token.substring(7);
+    return token.startsWith("Bearer ") ? token.substring(7) : token;
   }
 
   private Claims extractAllClaims(String token) {

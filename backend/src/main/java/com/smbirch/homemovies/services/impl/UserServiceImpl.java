@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
     Optional<User> userToCheckFor = userRepository.findByCredentials_Username(username);
 
     if (userToCheckFor.isEmpty() || userToCheckFor.get().isDeleted()) {
+      log.warn("FAIL getUser: No user found with username {}", username);
       throw new NotFoundException("No user found with username: '" + username + "'");
     }
     return userToCheckFor.get();
@@ -59,12 +60,13 @@ public class UserServiceImpl implements UserService {
         || profile.getEmail() == null
         || credentials.getPassword() == null
         || credentials.getUsername() == null) {
-      log.warn("createUser FAIL - A required parameter is missing {}", userRequestDto);
+      log.info("createUser FAIL - A required parameter is missing {}", userRequestDto);
       throw new BadRequestException("A required parameter is missing");
     }
     if (userRepository.existsByCredentials_Username(credentials.getUsername())) {
       log.warn(
-          "createUser FAIL - User with username: '{}' already exists", credentials.getUsername());
+          "FAIL - Failed to create user with username: '{}' - username already exists",
+          credentials.getUsername());
       throw new BadRequestException("This username is already in use.");
     }
 
@@ -97,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserResponseDto login(UserRequestDto userRequestDto) {
-    log.info("Logging-in user: {}", userRequestDto.getCredentials().getUsername());
+    log.info("Login attempt for user: {}", userRequestDto.getCredentials().getUsername());
     User user = getUserHelper(userRequestDto.getCredentials().getUsername());
 
     boolean doesPasswordMatch =
@@ -105,7 +107,9 @@ public class UserServiceImpl implements UserService {
             userRequestDto.getCredentials().getPassword(), user.getCredentials().getPassword());
 
     if (!doesPasswordMatch) {
-      log.warn("FAIL login - '{}' submitted an incorrect password", userRequestDto.getCredentials().getUsername());
+      log.warn(
+          "FAIL login - '{}' submitted an incorrect password",
+          userRequestDto.getCredentials().getUsername());
       throw new BadRequestException("Username or password is incorrect");
     }
 
@@ -116,23 +120,26 @@ public class UserServiceImpl implements UserService {
     userResponseDto.setProfile(userRequestDto.getProfile());
     userResponseDto.setToken(newJwtToken);
 
+    log.info("SUCCESS Login for '{}'", userRequestDto.getCredentials().getUsername());
     return userResponseDto;
   }
 
   @Override
   public ResponseEntity<AuthDto> validateUser(String authHeader, String username) {
+    log.info("Token validation request for user: '{}'", username);
     try {
       String token = jwtService.getTokenSubString(authHeader);
       boolean isValid = jwtService.validateTokenAndUser(token, username);
       if (isValid) {
+        log.info("Token is valid for user: '{}'", username);
         return ResponseEntity.ok(new AuthDto(true, "Token is valid"));
       } else {
-        log.warn("Token is invalid for user '{}'", username);
+        log.warn("FAIL: Token is invalid for user '{}'", username);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
             .body(new AuthDto(false, "Invalid token"));
       }
     } catch (Exception e) {
-      log.warn("error validating token for user '{}'", username);
+      log.error("Cannot validate token for user '{}'", username);
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
           .body(new AuthDto(false, "Error validating token"));
     }

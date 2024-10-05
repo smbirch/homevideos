@@ -1,68 +1,876 @@
-2024-10-04 17:00:51 [restartedMain] INFO  c.s.homemovies.HomemoviesApplication - Starting HomemoviesApplication using Java 21.0.2 with PID 26181 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
-2024-10-04 17:00:51 [restartedMain] DEBUG c.s.homemovies.HomemoviesApplication - Running with Spring Boot v3.2.2, Spring v6.1.3
-2024-10-04 17:00:51 [restartedMain] INFO  c.s.homemovies.HomemoviesApplication - No active profile set, falling back to 1 default profile: "default"
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 56 ms. Found 3 JPA repository interfaces.
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2024-10-04 17:00:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
-2024-10-04 17:00:52 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2024-10-04 17:00:52 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 529 ms
-2024-10-04 17:00:52 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-10-04 17:00:52 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
-2024-10-04 17:00:52 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2024-10-04 17:00:52 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-10-04 17:00:52 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2024-10-04 17:00:52 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7c189c14
-2024-10-04 17:00:52 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2024-10-04 17:00:52 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-10-04 17:00:55 [restartedMain] INFO  c.s.homemovies.HomemoviesApplication - Starting HomemoviesApplication using Java 21.0.2 with PID 26200 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
-2024-10-04 17:00:55 [restartedMain] DEBUG c.s.homemovies.HomemoviesApplication - Running with Spring Boot v3.2.2, Spring v6.1.3
-2024-10-04 17:00:55 [restartedMain] INFO  c.s.homemovies.HomemoviesApplication - No active profile set, falling back to 1 default profile: "default"
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 55 ms. Found 3 JPA repository interfaces.
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2024-10-04 17:00:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
-2024-10-04 17:00:56 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2024-10-04 17:00:56 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2024-10-04 17:00:56 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2024-10-04 17:00:56 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.18]
-2024-10-04 17:00:56 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2024-10-04 17:00:56 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 518 ms
-2024-10-04 17:00:56 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-10-04 17:00:56 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
-2024-10-04 17:00:56 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2024-10-04 17:00:56 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-10-04 17:00:56 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2024-10-04 17:00:56 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5ebb1410
-2024-10-04 17:00:56 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2024-10-04 17:00:56 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-10-04 17:00:56 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-10-04 17:00:56 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-10-04 17:00:56 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-10-04 17:00:57 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2024-10-04 17:00:57 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2024-10-04 17:00:57 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
-2024-10-04 17:00:57 [restartedMain] INFO  c.s.homemovies.HomemoviesApplication - Started HomemoviesApplication in 1.699 seconds (process running for 1.996)
-2024-10-04 17:01:02 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2024-10-04 17:01:02 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2024-10-04 17:01:02 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-2024-10-04 17:01:02 [http-nio-8080-exec-1] INFO  c.s.h.services.impl.UserServiceImpl - Creating new user: UserRequestDto(token=null, credentials=CredentialsDto(username=spencer, password=password, token=null), profile=ProfileDto(firstName=spencer, lastName=birch, email=sb@email.com, admin=true))
-2024-10-04 17:01:02 [http-nio-8080-exec-1] INFO  c.s.h.services.impl.JwtServiceImpl - Generating JWT token for spencer
-2024-10-04 17:01:02 [http-nio-8080-exec-1] INFO  c.s.h.services.impl.UserServiceImpl - New user created successfully with ID: '1' and username: 'spencer'
-2024-10-04 17:01:11 [http-nio-8080-exec-3] INFO  c.s.h.services.impl.UserServiceImpl - Creating new user: UserRequestDto(token=null, credentials=CredentialsDto(username=spencer, password=password, token=null), profile=ProfileDto(firstName=spencer, lastName=birch, email=sb@email.com, admin=true))
-2024-10-04 17:01:11 [http-nio-8080-exec-3] WARN  c.s.h.services.impl.UserServiceImpl - createUser FAIL - User with username: 'spencer' already exists
-2024-10-04 17:01:11 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.smbirch.homemovies.exceptions.BadRequestException: This username is already in use.]
+2024-10-04 22:48:37 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 31658 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 22:48:37 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 22:48:37 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 22:48:37 - INFO  - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-04 22:48:37 - INFO  - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-04 22:48:38 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:48:38 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 22:48:38 - INFO  - Finished Spring Data repository scanning in 65 ms. Found 3 JPA repository interfaces.
+2024-10-04 22:48:38 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:48:38 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 22:48:38 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:48:38 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:48:38 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:48:38 - INFO  - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2024-10-04 22:48:38 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 22:48:38 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:48:38 - INFO  - Starting service [Tomcat]
+2024-10-04 22:48:38 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 22:48:38 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 22:48:38 - INFO  - Root WebApplicationContext: initialization completed in 586 ms
+2024-10-04 22:48:38 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 22:48:38 - INFO  - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-10-04 22:48:38 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 22:48:38 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 22:48:38 - INFO  - HikariPool-1 - Starting...
+2024-10-04 22:48:38 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6ddc90c3
+2024-10-04 22:48:38 - INFO  - HikariPool-1 - Start completed.
+2024-10-04 22:48:39 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 22:48:39 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:48:39 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:48:39 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:48:39 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:48:39 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:48:39 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:48:39 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:48:39 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:48:39 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:48:39 - WARN  - table "comment" does not exist, skipping
+2024-10-04 22:48:39 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:48:39 - WARN  - table "user_likes" does not exist, skipping
+2024-10-04 22:48:39 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:48:39 - WARN  - table "user_table" does not exist, skipping
+2024-10-04 22:48:39 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:48:39 - WARN  - table "video" does not exist, skipping
+2024-10-04 22:48:39 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:48:39 - INFO  - LiveReload server is running on port 35729
+2024-10-04 22:48:39 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:48:39 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 22:48:39 - INFO  - Started HomemoviesApplication in 1.86 seconds (process running for 2.154)
+2024-10-04 22:48:42 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 22:48:42 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 22:48:42 - INFO  - Completed initialization in 0 ms
+2024-10-04 22:48:42 - INFO  - Creating new user: UserRequestDto(token=null, credentials=CredentialsDto(username=spencer, password=password, token=null), profile=ProfileDto(firstName=spencer, lastName=birch, email=sb@email.com, admin=true))
+2024-10-04 22:48:42 - INFO  - Generating JWT token for spencer
+2024-10-04 22:48:42 - INFO  - New user created successfully with ID: '1' and username: 'spencer'
+2024-10-04 22:49:02 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 22:49:02 - INFO  - Token is not blacklisted
+2024-10-04 22:49:02 - WARN  - token is expired - 'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzI4MTA3MzIyLCJleHAiOjE3MjgxMDczMjJ9.aQeG4Tv9_goPeXHfT0wFNhGHgvBi9t02M6K5kMGSrsZkbXXwBRf3HICXESeWZecJ'
+2024-10-04 22:49:02 - ERROR - Cannot validate token for user 'spencer'
+2024-10-04 22:51:51 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 31757 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 22:51:51 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 22:51:51 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 22:51:51 - INFO  - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-04 22:51:51 - INFO  - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-04 22:51:51 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:51:51 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 22:51:51 - INFO  - Finished Spring Data repository scanning in 59 ms. Found 3 JPA repository interfaces.
+2024-10-04 22:51:51 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:51:51 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 22:51:51 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:51:51 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:51:51 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:51:51 - INFO  - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2024-10-04 22:51:52 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 22:51:52 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:51:52 - INFO  - Starting service [Tomcat]
+2024-10-04 22:51:52 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 22:51:52 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 22:51:52 - INFO  - Root WebApplicationContext: initialization completed in 533 ms
+2024-10-04 22:51:52 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 22:51:52 - INFO  - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-10-04 22:51:52 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 22:51:52 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 22:51:52 - INFO  - HikariPool-1 - Starting...
+2024-10-04 22:51:52 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7c78c5d8
+2024-10-04 22:51:52 - INFO  - HikariPool-1 - Start completed.
+2024-10-04 22:51:52 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 22:51:52 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:51:53 - INFO  - LiveReload server is running on port 35729
+2024-10-04 22:51:53 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:51:53 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 22:51:53 - INFO  - Started HomemoviesApplication in 1.74 seconds (process running for 2.031)
+2024-10-04 22:52:03 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 22:52:03 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 22:52:03 - INFO  - Completed initialization in 1 ms
+2024-10-04 22:52:03 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 22:52:03 - INFO  - Token is not blacklisted
+2024-10-04 22:52:03 - WARN  - token is expired - 'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzI4MTA3MzIyLCJleHAiOjE3MjgxMDczMjJ9.aQeG4Tv9_goPeXHfT0wFNhGHgvBi9t02M6K5kMGSrsZkbXXwBRf3HICXESeWZecJ'
+2024-10-04 22:52:03 - ERROR - Cannot validate token for user 'spencer'
+2024-10-04 22:54:54 - INFO  - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-10-04 22:54:54 - INFO  - Stopping ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:55:05 - WARN  - The acceptor thread [http-nio-8080-Acceptor] did not stop cleanly
+2024-10-04 22:55:05 - INFO  - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:55:05 - INFO  - HikariPool-1 - Shutdown initiated...
+2024-10-04 22:55:05 - INFO  - HikariPool-1 - Shutdown completed.
+2024-10-04 22:55:06 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 31757 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 22:55:06 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 22:55:06 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 22:55:06 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:55:06 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 22:55:06 - INFO  - Finished Spring Data repository scanning in 5 ms. Found 3 JPA repository interfaces.
+2024-10-04 22:55:06 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:55:06 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 22:55:06 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:55:06 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:55:06 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:55:06 - INFO  - Finished Spring Data repository scanning in 1 ms. Found 0 Redis repository interfaces.
+2024-10-04 22:55:06 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 22:55:06 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:55:06 - INFO  - Starting service [Tomcat]
+2024-10-04 22:55:06 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 22:55:06 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 22:55:06 - INFO  - Root WebApplicationContext: initialization completed in 110 ms
+2024-10-04 22:55:06 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 22:55:06 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 22:55:06 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 22:55:06 - INFO  - HikariPool-2 - Starting...
+2024-10-04 22:55:06 - INFO  - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@7b639f20
+2024-10-04 22:55:06 - INFO  - HikariPool-2 - Start completed.
+2024-10-04 22:55:06 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 22:55:06 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:55:06 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:55:06 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:55:06 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:55:06 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:55:06 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:55:06 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:55:06 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:55:06 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:55:06 - WARN  - table "comment" does not exist, skipping
+2024-10-04 22:55:06 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:55:06 - WARN  - table "user_likes" does not exist, skipping
+2024-10-04 22:55:06 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:55:06 - WARN  - table "user_table" does not exist, skipping
+2024-10-04 22:55:06 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:55:06 - WARN  - table "video" does not exist, skipping
+2024-10-04 22:55:06 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:55:06 - INFO  - LiveReload server is running on port 35729
+2024-10-04 22:55:06 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:55:06 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 22:55:06 - INFO  - Started HomemoviesApplication in 0.37 seconds (process running for 195.191)
+2024-10-04 22:55:06 - INFO  - Condition evaluation unchanged
+2024-10-04 22:55:57 - INFO  - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-10-04 22:55:57 - INFO  - Stopping ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:56:08 - WARN  - The acceptor thread [http-nio-8080-Acceptor] did not stop cleanly
+2024-10-04 22:56:08 - INFO  - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:56:08 - INFO  - HikariPool-2 - Shutdown initiated...
+2024-10-04 22:56:08 - INFO  - HikariPool-2 - Shutdown completed.
+2024-10-04 22:56:08 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 31757 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 22:56:08 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 22:56:08 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 22:56:08 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:56:08 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 22:56:08 - INFO  - Finished Spring Data repository scanning in 4 ms. Found 3 JPA repository interfaces.
+2024-10-04 22:56:08 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:56:08 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 22:56:08 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:56:08 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:56:08 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:56:08 - INFO  - Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
+2024-10-04 22:56:08 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 22:56:08 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:56:08 - INFO  - Starting service [Tomcat]
+2024-10-04 22:56:08 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 22:56:08 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 22:56:08 - INFO  - Root WebApplicationContext: initialization completed in 96 ms
+2024-10-04 22:56:08 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 22:56:08 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 22:56:08 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 22:56:08 - INFO  - HikariPool-3 - Starting...
+2024-10-04 22:56:08 - INFO  - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@3000f3e
+2024-10-04 22:56:08 - INFO  - HikariPool-3 - Start completed.
+2024-10-04 22:56:08 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 22:56:08 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:08 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:56:08 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:08 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:56:08 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:08 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:56:08 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:08 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:56:08 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:08 - WARN  - table "comment" does not exist, skipping
+2024-10-04 22:56:08 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:08 - WARN  - table "user_likes" does not exist, skipping
+2024-10-04 22:56:08 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:08 - WARN  - table "user_table" does not exist, skipping
+2024-10-04 22:56:08 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:08 - WARN  - table "video" does not exist, skipping
+2024-10-04 22:56:08 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:56:08 - INFO  - LiveReload server is running on port 35729
+2024-10-04 22:56:08 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:56:08 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 22:56:08 - INFO  - Started HomemoviesApplication in 0.338 seconds (process running for 257.555)
+2024-10-04 22:56:08 - INFO  - Condition evaluation unchanged
+2024-10-04 22:56:26 - INFO  - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-10-04 22:56:26 - INFO  - Stopping ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:56:37 - WARN  - The acceptor thread [http-nio-8080-Acceptor] did not stop cleanly
+2024-10-04 22:56:37 - INFO  - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:56:37 - INFO  - HikariPool-3 - Shutdown initiated...
+2024-10-04 22:56:37 - INFO  - HikariPool-3 - Shutdown completed.
+2024-10-04 22:56:37 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 31757 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 22:56:37 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 22:56:37 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 22:56:37 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:56:37 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 22:56:37 - INFO  - Finished Spring Data repository scanning in 4 ms. Found 3 JPA repository interfaces.
+2024-10-04 22:56:37 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:56:37 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 22:56:37 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:56:37 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:56:37 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:56:37 - INFO  - Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
+2024-10-04 22:56:37 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 22:56:37 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:56:37 - INFO  - Starting service [Tomcat]
+2024-10-04 22:56:37 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 22:56:37 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 22:56:37 - INFO  - Root WebApplicationContext: initialization completed in 91 ms
+2024-10-04 22:56:37 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 22:56:37 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 22:56:37 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 22:56:37 - INFO  - HikariPool-4 - Starting...
+2024-10-04 22:56:37 - INFO  - HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@737e42d9
+2024-10-04 22:56:37 - INFO  - HikariPool-4 - Start completed.
+2024-10-04 22:56:37 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 22:56:37 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:37 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:56:37 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:37 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:56:37 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:37 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:56:37 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:37 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:56:37 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:37 - WARN  - table "comment" does not exist, skipping
+2024-10-04 22:56:37 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:37 - WARN  - table "user_likes" does not exist, skipping
+2024-10-04 22:56:37 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:37 - WARN  - table "user_table" does not exist, skipping
+2024-10-04 22:56:37 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:56:37 - WARN  - table "video" does not exist, skipping
+2024-10-04 22:56:38 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:56:38 - INFO  - LiveReload server is running on port 35729
+2024-10-04 22:56:38 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:56:38 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 22:56:38 - INFO  - Started HomemoviesApplication in 0.337 seconds (process running for 286.981)
+2024-10-04 22:56:38 - INFO  - Condition evaluation unchanged
+2024-10-04 22:57:24 - INFO  - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-10-04 22:57:24 - INFO  - Stopping ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:57:35 - WARN  - The acceptor thread [http-nio-8080-Acceptor] did not stop cleanly
+2024-10-04 22:57:35 - INFO  - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:57:35 - INFO  - HikariPool-4 - Shutdown initiated...
+2024-10-04 22:57:35 - INFO  - HikariPool-4 - Shutdown completed.
+2024-10-04 22:57:35 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 31757 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 22:57:35 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 22:57:35 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 22:57:35 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:57:35 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 22:57:35 - INFO  - Finished Spring Data repository scanning in 3 ms. Found 3 JPA repository interfaces.
+2024-10-04 22:57:35 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:57:35 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 22:57:35 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:57:35 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:57:35 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:57:35 - INFO  - Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
+2024-10-04 22:57:35 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 22:57:35 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:57:35 - INFO  - Starting service [Tomcat]
+2024-10-04 22:57:35 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 22:57:35 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 22:57:35 - INFO  - Root WebApplicationContext: initialization completed in 89 ms
+2024-10-04 22:57:35 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 22:57:35 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 22:57:35 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 22:57:35 - INFO  - HikariPool-5 - Starting...
+2024-10-04 22:57:35 - INFO  - HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@2bdc7179
+2024-10-04 22:57:35 - INFO  - HikariPool-5 - Start completed.
+2024-10-04 22:57:35 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 22:57:35 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:57:35 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:57:35 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:57:35 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:57:35 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:57:35 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:57:35 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:57:35 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:57:35 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:57:35 - WARN  - table "comment" does not exist, skipping
+2024-10-04 22:57:35 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:57:35 - WARN  - table "user_likes" does not exist, skipping
+2024-10-04 22:57:35 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:57:35 - WARN  - table "user_table" does not exist, skipping
+2024-10-04 22:57:35 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:57:35 - WARN  - table "video" does not exist, skipping
+2024-10-04 22:57:35 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:57:35 - INFO  - LiveReload server is running on port 35729
+2024-10-04 22:57:35 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:57:35 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 22:57:35 - INFO  - Started HomemoviesApplication in 0.319 seconds (process running for 344.274)
+2024-10-04 22:57:35 - INFO  - Condition evaluation unchanged
+2024-10-04 22:57:50 - INFO  - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-10-04 22:57:50 - INFO  - Stopping ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:58:01 - WARN  - The acceptor thread [http-nio-8080-Acceptor] did not stop cleanly
+2024-10-04 22:58:01 - INFO  - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:58:01 - INFO  - HikariPool-5 - Shutdown initiated...
+2024-10-04 22:58:01 - INFO  - HikariPool-5 - Shutdown completed.
+2024-10-04 22:58:01 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 31757 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 22:58:01 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 22:58:01 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 22:58:01 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:58:01 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 22:58:01 - INFO  - Finished Spring Data repository scanning in 3 ms. Found 3 JPA repository interfaces.
+2024-10-04 22:58:01 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:58:01 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 22:58:01 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:58:01 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:58:01 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:58:01 - INFO  - Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
+2024-10-04 22:58:01 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 22:58:01 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:58:01 - INFO  - Starting service [Tomcat]
+2024-10-04 22:58:01 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 22:58:01 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 22:58:01 - INFO  - Root WebApplicationContext: initialization completed in 88 ms
+2024-10-04 22:58:01 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 22:58:01 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 22:58:01 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 22:58:01 - INFO  - HikariPool-6 - Starting...
+2024-10-04 22:58:01 - INFO  - HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@485473ad
+2024-10-04 22:58:01 - INFO  - HikariPool-6 - Start completed.
+2024-10-04 22:58:01 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 22:58:01 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:01 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:58:01 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:01 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:58:01 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:01 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:58:01 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:01 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:58:01 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:01 - WARN  - table "comment" does not exist, skipping
+2024-10-04 22:58:01 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:01 - WARN  - table "user_likes" does not exist, skipping
+2024-10-04 22:58:01 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:01 - WARN  - table "user_table" does not exist, skipping
+2024-10-04 22:58:01 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:01 - WARN  - table "video" does not exist, skipping
+2024-10-04 22:58:01 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:58:01 - INFO  - LiveReload server is running on port 35729
+2024-10-04 22:58:01 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:58:01 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 22:58:01 - INFO  - Started HomemoviesApplication in 0.322 seconds (process running for 370.64)
+2024-10-04 22:58:01 - INFO  - Condition evaluation unchanged
+2024-10-04 22:58:19 - INFO  - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-10-04 22:58:19 - INFO  - Stopping ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:58:30 - WARN  - The acceptor thread [http-nio-8080-Acceptor] did not stop cleanly
+2024-10-04 22:58:30 - INFO  - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:58:30 - INFO  - HikariPool-6 - Shutdown initiated...
+2024-10-04 22:58:30 - INFO  - HikariPool-6 - Shutdown completed.
+2024-10-04 22:58:30 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 31757 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 22:58:30 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 22:58:30 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 22:58:30 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:58:30 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 22:58:30 - INFO  - Finished Spring Data repository scanning in 3 ms. Found 3 JPA repository interfaces.
+2024-10-04 22:58:30 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 22:58:30 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 22:58:30 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:58:30 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:58:30 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 22:58:30 - INFO  - Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
+2024-10-04 22:58:30 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 22:58:30 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:58:30 - INFO  - Starting service [Tomcat]
+2024-10-04 22:58:30 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 22:58:30 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 22:58:30 - INFO  - Root WebApplicationContext: initialization completed in 91 ms
+2024-10-04 22:58:31 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 22:58:31 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 22:58:31 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 22:58:31 - INFO  - HikariPool-7 - Starting...
+2024-10-04 22:58:31 - INFO  - HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@6b8ab4e2
+2024-10-04 22:58:31 - INFO  - HikariPool-7 - Start completed.
+2024-10-04 22:58:31 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 22:58:31 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:31 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:58:31 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:31 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 22:58:31 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:31 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:58:31 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:31 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 22:58:31 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:31 - WARN  - table "comment" does not exist, skipping
+2024-10-04 22:58:31 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:31 - WARN  - table "user_likes" does not exist, skipping
+2024-10-04 22:58:31 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:31 - WARN  - table "user_table" does not exist, skipping
+2024-10-04 22:58:31 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 22:58:31 - WARN  - table "video" does not exist, skipping
+2024-10-04 22:58:31 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 22:58:31 - INFO  - LiveReload server is running on port 35729
+2024-10-04 22:58:31 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 22:58:31 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 22:58:31 - INFO  - Started HomemoviesApplication in 0.314 seconds (process running for 400.02)
+2024-10-04 22:58:31 - INFO  - Condition evaluation unchanged
+2024-10-04 23:00:57 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 32113 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 23:00:57 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 23:00:57 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 23:00:57 - INFO  - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-04 23:00:57 - INFO  - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-04 23:00:58 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:00:58 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 23:00:58 - INFO  - Finished Spring Data repository scanning in 54 ms. Found 3 JPA repository interfaces.
+2024-10-04 23:00:58 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:00:58 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 23:00:58 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:00:58 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:00:58 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:00:58 - INFO  - Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2024-10-04 23:00:58 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 23:00:58 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:00:58 - INFO  - Starting service [Tomcat]
+2024-10-04 23:00:58 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 23:00:58 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 23:00:58 - INFO  - Root WebApplicationContext: initialization completed in 509 ms
+2024-10-04 23:00:58 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 23:00:58 - INFO  - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-10-04 23:00:58 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 23:00:58 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 23:00:58 - INFO  - HikariPool-1 - Starting...
+2024-10-04 23:00:58 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@57be0dd0
+2024-10-04 23:00:58 - INFO  - HikariPool-1 - Start completed.
+2024-10-04 23:00:59 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 23:00:59 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:00:59 - INFO  - LiveReload server is running on port 35729
+2024-10-04 23:00:59 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:00:59 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 23:00:59 - INFO  - Started HomemoviesApplication in 1.735 seconds (process running for 2.015)
+2024-10-04 23:01:12 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 23:01:12 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 23:01:12 - INFO  - Completed initialization in 1 ms
+2024-10-04 23:01:12 - INFO  - Creating new user: UserRequestDto(token=null, credentials=CredentialsDto(username=spencer, password=password, token=null), profile=ProfileDto(firstName=spencer, lastName=birch, email=sb@email.com, admin=true))
+2024-10-04 23:01:12 - INFO  - Generating JWT token for spencer
+2024-10-04 23:01:12 - INFO  - New user created successfully with ID: '1' and username: 'spencer'
+2024-10-04 23:01:19 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 23:01:19 - INFO  - Token is not blacklisted
+2024-10-04 23:01:19 - WARN  - Invalid JWT token: JWT expired 757917 milliseconds ago at 2024-10-05T05:48:42.000Z. Current time: 2024-10-05T06:01:19.917Z. Allowed clock skew: 0 milliseconds.
+2024-10-04 23:01:19 - WARN  - FAIL - Token is invalid for user 'spencer'
+2024-10-04 23:02:39 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 32182 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 23:02:39 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 23:02:39 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 23:02:39 - INFO  - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-04 23:02:39 - INFO  - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-04 23:02:39 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:02:39 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 23:02:39 - INFO  - Finished Spring Data repository scanning in 56 ms. Found 3 JPA repository interfaces.
+2024-10-04 23:02:39 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:02:39 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 23:02:39 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:02:39 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:02:39 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:02:39 - INFO  - Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2024-10-04 23:02:39 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 23:02:39 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:02:39 - INFO  - Starting service [Tomcat]
+2024-10-04 23:02:39 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 23:02:39 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 23:02:39 - INFO  - Root WebApplicationContext: initialization completed in 534 ms
+2024-10-04 23:02:40 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 23:02:40 - INFO  - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-10-04 23:02:40 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 23:02:40 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 23:02:40 - INFO  - HikariPool-1 - Starting...
+2024-10-04 23:02:40 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@33a568e5
+2024-10-04 23:02:40 - INFO  - HikariPool-1 - Start completed.
+2024-10-04 23:02:40 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 23:02:40 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:02:41 - INFO  - LiveReload server is running on port 35729
+2024-10-04 23:02:41 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:02:41 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 23:02:41 - INFO  - Started HomemoviesApplication in 1.736 seconds (process running for 2.024)
+2024-10-04 23:02:42 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 23:02:42 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 23:02:42 - INFO  - Completed initialization in 1 ms
+2024-10-04 23:02:42 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 23:02:42 - INFO  - Token is not blacklisted
+2024-10-04 23:02:42 - WARN  - Invalid JWT token: JWT expired 840882 milliseconds ago at 2024-10-05T05:48:42.000Z. Current time: 2024-10-05T06:02:42.882Z. Allowed clock skew: 0 milliseconds.
+2024-10-04 23:02:42 - WARN  - Error while blacklisting token: JWT expired 840883 milliseconds ago at 2024-10-05T05:48:42.000Z. Current time: 2024-10-05T06:02:42.883Z. Allowed clock skew: 0 milliseconds.
+2024-10-04 23:02:42 - WARN  - FAIL - Token is invalid for user 'spencer'
+2024-10-04 23:03:43 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 32226 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 23:03:43 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 23:03:43 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 23:03:43 - INFO  - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-04 23:03:43 - INFO  - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-04 23:03:43 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:03:43 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 23:03:43 - INFO  - Finished Spring Data repository scanning in 60 ms. Found 3 JPA repository interfaces.
+2024-10-04 23:03:43 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:03:43 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 23:03:43 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:03:43 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:03:43 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:03:43 - INFO  - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2024-10-04 23:03:44 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 23:03:44 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:03:44 - INFO  - Starting service [Tomcat]
+2024-10-04 23:03:44 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 23:03:44 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 23:03:44 - INFO  - Root WebApplicationContext: initialization completed in 569 ms
+2024-10-04 23:03:44 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 23:03:44 - INFO  - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-10-04 23:03:44 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 23:03:44 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 23:03:44 - INFO  - HikariPool-1 - Starting...
+2024-10-04 23:03:44 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1e96ab56
+2024-10-04 23:03:44 - INFO  - HikariPool-1 - Start completed.
+2024-10-04 23:03:44 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 23:03:44 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:03:45 - INFO  - LiveReload server is running on port 35729
+2024-10-04 23:03:45 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:03:45 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 23:03:45 - INFO  - Started HomemoviesApplication in 1.76 seconds (process running for 2.047)
+2024-10-04 23:03:46 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 23:03:46 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 23:03:46 - INFO  - Completed initialization in 1 ms
+2024-10-04 23:03:46 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 23:03:46 - INFO  - Token is not blacklisted
+2024-10-04 23:03:46 - WARN  - Invalid/Expired JWT token: JWT expired 904406 milliseconds ago at 2024-10-05T05:48:42.000Z. Current time: 2024-10-05T06:03:46.406Z. Allowed clock skew: 0 milliseconds.
+2024-10-04 23:03:46 - WARN  - FAIL - Token is invalid for user 'spencer'
+2024-10-04 23:04:32 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 32264 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 23:04:32 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 23:04:32 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 23:04:32 - INFO  - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-04 23:04:32 - INFO  - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-04 23:04:32 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:04:32 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 23:04:32 - INFO  - Finished Spring Data repository scanning in 63 ms. Found 3 JPA repository interfaces.
+2024-10-04 23:04:32 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:04:32 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 23:04:32 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:04:32 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:04:32 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:04:32 - INFO  - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2024-10-04 23:04:32 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 23:04:32 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:04:32 - INFO  - Starting service [Tomcat]
+2024-10-04 23:04:32 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 23:04:32 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 23:04:32 - INFO  - Root WebApplicationContext: initialization completed in 563 ms
+2024-10-04 23:04:32 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 23:04:32 - INFO  - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-10-04 23:04:32 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 23:04:33 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 23:04:33 - INFO  - HikariPool-1 - Starting...
+2024-10-04 23:04:33 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3f444878
+2024-10-04 23:04:33 - INFO  - HikariPool-1 - Start completed.
+2024-10-04 23:04:33 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 23:04:33 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:04:33 - INFO  - LiveReload server is running on port 35729
+2024-10-04 23:04:33 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:04:33 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 23:04:33 - INFO  - Started HomemoviesApplication in 1.761 seconds (process running for 2.043)
+2024-10-04 23:04:35 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 23:04:35 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 23:04:35 - INFO  - Completed initialization in 0 ms
+2024-10-04 23:04:35 - INFO  - Creating new user: UserRequestDto(token=null, credentials=CredentialsDto(username=spencer, password=password, token=null), profile=ProfileDto(firstName=spencer, lastName=birch, email=sb@email.com, admin=true))
+2024-10-04 23:04:35 - INFO  - Generating JWT token for spencer
+2024-10-04 23:04:35 - INFO  - New user created successfully with ID: '1' and username: 'spencer'
+2024-10-04 23:04:37 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 23:04:37 - INFO  - Token is not blacklisted
+2024-10-04 23:04:37 - WARN  - FAIL: Validating Token: JWT expired 955507 milliseconds ago at 2024-10-05T05:48:42.000Z. Current time: 2024-10-05T06:04:37.507Z. Allowed clock skew: 0 milliseconds.
+2024-10-04 23:04:37 - WARN  - FAIL - Token is invalid for user 'spencer'
+2024-10-04 23:04:48 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 23:04:48 - INFO  - Token is not blacklisted
+2024-10-04 23:04:48 - INFO  - SUCCESS Token is valid for user: 'spencer'
+2024-10-04 23:05:22 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 32302 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 23:05:22 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 23:05:22 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 23:05:22 - INFO  - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-04 23:05:22 - INFO  - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-04 23:05:22 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:05:22 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 23:05:22 - INFO  - Finished Spring Data repository scanning in 55 ms. Found 3 JPA repository interfaces.
+2024-10-04 23:05:22 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:05:22 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 23:05:22 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:05:22 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:05:22 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:05:22 - INFO  - Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2024-10-04 23:05:22 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 23:05:22 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:05:22 - INFO  - Starting service [Tomcat]
+2024-10-04 23:05:22 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 23:05:22 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 23:05:22 - INFO  - Root WebApplicationContext: initialization completed in 523 ms
+2024-10-04 23:05:22 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 23:05:22 - INFO  - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-10-04 23:05:22 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 23:05:22 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 23:05:22 - INFO  - HikariPool-1 - Starting...
+2024-10-04 23:05:22 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6314e7fc
+2024-10-04 23:05:22 - INFO  - HikariPool-1 - Start completed.
+2024-10-04 23:05:23 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 23:05:23 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:05:23 - INFO  - LiveReload server is running on port 35729
+2024-10-04 23:05:23 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:05:23 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 23:05:23 - INFO  - Started HomemoviesApplication in 1.752 seconds (process running for 2.033)
+2024-10-04 23:05:24 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 23:05:24 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 23:05:24 - INFO  - Completed initialization in 1 ms
+2024-10-04 23:05:24 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 23:05:25 - INFO  - Token is not blacklisted
+2024-10-04 23:05:25 - INFO  - OK Token is valid for user: 'spencer'
+2024-10-04 23:06:44 - INFO  - Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2024-10-04 23:06:44 - INFO  - Stopping ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:06:55 - INFO  - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:06:55 - INFO  - HikariPool-1 - Shutdown initiated...
+2024-10-04 23:06:55 - INFO  - HikariPool-1 - Shutdown completed.
+2024-10-04 23:06:55 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 32302 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 23:06:55 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 23:06:55 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 23:06:55 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:06:55 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 23:06:55 - INFO  - Finished Spring Data repository scanning in 4 ms. Found 3 JPA repository interfaces.
+2024-10-04 23:06:55 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:06:55 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 23:06:55 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:06:55 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:06:55 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:06:55 - INFO  - Finished Spring Data repository scanning in 1 ms. Found 0 Redis repository interfaces.
+2024-10-04 23:06:55 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 23:06:55 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:06:55 - INFO  - Starting service [Tomcat]
+2024-10-04 23:06:55 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 23:06:55 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 23:06:55 - INFO  - Root WebApplicationContext: initialization completed in 107 ms
+2024-10-04 23:06:55 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 23:06:55 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 23:06:55 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 23:06:55 - INFO  - HikariPool-2 - Starting...
+2024-10-04 23:06:55 - INFO  - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@27c6d29b
+2024-10-04 23:06:55 - INFO  - HikariPool-2 - Start completed.
+2024-10-04 23:06:55 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 23:06:55 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:06:55 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 23:06:55 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:06:55 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 23:06:55 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:06:55 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 23:06:55 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:06:55 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 23:06:55 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:06:55 - WARN  - table "comment" does not exist, skipping
+2024-10-04 23:06:55 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:06:55 - WARN  - table "user_likes" does not exist, skipping
+2024-10-04 23:06:55 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:06:55 - WARN  - table "user_table" does not exist, skipping
+2024-10-04 23:06:55 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:06:55 - WARN  - table "video" does not exist, skipping
+2024-10-04 23:06:55 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:06:55 - INFO  - LiveReload server is running on port 35729
+2024-10-04 23:06:55 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:06:55 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 23:06:55 - INFO  - Started HomemoviesApplication in 0.38 seconds (process running for 93.876)
+2024-10-04 23:06:55 - INFO  - Condition evaluation unchanged
+2024-10-04 23:06:56 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 23:06:56 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 23:06:56 - INFO  - Completed initialization in 1 ms
+2024-10-04 23:06:56 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 23:06:56 - INFO  - Token is not blacklisted
+2024-10-04 23:06:56 - INFO  - Token is valid for user: 'spencer'
+2024-10-04 23:06:56 - INFO  - Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2024-10-04 23:06:56 - INFO  - Stopping ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:07:07 - INFO  - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:07:07 - INFO  - HikariPool-2 - Shutdown initiated...
+2024-10-04 23:07:07 - INFO  - HikariPool-2 - Shutdown completed.
+2024-10-04 23:07:07 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 32302 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 23:07:07 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 23:07:07 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 23:07:07 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:07:07 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 23:07:07 - INFO  - Finished Spring Data repository scanning in 4 ms. Found 3 JPA repository interfaces.
+2024-10-04 23:07:07 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:07:07 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 23:07:07 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:07:07 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:07:07 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:07:07 - INFO  - Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
+2024-10-04 23:07:07 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 23:07:07 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:07:07 - INFO  - Starting service [Tomcat]
+2024-10-04 23:07:07 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 23:07:07 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 23:07:07 - INFO  - Root WebApplicationContext: initialization completed in 94 ms
+2024-10-04 23:07:07 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 23:07:07 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 23:07:07 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 23:07:07 - INFO  - HikariPool-3 - Starting...
+2024-10-04 23:07:07 - INFO  - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@6967f635
+2024-10-04 23:07:07 - INFO  - HikariPool-3 - Start completed.
+2024-10-04 23:07:07 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 23:07:07 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:07:07 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 23:07:07 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:07:07 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 23:07:07 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:07:07 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 23:07:07 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:07:07 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 23:07:07 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:07:07 - WARN  - table "comment" does not exist, skipping
+2024-10-04 23:07:07 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:07:07 - WARN  - table "user_likes" does not exist, skipping
+2024-10-04 23:07:07 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:07:07 - WARN  - table "user_table" does not exist, skipping
+2024-10-04 23:07:07 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:07:07 - WARN  - table "video" does not exist, skipping
+2024-10-04 23:07:07 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:07:07 - INFO  - LiveReload server is running on port 35729
+2024-10-04 23:07:07 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:07:07 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 23:07:07 - INFO  - Started HomemoviesApplication in 0.349 seconds (process running for 105.775)
+2024-10-04 23:07:07 - INFO  - Condition evaluation unchanged
+2024-10-04 23:07:14 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 32401 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 23:07:14 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 23:07:14 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 23:07:14 - INFO  - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-04 23:07:14 - INFO  - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-04 23:07:14 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:07:14 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 23:07:14 - INFO  - Finished Spring Data repository scanning in 55 ms. Found 3 JPA repository interfaces.
+2024-10-04 23:07:14 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:07:14 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 23:07:14 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:07:14 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:07:14 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:07:14 - INFO  - Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2024-10-04 23:07:14 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 23:07:14 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:07:14 - INFO  - Starting service [Tomcat]
+2024-10-04 23:07:14 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 23:07:14 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 23:07:14 - INFO  - Root WebApplicationContext: initialization completed in 534 ms
+2024-10-04 23:07:14 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 23:07:14 - INFO  - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-10-04 23:07:14 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 23:07:14 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 23:07:14 - INFO  - HikariPool-1 - Starting...
+2024-10-04 23:07:14 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2200803
+2024-10-04 23:07:14 - INFO  - HikariPool-1 - Start completed.
+2024-10-04 23:07:15 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 23:07:15 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:07:15 - INFO  - LiveReload server is running on port 35729
+2024-10-04 23:07:15 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:07:15 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 23:07:15 - INFO  - Started HomemoviesApplication in 1.77 seconds (process running for 2.05)
+2024-10-04 23:07:19 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 23:07:19 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 23:07:19 - INFO  - Completed initialization in 0 ms
+2024-10-04 23:07:19 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 23:07:19 - INFO  - Token is not blacklisted
+2024-10-04 23:07:19 - INFO  - Token is valid for user: 'spencer'
+2024-10-04 23:07:49 - INFO  - Logging out user: 'spencer'
+2024-10-04 23:07:49 - INFO  - Token is not blacklisted
+2024-10-04 23:07:49 - INFO  - Token blacklisted successfully
+2024-10-04 23:10:05 - INFO  - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-10-04 23:10:05 - INFO  - Stopping ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:10:16 - WARN  - The acceptor thread [http-nio-8080-Acceptor] did not stop cleanly
+2024-10-04 23:10:16 - INFO  - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:10:16 - INFO  - HikariPool-1 - Shutdown initiated...
+2024-10-04 23:10:16 - INFO  - HikariPool-1 - Shutdown completed.
+2024-10-04 23:10:16 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 32401 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 23:10:16 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 23:10:16 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 23:10:16 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:10:16 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 23:10:16 - INFO  - Finished Spring Data repository scanning in 4 ms. Found 3 JPA repository interfaces.
+2024-10-04 23:10:16 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:10:16 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 23:10:16 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:10:16 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:10:16 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:10:16 - INFO  - Finished Spring Data repository scanning in 1 ms. Found 0 Redis repository interfaces.
+2024-10-04 23:10:17 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 23:10:17 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:10:17 - INFO  - Starting service [Tomcat]
+2024-10-04 23:10:17 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 23:10:17 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 23:10:17 - INFO  - Root WebApplicationContext: initialization completed in 105 ms
+2024-10-04 23:10:17 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 23:10:17 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 23:10:17 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 23:10:17 - INFO  - HikariPool-2 - Starting...
+2024-10-04 23:10:17 - INFO  - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@7f4c1a62
+2024-10-04 23:10:17 - INFO  - HikariPool-2 - Start completed.
+2024-10-04 23:10:17 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 23:10:17 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:10:17 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 23:10:17 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:10:17 - WARN  - relation "comment" does not exist, skipping
+2024-10-04 23:10:17 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:10:17 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 23:10:17 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:10:17 - WARN  - relation "user_likes" does not exist, skipping
+2024-10-04 23:10:17 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:10:17 - WARN  - table "comment" does not exist, skipping
+2024-10-04 23:10:17 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:10:17 - WARN  - table "user_likes" does not exist, skipping
+2024-10-04 23:10:17 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:10:17 - WARN  - table "user_table" does not exist, skipping
+2024-10-04 23:10:17 - WARN  - SQL Warning Code: 0, SQLState: 00000
+2024-10-04 23:10:17 - WARN  - table "video" does not exist, skipping
+2024-10-04 23:10:17 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:10:17 - INFO  - LiveReload server is running on port 35729
+2024-10-04 23:10:17 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:10:17 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 23:10:17 - INFO  - Started HomemoviesApplication in 0.355 seconds (process running for 183.641)
+2024-10-04 23:10:17 - INFO  - Condition evaluation unchanged
+2024-10-04 23:10:27 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 23:10:27 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 23:10:27 - INFO  - Completed initialization in 1 ms
+2024-10-04 23:10:27 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 23:10:27 - INFO  - Token is blacklisted
+2024-10-04 23:10:27 - WARN  - FAIL: Token is invalid for user 'spencer'
+2024-10-04 23:11:01 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 32518 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2024-10-04 23:11:01 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2024-10-04 23:11:01 - INFO  - No active profile set, falling back to 1 default profile: "default"
+2024-10-04 23:11:01 - INFO  - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-04 23:11:01 - INFO  - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-04 23:11:01 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:11:01 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-04 23:11:01 - INFO  - Finished Spring Data repository scanning in 64 ms. Found 3 JPA repository interfaces.
+2024-10-04 23:11:01 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-10-04 23:11:01 - INFO  - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-04 23:11:01 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:11:01 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:11:01 - INFO  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.smbirch.homemovies.repositories.VideoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-10-04 23:11:01 - INFO  - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2024-10-04 23:11:01 - INFO  - Tomcat initialized with port 8080 (http)
+2024-10-04 23:11:01 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:11:01 - INFO  - Starting service [Tomcat]
+2024-10-04 23:11:01 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-10-04 23:11:01 - INFO  - Initializing Spring embedded WebApplicationContext
+2024-10-04 23:11:01 - INFO  - Root WebApplicationContext: initialization completed in 576 ms
+2024-10-04 23:11:01 - INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-04 23:11:01 - INFO  - HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-10-04 23:11:01 - INFO  - HHH000026: Second-level cache disabled
+2024-10-04 23:11:01 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-04 23:11:01 - INFO  - HikariPool-1 - Starting...
+2024-10-04 23:11:01 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@8adfdd9
+2024-10-04 23:11:01 - INFO  - HikariPool-1 - Start completed.
+2024-10-04 23:11:02 - INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-04 23:11:02 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-04 23:11:02 - INFO  - LiveReload server is running on port 35729
+2024-10-04 23:11:02 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-04 23:11:02 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2024-10-04 23:11:02 - INFO  - Started HomemoviesApplication in 1.755 seconds (process running for 2.043)
+2024-10-04 23:11:03 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-04 23:11:03 - INFO  - Initializing Servlet 'dispatcherServlet'
+2024-10-04 23:11:03 - INFO  - Completed initialization in 0 ms
+2024-10-04 23:11:03 - INFO  - Token validation request for user: 'spencer'
+2024-10-04 23:11:03 - INFO  - Token is blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzI4MTA4Mjc1LCJleHAiOjE3MjgxMTE4NzV9.A3dLUhGMsCGeFQtotlH6mNCqBflxOjLTjBz7j4JAd94lGEBpBAVVpXqaZTHkUVSy'
+2024-10-04 23:11:03 - WARN  - FAIL: Token is invalid for user 'spencer'
