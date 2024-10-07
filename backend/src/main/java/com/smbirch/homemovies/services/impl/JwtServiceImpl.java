@@ -34,7 +34,7 @@ public class JwtServiceImpl implements JwtService {
 
   @Override
   public String generateToken(String username) {
-    log.info("Generating JWT token for {}", username);
+    log.info("102 - Generating JWT token for {}", username);
     return generateToken(new HashMap<>(), username);
   }
 
@@ -42,13 +42,14 @@ public class JwtServiceImpl implements JwtService {
   public String generateToken(Map<String, Object> claims, String userName) {
     long now = System.currentTimeMillis();
     return Jwts.builder()
-            .claims(claims)
-            .subject(userName)
-            .issuedAt(new Date(now))
-            .expiration(new Date(now + jwtExpiration))
-            .signWith(signInKeyHelper())
-            .compact();
+        .claims(claims)
+        .subject(userName)
+        .issuedAt(new Date(now))
+        .expiration(new Date(now + jwtExpiration))
+        .signWith(signInKeyHelper())
+        .compact();
   }
+
   @Override
   public String extractUsername(String token) {
     return extractClaim(token, Claims::getSubject);
@@ -71,7 +72,7 @@ public class JwtServiceImpl implements JwtService {
       Date expiration = extractExpiration(token);
       return expiration != null && expiration.before(new Date());
     } catch (Exception e) {
-      log.warn("Error checking token expiration: {}", e.getMessage());
+      log.warn("500 - Error checking token expiration: {}", e.getMessage());
       return true;
     }
   }
@@ -85,7 +86,7 @@ public class JwtServiceImpl implements JwtService {
       Jwts.parser().verifyWith(signInKeyHelper()).build().parseSignedClaims(token);
       return !isTokenExpired(token);
     } catch (Exception e) {
-      log.warn("FAIL: Validating Token: {}", e.getMessage());
+      log.warn("500 - Failure to validate Token: {}", e.getMessage());
       return false;
     }
   }
@@ -97,9 +98,10 @@ public class JwtServiceImpl implements JwtService {
     }
     String extractedUsername = extractUsername(token);
     if (!extractedUsername.equals(username)) {
-      log.warn("FAIL: Validating Token and Username mismatch");
+      log.warn("406 - Username does not match token claims");
       return false;
     }
+    log.info("200 - Token validated for user '{}'", username);
     return true;
   }
 
@@ -111,11 +113,11 @@ public class JwtServiceImpl implements JwtService {
       if (expiration != null) {
         long expiresIn = expiration.getTime() - System.currentTimeMillis();
         redisTemplate.opsForValue().set(key, "blacklisted", expiresIn, TimeUnit.MILLISECONDS);
-        log.info("Token blacklisted successfully");
+        log.info("200 - Token blacklisted successfully: '{}'", token);
         return true;
       }
     } catch (Exception e) {
-      log.warn("Error while blacklisting token: {}", e.getMessage());
+      log.warn("500 - Error while blacklisting token: {}", e.getMessage());
     }
     return false;
   }
@@ -124,7 +126,8 @@ public class JwtServiceImpl implements JwtService {
   public boolean isBlacklisted(String token) {
     String key = "blacklist:" + token;
     boolean isBlacklisted = redisTemplate.opsForValue().get(key) != null;
-    log.info("Token is {}blacklisted: '{}'", isBlacklisted ? "" : "not ", token);
+    log.info("102 - Checking token blacklist status");
+    log.info("200 - Token is {}blacklisted: '{}'", isBlacklisted ? "" : "not ", token);
     return isBlacklisted;
   }
 

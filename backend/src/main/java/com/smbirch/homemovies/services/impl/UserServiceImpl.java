@@ -3,6 +3,7 @@ package com.smbirch.homemovies.services.impl;
 import com.smbirch.homemovies.dtos.*;
 import com.smbirch.homemovies.entities.User;
 import com.smbirch.homemovies.exceptions.BadRequestException;
+import com.smbirch.homemovies.exceptions.NotAuthorizedException;
 import com.smbirch.homemovies.exceptions.NotFoundException;
 import com.smbirch.homemovies.mappers.UserMapper;
 import com.smbirch.homemovies.repositories.UserRepository;
@@ -51,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserResponseDto createUser(UserRequestDto userRequestDto) {
-    log.info("Creating new user: {}", userRequestDto);
+    log.info("102 - Creating new user: {}", userRequestDto);
     CredentialsDto credentials = userRequestDto.getCredentials();
     ProfileDto profile = userRequestDto.getProfile();
 
@@ -60,12 +61,12 @@ public class UserServiceImpl implements UserService {
         || profile.getEmail() == null
         || credentials.getPassword() == null
         || credentials.getUsername() == null) {
-      log.info("createUser FAIL - A required parameter is missing {}", userRequestDto);
+      log.info("400 - A required parameter is missing {}: createUser", userRequestDto);
       throw new BadRequestException("A required parameter is missing");
     }
     if (userRepository.existsByCredentials_Username(credentials.getUsername())) {
       log.warn(
-          "FAIL - Failed to create user with username: '{}' - username already exists",
+          "400 - Failed to create user with username: '{}' - username already exists",
           credentials.getUsername());
       throw new BadRequestException("This username is already in use.");
     }
@@ -79,7 +80,7 @@ public class UserServiceImpl implements UserService {
     String newJwtToken = jwtService.generateToken(credentials.getUsername());
     user = userRepository.saveAndFlush(user);
     log.info(
-        "New user created successfully with ID: '{}' and username: '{}'",
+        "201 - New user created successfully with ID: '{}' and username: '{}'",
         user.getId(),
         user.getCredentials().getUsername());
 
@@ -99,7 +100,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserResponseDto login(UserRequestDto userRequestDto) {
-    log.info("Login attempt for user: {}", userRequestDto.getCredentials().getUsername());
+    log.info("102 - Login attempt for user: {}", userRequestDto.getCredentials().getUsername());
     User user = getUserHelper(userRequestDto.getCredentials().getUsername());
 
     boolean doesPasswordMatch =
@@ -108,9 +109,9 @@ public class UserServiceImpl implements UserService {
 
     if (!doesPasswordMatch) {
       log.warn(
-          "FAIL login - '{}' submitted an incorrect password",
+          "401 - '{}' submitted an incorrect password at login",
           userRequestDto.getCredentials().getUsername());
-      throw new BadRequestException("Username or password is incorrect");
+      throw new NotAuthorizedException("Username or password is incorrect");
     }
 
     String newJwtToken = jwtService.generateToken(user.getCredentials().getUsername());
@@ -120,26 +121,25 @@ public class UserServiceImpl implements UserService {
     userResponseDto.setProfile(userRequestDto.getProfile());
     userResponseDto.setToken(newJwtToken);
 
-    log.info("SUCCESS Login for '{}'", userRequestDto.getCredentials().getUsername());
+    log.info("200 - Successful login for '{}'", userRequestDto.getCredentials().getUsername());
     return userResponseDto;
   }
 
   @Override
   public ResponseEntity<AuthDto> validateUser(String authHeader, String username) {
-    log.info("Token validation request for user: '{}'", username);
+    log.info("102 - Token validation request for user: '{}' - Token: '{}'", username, authHeader);
     try {
       String token = jwtService.getTokenSubString(authHeader);
       boolean isValid = jwtService.validateTokenAndUser(token, username);
       if (isValid) {
-        log.info("Token is valid for user: '{}'", username);
         return ResponseEntity.ok(new AuthDto(true, "Token is valid"));
       } else {
-        log.warn("FAIL: Token is invalid for user '{}'", username);
+        log.warn("401 - Token is invalid for user '{}'", username);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
             .body(new AuthDto(false, "Invalid token"));
       }
     } catch (Exception e) {
-      log.error("Cannot validate token for user '{}'", username);
+      log.error("500 - Cannot validate token for user '{}'", username);
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
           .body(new AuthDto(false, "Error validating token"));
     }
@@ -147,7 +147,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public ResponseEntity<AuthDto> logoutUser(String authHeader, String username) {
-    log.info("Logging out user: '{}'", username);
+    log.info("102 - Logging out user: '{}'", username);
     try {
       String token = jwtService.getTokenSubString(authHeader);
       boolean isValidToken = jwtService.validateTokenAndUser(token, username);
