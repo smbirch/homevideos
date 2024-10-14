@@ -14,10 +14,12 @@ export interface User {
 export interface UserRequestDto {
   credentials: Credentials;
   profile: Profile;
+  token: string;
 }
 
 export interface UserResponseDto {
   id: number;
   username: string;
+  token: string;
   profile: Profile;
 }

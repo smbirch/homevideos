@@ -114,9 +114,14 @@ public class UserServiceImpl implements UserService {
 
     String newJwtToken = jwtService.generateToken(user.getCredentials().getUsername(), user.getProfile().isAdmin());
     UserResponseDto userResponseDto = new UserResponseDto();
+    ProfileDto profileDto = new ProfileDto();
+    userResponseDto.setProfile(profileDto);
     userResponseDto.setId(user.getId());
     userResponseDto.setUsername(user.getCredentials().getUsername());
-    userResponseDto.setProfile(userRequestDto.getProfile());
+    userResponseDto.getProfile().setEmail(user.getProfile().getEmail());
+    userResponseDto.getProfile().setFirstName(user.getProfile().getFirstName());
+    userResponseDto.getProfile().setLastName(user.getProfile().getLastName());
+    userResponseDto.getProfile().setAdmin(user.getProfile().isAdmin());
     userResponseDto.setToken(newJwtToken);
 
     log.info("200 - Successful login for user: '{}'", userRequestDto.getCredentials().getUsername());
