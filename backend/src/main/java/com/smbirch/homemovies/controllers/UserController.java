@@ -37,12 +37,14 @@ public class UserController {
   }
 
   @PostMapping("/validate/{username}")
-  public ResponseEntity<AuthDto> validateUser(@PathVariable String username, @RequestHeader("Authorization") String authHeader) {
+  public ResponseEntity<AuthDto> validateUser(
+      @PathVariable String username, @RequestHeader("Authorization") String authHeader) {
     return userService.validateUser(authHeader, username);
   }
 
   @PostMapping("/logout/{username}")
-  public ResponseEntity<AuthDto> logout(@PathVariable String username, @RequestHeader("Authorization") String authHeader) {
+  public ResponseEntity<AuthDto> logout(
+      @PathVariable String username, @RequestHeader("Authorization") String authHeader) {
     return userService.logoutUser(authHeader, username);
   }
 }

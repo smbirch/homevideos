@@ -6,10 +6,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class VideoRequestDto {
-    private Long id;
+  private Long id;
 
-    private String title;
+  private String title;
 
-    private String description;
-
+  private String description;
 }

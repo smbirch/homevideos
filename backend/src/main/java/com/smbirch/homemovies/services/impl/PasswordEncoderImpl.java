@@ -5,21 +5,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @RequiredArgsConstructor
 public class PasswordEncoderImpl implements PasswordEncoder {
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+  private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-    @Override
-    public String hashPassword(String password) {
-        return bCryptPasswordEncoder.encode(password);
-    }
+  @Override
+  public String hashPassword(String password) {
+    return bCryptPasswordEncoder.encode(password);
+  }
 
-    @Override
-    public boolean verifyPassword(String rawPassword, String encodedPassword) {
-        return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
-    }
-
+  @Override
+  public boolean verifyPassword(String rawPassword, String encodedPassword) {
+    return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
+  }
 }

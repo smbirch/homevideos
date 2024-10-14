@@ -4,9 +4,7 @@ import com.smbirch.homemovies.dtos.ErrorDto;
 import com.smbirch.homemovies.exceptions.BadRequestException;
 import com.smbirch.homemovies.exceptions.NotAuthorizedException;
 import com.smbirch.homemovies.exceptions.NotFoundException;
-
 import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,24 +15,24 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseBody
 public class HomeMoviesAdvice {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(BadRequestException.class)
-    public ErrorDto handleBadRequestException(
-            HttpServletRequest request, BadRequestException badRequestException) {
-        return new ErrorDto(false, badRequestException.getMessage());
-    }
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(BadRequestException.class)
+  public ErrorDto handleBadRequestException(
+      HttpServletRequest request, BadRequestException badRequestException) {
+    return new ErrorDto(false, badRequestException.getMessage());
+  }
 
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(NotAuthorizedException.class)
-    public ErrorDto handleNotAuthorizedException(
-            HttpServletRequest request, NotAuthorizedException notAuthorizedException) {
-        return new ErrorDto(false, notAuthorizedException.getMessage());
-    }
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  @ExceptionHandler(NotAuthorizedException.class)
+  public ErrorDto handleNotAuthorizedException(
+      HttpServletRequest request, NotAuthorizedException notAuthorizedException) {
+    return new ErrorDto(false, notAuthorizedException.getMessage());
+  }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    public ErrorDto handleNotFoundException(
-            HttpServletRequest request, NotFoundException notFoundException) {
-        return new ErrorDto(false, notFoundException.getMessage());
-    }
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ExceptionHandler(NotFoundException.class)
+  public ErrorDto handleNotFoundException(
+      HttpServletRequest request, NotFoundException notFoundException) {
+    return new ErrorDto(false, notFoundException.getMessage());
+  }
 }

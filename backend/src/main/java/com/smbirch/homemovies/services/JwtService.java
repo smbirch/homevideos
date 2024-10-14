@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 public interface JwtService {
-  String generateToken(String username);
+  String generateToken(String username, boolean isAdmin);
 
   String generateToken(Map<String, Object> claims, String userName);
 
@@ -15,6 +15,8 @@ public interface JwtService {
   Date extractExpiration(String token);
 
   <T> T extractClaim(String token, Function<Claims, T> claimsResolver);
+
+  boolean isUserAdmin(String token);
 
   boolean isTokenExpired(String token);
 

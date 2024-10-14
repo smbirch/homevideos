@@ -73,11 +73,9 @@ public class UserServiceImpl implements UserService {
 
     String hashedPassword = passwordEncoder.hashPassword(credentials.getPassword());
     userRequestDto.getCredentials().setPassword(hashedPassword);
-    User user = new User();
-    user.setProfile(userMapper.requestDtoToEntity(userRequestDto).getProfile());
-    user.setCredentials(userMapper.requestDtoToEntity(userRequestDto).getCredentials());
+    User user = userMapper.requestDtoToEntity(userRequestDto);
 
-    String newJwtToken = jwtService.generateToken(credentials.getUsername());
+    String newJwtToken = jwtService.generateToken(credentials.getUsername(), profile.isAdmin());
     user = userRepository.saveAndFlush(user);
     log.info(
         "201 - New user created successfully with ID: '{}' and username: '{}'",
@@ -100,7 +98,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserResponseDto login(UserRequestDto userRequestDto) {
-    log.info("102 - Login attempt for user: {}", userRequestDto.getCredentials().getUsername());
+    log.info("102 - Login attempt for user: '{}'", userRequestDto.getCredentials().getUsername());
     User user = getUserHelper(userRequestDto.getCredentials().getUsername());
 
     boolean doesPasswordMatch =
@@ -114,14 +112,14 @@ public class UserServiceImpl implements UserService {
       throw new NotAuthorizedException("Username or password is incorrect");
     }
 
-    String newJwtToken = jwtService.generateToken(user.getCredentials().getUsername());
+    String newJwtToken = jwtService.generateToken(user.getCredentials().getUsername(), user.getProfile().isAdmin());
     UserResponseDto userResponseDto = new UserResponseDto();
     userResponseDto.setId(user.getId());
     userResponseDto.setUsername(user.getCredentials().getUsername());
     userResponseDto.setProfile(userRequestDto.getProfile());
     userResponseDto.setToken(newJwtToken);
 
-    log.info("200 - Successful login for '{}'", userRequestDto.getCredentials().getUsername());
+    log.info("200 - Successful login for user: '{}'", userRequestDto.getCredentials().getUsername());
     return userResponseDto;
   }
 

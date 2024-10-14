@@ -1,6 +1,5 @@
 package com.smbirch.homemovies.controllers;
 
-
 import com.smbirch.homemovies.dtos.CommentRequestDto;
 import com.smbirch.homemovies.dtos.CommentResponseDto;
 import com.smbirch.homemovies.entities.Comment;
@@ -14,28 +13,26 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/comments")
 public class CommentController {
 
-    private final CommentService commentService;
+  private final CommentService commentService;
 
-    @GetMapping("/{videoId}")
-    public List<Comment> getVideoComments(@PathVariable Long videoId) {
-        return commentService.getVideoComments(videoId);
-    }
+  @GetMapping("/{videoId}")
+  public List<Comment> getVideoComments(@PathVariable Long videoId) {
+    return commentService.getVideoComments(videoId);
+  }
 
-    @PostMapping("/new")
-    public CommentResponseDto postVideoComment(@RequestBody CommentRequestDto commentRequestDto) {
-        return commentService.postVideoComment(commentRequestDto);
-    }
+  @PostMapping("/new")
+  public CommentResponseDto postVideoComment(@RequestBody CommentRequestDto commentRequestDto) {
+    return commentService.postVideoComment(commentRequestDto);
+  }
 
-    @PatchMapping("/update")
-    public CommentResponseDto updateComment(@RequestBody CommentRequestDto commentRequestDto) {
-        return commentService.updateComment(commentRequestDto);
-    }
-    
-    // only requires commentId in commentRequestDto
-    @DeleteMapping("/delete")
-    public CommentResponseDto deleteComment(@RequestBody CommentRequestDto commentRequestDto) {
-        return commentService.deleteComment(commentRequestDto);
-    }
+  @PatchMapping("/update")
+  public CommentResponseDto updateComment(@RequestBody CommentRequestDto commentRequestDto) {
+    return commentService.updateComment(commentRequestDto);
+  }
 
-
+  // only requires commentId in commentRequestDto
+  @DeleteMapping("/delete")
+  public CommentResponseDto deleteComment(@RequestBody CommentRequestDto commentRequestDto) {
+    return commentService.deleteComment(commentRequestDto);
+  }
 }

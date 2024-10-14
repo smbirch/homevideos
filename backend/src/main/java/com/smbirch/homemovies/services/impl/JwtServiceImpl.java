@@ -20,22 +20,24 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class JwtServiceImpl implements JwtService {
 
+  private final RedisTemplate<String, String> redisTemplate;
+
   @Value("${jwt.secret}")
   private String secretKey;
 
   @Value("${jwt.expiration}")
   private Long jwtExpiration;
 
-  private final RedisTemplate<String, String> redisTemplate;
-
   public JwtServiceImpl(RedisTemplate<String, String> redisTemplate) {
     this.redisTemplate = redisTemplate;
   }
 
   @Override
-  public String generateToken(String username) {
-    log.info("102 - Generating JWT token for {}", username);
-    return generateToken(new HashMap<>(), username);
+  public String generateToken(String username, boolean isAdmin) {
+    log.info("102 - Generating JWT token for user '{}'", username);
+    Map<String, Object> claims = new HashMap<>();
+    claims.put("isAdmin", isAdmin);
+    return generateToken(claims, username);
   }
 
   @Override
@@ -64,6 +66,12 @@ public class JwtServiceImpl implements JwtService {
   public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
     final Claims claims = extractAllClaims(token);
     return claimsResolver.apply(claims);
+  }
+
+  @Override
+  public boolean isUserAdmin(String token) {
+    Claims claims = extractAllClaims(token);
+    return claims.get("isAdmin", Boolean.class);
   }
 
   @Override

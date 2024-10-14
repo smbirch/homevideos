@@ -2,6 +2,7 @@
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/repositories/CommentRepository.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/repositories/VideoRepository.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/exceptions/NotFoundException.java
+/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/config/RedisConfig.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/exceptions/NotAuthorizedException.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/mappers/ProfileMapper.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/entities/Credentials.java
@@ -26,6 +27,7 @@
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/controllers/VideoController.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/services/impl/CommentServiceImpl.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/entities/Profile.java
+/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/dtos/AuthDto.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/controllers/CommentController.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/services/PasswordEncoder.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/services/CommentService.java

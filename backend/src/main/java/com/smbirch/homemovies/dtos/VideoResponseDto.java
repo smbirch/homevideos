@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class VideoResponseDto {
-    private Long id;
+  private Long id;
 
-    private String title;
+  private String title;
 
-    private String url;
+  private String url;
 
-    private String filename;
+  private String filename;
 
-    private String thumbnailurl;
+  private String thumbnailurl;
 
-    private String description;
+  private String description;
 }
