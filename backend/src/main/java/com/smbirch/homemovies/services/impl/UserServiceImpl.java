@@ -10,6 +10,9 @@ import com.smbirch.homemovies.repositories.UserRepository;
 import com.smbirch.homemovies.services.JwtService;
 import com.smbirch.homemovies.services.PasswordEncoder;
 import com.smbirch.homemovies.services.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -32,27 +35,48 @@ public class UserServiceImpl implements UserService {
     Optional<User> userToCheckFor = userRepository.findByCredentials_Username(username);
 
     if (userToCheckFor.isEmpty() || userToCheckFor.get().isDeleted()) {
-      log.warn("FAIL getUser: No user found with username {}", username);
+      log.warn("404 - No user found with username: '{}'", username);
       throw new NotFoundException("No user found with username: '" + username + "'");
     }
     return userToCheckFor.get();
   }
 
+  private ResponseEntity<AuthDto> invalidateTokenHelper(String username, HttpServletResponse response) {
+    String token = response.getHeader("Authorization");
+    try {
+      boolean isValidToken = jwtService.validateTokenAndUser((HttpServletRequest) response, username);
+      if (isValidToken) {
+        if (jwtService.blacklistToken(token)) {
+          log.info("200 - Token invalidated succesfully: '{}'", token);
+          return ResponseEntity.ok(new AuthDto(true, "Token has been invalidated"));
+        }
+      } else {
+        log.warn("400 - Invalid token: '{}' for user: '{}'", token, username);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            .body(new AuthDto(false, "Invalid token"));
+      }
+    } catch (Exception e) {
+      log.warn("500 - Error invalidating token: '{}'", e.getMessage());
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+          .body(new AuthDto(false, "Error invalidating token"));
+    }
+    // If we get here we will fail the request
+    log.warn(
+        "500 - Error not caught while invalidating token: '{}' for user: '{}'", token, username);
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+        .body(new AuthDto(false, "Error invalidating token"));
+  }
+
   @Override
   public List<UserResponseDto> getAllUsers() {
     List<UserResponseDto> userList = userMapper.entitiesToDtos(userRepository.findAll());
-
-    for (UserResponseDto user : userList) {
-      if (userMapper.responseDtoToEntity(user).isDeleted()) {
-        userList.remove(user);
-      }
-    }
+    userList.removeIf(user -> userMapper.responseDtoToEntity(user).isDeleted());
     return userList;
   }
 
   @Override
   public UserResponseDto createUser(UserRequestDto userRequestDto) {
-    log.info("102 - Creating new user: {}", userRequestDto);
+    log.info("102 - Creating new user: '{}'", userRequestDto.getCredentials().getUsername());
     CredentialsDto credentials = userRequestDto.getCredentials();
     ProfileDto profile = userRequestDto.getProfile();
 
@@ -75,7 +99,7 @@ public class UserServiceImpl implements UserService {
     userRequestDto.getCredentials().setPassword(hashedPassword);
     User user = userMapper.requestDtoToEntity(userRequestDto);
 
-    String newJwtToken = jwtService.generateToken(credentials.getUsername(), profile.isAdmin());
+    String newJwtToken = jwtService.generateToken(user);
     user = userRepository.saveAndFlush(user);
     log.info(
         "201 - New user created successfully with ID: '{}' and username: '{}'",
@@ -97,7 +121,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserResponseDto login(UserRequestDto userRequestDto) {
+  public ResponseEntity<UserResponseDto> login(UserRequestDto userRequestDto, HttpServletResponse response) {
     log.info("102 - Login attempt for user: '{}'", userRequestDto.getCredentials().getUsername());
     User user = getUserHelper(userRequestDto.getCredentials().getUsername());
 
@@ -112,7 +136,9 @@ public class UserServiceImpl implements UserService {
       throw new NotAuthorizedException("Username or password is incorrect");
     }
 
-    String newJwtToken = jwtService.generateToken(user.getCredentials().getUsername(), user.getProfile().isAdmin());
+    String newJwtToken = jwtService.generateToken(user);
+    jwtService.setAuthenticationCookie(newJwtToken, response);
+
     UserResponseDto userResponseDto = new UserResponseDto();
     ProfileDto profileDto = new ProfileDto();
     userResponseDto.setProfile(profileDto);
@@ -124,16 +150,17 @@ public class UserServiceImpl implements UserService {
     userResponseDto.getProfile().setAdmin(user.getProfile().isAdmin());
     userResponseDto.setToken(newJwtToken);
 
-    log.info("200 - Successful login for user: '{}'", userRequestDto.getCredentials().getUsername());
-    return userResponseDto;
+    log.info(
+        "200 - Successful login for user: '{}'", userRequestDto.getCredentials().getUsername());
+    return ResponseEntity.ok(userResponseDto);
   }
 
   @Override
-  public ResponseEntity<AuthDto> validateUser(String authHeader, String username) {
-    log.info("102 - Token validation request for user: '{}' - Token: '{}'", username, authHeader);
+  public ResponseEntity<AuthDto> validateUser(UserRequestDto userRequestDto, HttpServletRequest request) {
+    String username = userRequestDto.getCredentials().getUsername();
+    log.info("102 - Token validation request for user: '{}'", username);
     try {
-      String token = jwtService.getTokenSubString(authHeader);
-      boolean isValid = jwtService.validateTokenAndUser(token, username);
+      boolean isValid = jwtService.validateTokenAndUser(request, username);
       if (isValid) {
         return ResponseEntity.ok(new AuthDto(true, "Token is valid"));
       } else {
@@ -149,25 +176,55 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public ResponseEntity<AuthDto> logoutUser(String authHeader, String username) {
+  public ResponseEntity<AuthDto> logoutUser(UserRequestDto userRequestDto, HttpServletRequest request, HttpServletResponse response) {
+    String username = userRequestDto.getCredentials().getUsername();
     log.info("102 - Logging out user: '{}'", username);
-    try {
-      String token = jwtService.getTokenSubString(authHeader);
-      boolean isValidToken = jwtService.validateTokenAndUser(token, username);
 
-      if (isValidToken) {
-        if (jwtService.blacklistToken(token)) {
-          return ResponseEntity.ok(new AuthDto(true, "Token has been invalidated"));
-        } else
-          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-              .body(new AuthDto(false, "Server error: Token cannot be invalidated"));
-      } else {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-            .body(new AuthDto(false, "Invalid token"));
-      }
-    } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-          .body(new AuthDto(false, "Error validating token"));
+    // Try getting token from multiple sources
+    String token = jwtService.getTokenFromRequest(request);
+
+    // If not found in request, try from DTO
+    if (token == null && userRequestDto.getToken() != null) {
+      token = userRequestDto.getToken();
+      log.info("Using token from request body");
     }
+
+    if (token == null) {
+      log.warn("401 - No token found in request or body for user: {}", username);
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+              .body(new AuthDto(false, "No token found"));
+    }
+
+    log.info("Token found for logout: {}", token.substring(0, Math.min(20, token.length())) + "...");
+
+    boolean isValidToken = jwtService.validateTokenAndUser(request, username);
+    if (isValidToken) {
+      if (jwtService.blacklistToken(token)) {
+        // Clear cookie using multiple methods
+        Cookie authCookie = new Cookie("homevideosCookie", "");
+        authCookie.setMaxAge(0);
+        authCookie.setPath("/");
+        authCookie.setHttpOnly(true);
+        authCookie.setSecure(false);
+        response.addCookie(authCookie);
+
+        // Also set via header
+        response.setHeader("Set-Cookie",
+                "homevideosCookie=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax");
+
+        log.info("200 - Successfully logged out user: '{}'", username);
+        return ResponseEntity.ok(new AuthDto(true, "Token has been invalidated"));
+      }
+    }
+
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            .body(new AuthDto(false, "Invalid token"));
+  }
+
+  @Override
+  public ResponseEntity<AuthDto> releaseToken(String username, HttpServletResponse response) {
+    String token = response.getHeader("Authorization");
+    log.info("102 - Releasing token: '{}' for user: '{}'", token, username);
+    return invalidateTokenHelper(username, response);
   }
 }

@@ -30,6 +30,7 @@ public class HomemoviesApplication {
             "https://www.homevideos.smbirch.com"));
     corsConfiguration.setAllowedHeaders(List.of("*"));
     corsConfiguration.setExposedHeaders(List.of("*"));
+
     corsConfiguration.setAllowedMethods(
         Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
 

@@ -5,6 +5,9 @@ import com.smbirch.homemovies.dtos.UserRequestDto;
 import com.smbirch.homemovies.dtos.UserResponseDto;
 import com.smbirch.homemovies.services.UserService;
 import java.util.List;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,19 +35,22 @@ public class UserController {
   }
 
   @PostMapping("/login")
-  public UserResponseDto login(@RequestBody UserRequestDto userRequestDto) {
-    return userService.login(userRequestDto);
+  public ResponseEntity<UserResponseDto> login(@RequestBody UserRequestDto userRequestDto, HttpServletResponse response) {
+    return userService.login(userRequestDto, response);
   }
 
-  @PostMapping("/validate/{username}")
-  public ResponseEntity<AuthDto> validateUser(
-      @PathVariable String username, @RequestHeader("Authorization") String authHeader) {
-    return userService.validateUser(authHeader, username);
+  @PostMapping("/validate")
+  public ResponseEntity<AuthDto> validateUser(@RequestBody UserRequestDto userRequestDto, HttpServletRequest request) {
+    return userService.validateUser(userRequestDto, request);
   }
 
-  @PostMapping("/logout/{username}")
-  public ResponseEntity<AuthDto> logout(
-      @PathVariable String username, @RequestHeader("Authorization") String authHeader) {
-    return userService.logoutUser(authHeader, username);
+  @PostMapping("/logout")
+  public ResponseEntity<AuthDto> logout(@RequestBody UserRequestDto userRequestDto, HttpServletRequest request, HttpServletResponse response) {
+    return userService.logoutUser(userRequestDto, request, response);
+  }
+
+  @PostMapping("/releasetoken")
+  public ResponseEntity<AuthDto> releasetoken(@PathVariable String username, HttpServletResponse response) {
+    return userService.releaseToken(username, response);
   }
 }

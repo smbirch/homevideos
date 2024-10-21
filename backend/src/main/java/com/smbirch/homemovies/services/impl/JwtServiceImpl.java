@@ -1,10 +1,14 @@
 package com.smbirch.homemovies.services.impl;
 
+import com.smbirch.homemovies.entities.User;
 import com.smbirch.homemovies.services.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,11 +37,11 @@ public class JwtServiceImpl implements JwtService {
   }
 
   @Override
-  public String generateToken(String username, boolean isAdmin) {
-    log.info("102 - Generating JWT token for user '{}'", username);
+  public String generateToken(User user) {
+    log.info("102 - Generating JWT token for user '{}'", user.getCredentials().getUsername());
     Map<String, Object> claims = new HashMap<>();
-    claims.put("isAdmin", isAdmin);
-    return generateToken(claims, username);
+    claims.put("isAdmin", user.getProfile().isAdmin());
+    return generateToken(claims, user.getCredentials().getUsername());
   }
 
   @Override
@@ -86,7 +90,7 @@ public class JwtServiceImpl implements JwtService {
   }
 
   @Override
-  public boolean validateToken(String token) {
+  public boolean isTokenValid(String token) {
     if (isBlacklisted(token)) {
       return false;
     }
@@ -100,15 +104,22 @@ public class JwtServiceImpl implements JwtService {
   }
 
   @Override
-  public boolean validateTokenAndUser(String token, String username) {
-    if (!validateToken(token)) {
+  public boolean validateTokenAndUser(HttpServletRequest request, String username) {
+    String token = getTokenFromRequest(request);
+    if (token == null) {
       return false;
     }
+
+    if (!isTokenValid(token)) {
+      return false;
+    }
+
     String extractedUsername = extractUsername(token);
     if (!extractedUsername.equals(username)) {
       log.warn("406 - Username does not match token claims");
       return false;
     }
+
     log.info("200 - Token validated for user '{}'", username);
     return true;
   }
@@ -142,6 +153,65 @@ public class JwtServiceImpl implements JwtService {
   @Override
   public String getTokenSubString(String token) {
     return token.startsWith("Bearer ") ? token.substring(7) : token;
+  }
+
+  @Override
+  public void setAuthenticationCookie(String token, HttpServletResponse response) {
+    response.setHeader("Access-Control-Allow-Credentials", "true");
+    String cookieValue = String.format(
+            "%s=%s; Path=/; Max-Age=%d; HttpOnly; SameSite=Lax",
+            "homevideosCookie",
+            token,
+            (int) (jwtExpiration / 1000)
+    );
+
+    // Add the Set-Cookie header directly
+    response.addHeader("Set-Cookie", cookieValue);
+
+    log.info("200 - Set authentication cookie");
+  }
+
+  @Override
+  public String getTokenFromRequest(HttpServletRequest request) {
+    // Try getting cookies directly first
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+      log.info("Found {} cookies in request", cookies.length);
+      for (Cookie cookie : cookies) {
+        log.info("Cookie name: '{}', value: '{}'", cookie.getName(),
+                cookie.getValue().substring(0, Math.min(20, cookie.getValue().length())) + "...");
+
+        if (cookie.getName().equals("homevideosCookie")) {
+          return cookie.getValue();
+        }
+      }
+    } else {
+      log.info("No cookies found using request.getCookies()");
+    }
+
+    // Try getting from Cookie header
+    String cookieHeader = request.getHeader("Cookie");
+    if (cookieHeader != null) {
+      log.info("Found Cookie header: {}", cookieHeader);
+      String[] cookiesArray = cookieHeader.split(";");
+      for (String cookie : cookiesArray) {
+        String[] parts = cookie.trim().split("=");
+        if (parts.length == 2 && parts[0].equals("homevideosCookie")) {
+          log.info("Found token in Cookie header");
+          return parts[1];
+        }
+      }
+    }
+
+    // Try getting from Authorization header as fallback
+    String authHeader = request.getHeader("Authorization");
+    if (authHeader != null && authHeader.startsWith("Bearer ")) {
+      log.info("Found token in Authorization header");
+      return authHeader.substring(7);
+    }
+
+    log.warn("401 - No token found in any location");
+    return null;
   }
 
   private Claims extractAllClaims(String token) {

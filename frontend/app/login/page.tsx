@@ -6,7 +6,6 @@ import {loginUser} from '@/app/services/userService'
 import {Credentials} from '@/app/types/credentials'
 import {UserRequestDto} from '@/app/types/user'
 import {UserResponseDto} from '@/app/types/user'
-import {Profile} from '@/app/types/profile'
 import {removeCookie, setCookie} from "@/app/utils/cookieUtils";
 
 export default function LoginPage() {
@@ -35,19 +34,10 @@ export default function LoginPage() {
 
       const userResponse: UserResponseDto = await loginUser(userRequestDto)
 
-      // Remove any existing auth token
+      // Remove existing auth token
       removeCookie('auth_token')
 
-      // Set the new token in a cookie
-      setCookie('auth_token', userResponse.token, {
-        maxAge: 3600, // 1 hour
-        httpOnly: true,
-        secure: false,
-        sameSite: 'strict'
-      })
-
-      // Store user information (except the token) in localStorage or state management solution
-      const { token, ...userInfo } = userResponse
+      const {token, ...userInfo} = userResponse
       localStorage.setItem('user', JSON.stringify(userInfo))
 
       // Redirect to dashboard or home page

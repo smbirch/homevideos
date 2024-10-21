@@ -1,48 +1,80 @@
+import { cookies } from 'next/headers';
+
 interface CookieOptions {
   maxAge?: number;
   httpOnly?: boolean;
   secure?: boolean;
   sameSite?: 'strict' | 'lax' | 'none';
   path?: string;
+  domain?: string;
 }
 
 export function setCookie(name: string, value: string, options: CookieOptions = {}) {
+  const defaultOptions: CookieOptions = {
+    path: '/',
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 7 * 24 * 60 * 60, // 7 days
+  };
+
+  const cookieOptions = { ...defaultOptions, ...options };
+
   let cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
 
-  if (options.maxAge) {
-    cookie += `; Max-Age=${options.maxAge}`;
+  if (cookieOptions.maxAge) {
+    cookie += `; Max-Age=${cookieOptions.maxAge}`;
   }
 
-  if (options.httpOnly) {
+  if (cookieOptions.httpOnly) {
     cookie += '; HttpOnly';
   }
 
-  if (options.secure) {
+  if (cookieOptions.secure) {
     cookie += '; Secure';
   }
 
-  if (options.sameSite) {
-    cookie += `; SameSite=${options.sameSite}`;
+  if (cookieOptions.sameSite) {
+    cookie += `; SameSite=${cookieOptions.sameSite}`;
   }
 
-  if (options.path) {
-    cookie += `; Path=${options.path}`;
+  if (cookieOptions.path) {
+    cookie += `; Path=${cookieOptions.path}`;
   }
 
-  document.cookie = cookie;
+  if (cookieOptions.domain) {
+    cookie += `; Domain=${cookieOptions.domain}`;
+  }
+
+  if (typeof window !== 'undefined') {
+    document.cookie = cookie;
+  }
 }
 
 export function getCookie(name: string): string | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   const nameEQ = encodeURIComponent(name) + '=';
-  const ca = document.cookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+  const cookies = document.cookie.split(';');
+
+  for (let cookie of cookies) {
+    cookie = cookie.trim();
+    if (cookie.indexOf(nameEQ) === 0) {
+      return decodeURIComponent(cookie.substring(nameEQ.length));
+    }
   }
   return null;
 }
 
-export function removeCookie(name: string, path: string = '/') {
-  document.cookie = `${encodeURIComponent(name)}=; Max-Age=0; path=${path}; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+export function removeCookie(name: string) {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  const date = new Date();
+
+  // Set it expire in -1 days
+  date.setTime(date.getTime() + (-1 * 24 * 60 * 60 * 1000));
+  console.log("removing cookie locally")
+  document.cookie = name+"=; expires="+date.toUTCString()+"; path=/";
 }
