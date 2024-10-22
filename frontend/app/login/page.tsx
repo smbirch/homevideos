@@ -39,6 +39,7 @@ export default function LoginPage() {
 
       const {token, ...userInfo} = userResponse
       localStorage.setItem('user', JSON.stringify(userInfo))
+      window.dispatchEvent(new Event('authChange'));
 
       // Redirect to dashboard or home page
       router.push('/')

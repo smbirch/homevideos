@@ -75,6 +75,5 @@ export function removeCookie(name: string) {
 
   // Set it expire in -1 days
   date.setTime(date.getTime() + (-1 * 24 * 60 * 60 * 1000));
-  console.log("removing cookie locally")
   document.cookie = name+"=; expires="+date.toUTCString()+"; path=/";
 }

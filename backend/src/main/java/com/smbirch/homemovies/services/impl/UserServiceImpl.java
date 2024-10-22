@@ -180,13 +180,10 @@ public class UserServiceImpl implements UserService {
     String username = userRequestDto.getCredentials().getUsername();
     log.info("102 - Logging out user: '{}'", username);
 
-    // Try getting token from multiple sources
     String token = jwtService.getTokenFromRequest(request);
 
-    // If not found in request, try from DTO
     if (token == null && userRequestDto.getToken() != null) {
       token = userRequestDto.getToken();
-      log.info("Using token from request body");
     }
 
     if (token == null) {
@@ -195,12 +192,10 @@ public class UserServiceImpl implements UserService {
               .body(new AuthDto(false, "No token found"));
     }
 
-    log.info("Token found for logout: {}", token.substring(0, Math.min(20, token.length())) + "...");
-
     boolean isValidToken = jwtService.validateTokenAndUser(request, username);
     if (isValidToken) {
       if (jwtService.blacklistToken(token)) {
-        // Clear cookie using multiple methods
+
         Cookie authCookie = new Cookie("homevideosCookie", "");
         authCookie.setMaxAge(0);
         authCookie.setPath("/");
@@ -208,7 +203,6 @@ public class UserServiceImpl implements UserService {
         authCookie.setSecure(false);
         response.addCookie(authCookie);
 
-        // Also set via header
         response.setHeader("Set-Cookie",
                 "homevideosCookie=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax");
 

@@ -2,7 +2,7 @@
 
 import {User, UserRequestDto, UserResponseDto} from "@/app/types/user";
 import {Credentials} from "@/app/types/credentials";
-import { cookies } from 'next/headers'
+import {cookies} from 'next/headers'
 
 const API_BASE_URL = 'http://localhost:8080/api/auth';
 
@@ -31,13 +31,14 @@ export async function createUser(userRequestDto: UserRequestDto): Promise<UserRe
   return response.json();
 }
 
-export async function validateUser(credentials: Credentials): Promise<UserResponseDto> {
-  const response = await fetch(`${API_BASE_URL}/validate/${credentials.username}`, {
+export async function validateUser(userRequestDto: UserRequestDto): Promise<UserResponseDto> {
+  const response = await fetch(`${API_BASE_URL}/validate/${userRequestDto.credentials.username}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(credentials),
+    body: JSON.stringify(userRequestDto.credentials),
+    credentials: 'include',
   });
 
   if (!response.ok) {
@@ -77,7 +78,7 @@ export async function loginUser(userRequestDto: UserRequestDto): Promise<UserRes
       path: '/',
       sameSite: 'lax',
       maxAge: 3600, // 1 hour
-      // secure: process.env.NODE_ENV === 'production', // Enable in production
+      // secure: process.env.NODE_ENV === 'production', //TODO: Enable in production
     });
   }
 
@@ -86,7 +87,6 @@ export async function loginUser(userRequestDto: UserRequestDto): Promise<UserRes
 
 export async function logoutUser(userRequestDto: UserRequestDto): Promise<UserResponseDto> {
   const currentCookie = cookies().get('homevideosCookie')
-  console.log('Current cookie:', currentCookie)
 
   const response = await fetch(`${API_BASE_URL}/logout`, {
     method: 'POST',

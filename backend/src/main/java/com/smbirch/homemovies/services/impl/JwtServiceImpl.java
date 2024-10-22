@@ -165,7 +165,6 @@ public class JwtServiceImpl implements JwtService {
             (int) (jwtExpiration / 1000)
     );
 
-    // Add the Set-Cookie header directly
     response.addHeader("Set-Cookie", cookieValue);
 
     log.info("200 - Set authentication cookie");
@@ -173,31 +172,23 @@ public class JwtServiceImpl implements JwtService {
 
   @Override
   public String getTokenFromRequest(HttpServletRequest request) {
-    // Try getting cookies directly first
     Cookie[] cookies = request.getCookies();
     if (cookies != null) {
-      log.info("Found {} cookies in request", cookies.length);
       for (Cookie cookie : cookies) {
-        log.info("Cookie name: '{}', value: '{}'", cookie.getName(),
-                cookie.getValue().substring(0, Math.min(20, cookie.getValue().length())) + "...");
 
         if (cookie.getName().equals("homevideosCookie")) {
           return cookie.getValue();
         }
       }
-    } else {
-      log.info("No cookies found using request.getCookies()");
     }
 
     // Try getting from Cookie header
     String cookieHeader = request.getHeader("Cookie");
     if (cookieHeader != null) {
-      log.info("Found Cookie header: {}", cookieHeader);
       String[] cookiesArray = cookieHeader.split(";");
       for (String cookie : cookiesArray) {
         String[] parts = cookie.trim().split("=");
         if (parts.length == 2 && parts[0].equals("homevideosCookie")) {
-          log.info("Found token in Cookie header");
           return parts[1];
         }
       }
@@ -206,7 +197,6 @@ public class JwtServiceImpl implements JwtService {
     // Try getting from Authorization header as fallback
     String authHeader = request.getHeader("Authorization");
     if (authHeader != null && authHeader.startsWith("Bearer ")) {
-      log.info("Found token in Authorization header");
       return authHeader.substring(7);
     }
 

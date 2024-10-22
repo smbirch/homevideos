@@ -19,17 +19,27 @@ export default function HomePage() {
   const getVideos = useCallback(async () => {
     if (loading || !hasMore) return;
     setLoading(true);
+
+    let isCurrent = true;
+
     try {
       const newVideoPage = await getVideoPage(page);
-      if (newVideoPage.length < 12) {
-        setHasMore(false);
+      if (isCurrent) {
+        if (newVideoPage.length < 12) {
+          setHasMore(false);
+        }
+        setVideos((prevVideos) => [...prevVideos, ...newVideoPage]);
+        setPage((prevPage) => prevPage + 1);
       }
-      setVideos((prevVideos) => [...prevVideos, ...newVideoPage]);
-      setPage((prevPage) => prevPage + 1);
     } catch (error) {
       console.error('Error fetching videos:', error);
     } finally {
-      setLoading(false);
+      if (isCurrent) {
+        setLoading(false);
+      }
+    }
+    return () => {
+      isCurrent = false;
     }
   }, [page, loading, hasMore]);
 

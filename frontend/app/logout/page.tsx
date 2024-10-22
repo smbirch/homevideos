@@ -6,62 +6,77 @@ import {useRouter} from 'next/navigation';
 import {removeCookie} from "@/app/utils/cookieUtils";
 import {UserRequestDto} from "@/app/types/user";
 
+
 export default function LogoutPage() {
   const router = useRouter();
-  const [loggingOut, setLoggingOut] = useState(true); // State to manage logout message
-  let [username, setUsername] = useState(''); // State for storing username
-
-  const userRequestDto: UserRequestDto = {
-    credentials: {
-      username: "",
-      password: ""
-    },
-    profile: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      admin: false
-    },
-    token: ''
-  }
+  const [loggingOut, setLoggingOut] = useState(true);
 
   useEffect(() => {
-    let user = localStorage.getItem("user") as string;
-    let parsedUser = JSON.parse(user); // Parse the user string to JSON object
+    let isActive = true;
+    let timeoutId: NodeJS.Timeout;
 
-    userRequestDto.credentials.username = parsedUser.username;
-    userRequestDto.profile = parsedUser.profile;
-    console.log("userrequestdto: {}",userRequestDto);
+    const performLogout = async () => {
+      try {
+        const userStr = localStorage.getItem("user");
+        if (!userStr) {
+          console.log("No user found in localStorage");
+          if (isActive) {
+            router.push('/');
+          }
+          return;
+        }
 
-    try {
-      // Display logging out message for 2 seconds before redirecting
-      setTimeout(() => {
-        logoutUser(userRequestDto).then(r => console.log(r));
-        localStorage.removeItem("user");
-        removeCookie('auth_token')
-        router.push('/');
-      }, 300);
-    } catch (e) {
-      console.log("caught error in logout page")
-      console.error(e);
-    }
+        const parsedUser = JSON.parse(userStr);
+        const userRequestDto: UserRequestDto = {
+          credentials: {
+            username: parsedUser.username,
+            password: ""
+          },
+          profile: parsedUser.profile,
+          token: ''
+        };
+
+        timeoutId = setTimeout(async () => {
+          if (isActive) {
+            try {
+              await logoutUser(userRequestDto);
+              if (isActive) {
+                localStorage.removeItem("user");
+                removeCookie('auth_token');
+                window.dispatchEvent(new Event('authChange'));
+                router.push('/');
+              }
+            } catch (e) {
+              console.error("Error during logout:", e);
+              if (isActive) {
+                router.push('/');
+              }
+            }
+          }
+        }, 300);
+
+      } catch (e) {
+        console.error("Error processing logout:", e);
+        if (isActive) {
+          router.push('/');
+        }
+      }
+    };
+
+    performLogout();
+
+    // Cleanup function
+    return () => {
+      isActive = false;
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [router]);
 
-  if (loggingOut) {
-    return (
-      <div style={{
-        backgroundColor: 'black',
-        color: 'white',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: '24px'
-      }}>
-        Goodbye!
-      </div>
-    );
-  }
-
-  return null; // The page won't display anything else during logout
+  return (
+    <div className="bg-black text-white h-screen flex justify-center items-center text-2xl">
+      Goodbye!
+    </div>
+  );
 }
