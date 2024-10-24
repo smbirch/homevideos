@@ -11,43 +11,51 @@ export default function HomePage() {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   const {ref, inView} = useInView({
     threshold: 0,
   });
 
+  // Add this effect to handle initial mount
+  useEffect(() => {
+    setMounted(true);
+    // Fetch initial data
+    getVideos();
+  }, []);
+
   const getVideos = useCallback(async () => {
     if (loading || !hasMore) return;
     setLoading(true);
 
-    let isCurrent = true;
-
     try {
       const newVideoPage = await getVideoPage(page);
-      if (isCurrent) {
-        if (newVideoPage.length < 12) {
-          setHasMore(false);
-        }
-        setVideos((prevVideos) => [...prevVideos, ...newVideoPage]);
-        setPage((prevPage) => prevPage + 1);
+      if (newVideoPage.length < 12) {
+        setHasMore(false);
       }
+      setVideos((prevVideos) => [...prevVideos, ...newVideoPage]);
+      setPage((prevPage) => prevPage + 1);
     } catch (error) {
       console.error('Error fetching videos:', error);
     } finally {
-      if (isCurrent) {
-        setLoading(false);
-      }
-    }
-    return () => {
-      isCurrent = false;
+      setLoading(false);
     }
   }, [page, loading, hasMore]);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && mounted) {
       getVideos();
     }
-  }, [inView, getVideos]);
+  }, [inView, getVideos, mounted]);
+
+  // Show loading state before mount
+  if (!mounted) {
+    return (
+      <div className="container mx-auto p-4">
+        <div className="text-center">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-4">

@@ -17,35 +17,61 @@ export default function VideoPage() {
   const [error, setError] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
 
-  const loadVideo = async () => {
-    setLoading(true);
+  const loadVideo = useCallback(async (signal: AbortSignal) => {
     try {
-      const data = await getVideoById(params.id as string);
+      const data = await getVideoById(params.id as string, signal);
       setVideo(data);
     } catch (err) {
-      setError('An error occurred while fetching the video.');
-      console.error(err);
-    } finally {
-      setLoading(false);
+      // Only set error if the request wasn't aborted
+      if (!(err instanceof DOMException && err.name === 'AbortError')) {
+        setError('An error occurred while fetching the video.');
+        console.error(err);
+      }
     }
-  };
+  }, [params.id]);
 
-  const loadComments = useCallback(async () => {
+  const loadComments = useCallback(async (signal: AbortSignal) => {
     try {
-      const fetchedComments: Comment[] = await getCommentsByVideoId(params.id as string);
+      const fetchedComments: Comment[] = await getCommentsByVideoId(params.id as string, signal);
       setComments(fetchedComments);
     } catch (err) {
-      console.error('An error occurred while fetching the comments:', err);
+      // Only log error if the request wasn't aborted
+      if (!(err instanceof DOMException && err.name === 'AbortError')) {
+        console.error('An error occurred while fetching the comments:', err);
+      }
     }
   }, [params.id]);
 
   useEffect(() => {
-    loadVideo();
-    loadComments();
-  }, [params.id, loadComments]);
+    setLoading(true);
+
+    // Create abort controller for cleanup
+    const controller = new AbortController();
+    const {signal} = controller;
+
+    // Use Promise.all to load video and comments concurrently
+    const loadData = async () => {
+      try {
+        await Promise.all([
+          loadVideo(signal),
+          loadComments(signal)
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+
+    // Cleanup function
+    return () => {
+      controller.abort();
+    };
+  }, [params.id, loadVideo, loadComments]);
 
   const handleAddComment = async (text: string, author: string) => {
     if (!video) return;
+
     try {
       const newComment = await postComment(video.id, text, author);
       setComments(prevComments => [newComment, ...prevComments]);
