@@ -26,8 +26,8 @@ public class Video {
 
   private String thumbnailurl;
 
-  @ManyToMany(mappedBy = "likedVideos")
-  private List<User> likedByUsers = new ArrayList<>();
+//  @ManyToMany(mappedBy = "likedVideos")
+//  private List<User> likedByUsers = new ArrayList<>();
 
   @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
   @JsonManagedReference

@@ -41,10 +41,12 @@ public class UserServiceImpl implements UserService {
     return userToCheckFor.get();
   }
 
-  private ResponseEntity<AuthDto> invalidateTokenHelper(String username, HttpServletResponse response) {
+  private ResponseEntity<AuthDto> invalidateTokenHelper(
+      String username, HttpServletResponse response) {
     String token = response.getHeader("Authorization");
     try {
-      boolean isValidToken = jwtService.validateTokenAndUser((HttpServletRequest) response, username);
+      boolean isValidToken =
+          jwtService.validateTokenAndUser((HttpServletRequest) response, username);
       if (isValidToken) {
         if (jwtService.blacklistToken(token)) {
           log.info("200 - Token invalidated succesfully: '{}'", token);
@@ -122,17 +124,16 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public ResponseEntity<UserResponseDto> login(UserRequestDto userRequestDto, HttpServletResponse response) {
-    log.info("102 - Login attempt for user: '{}'", userRequestDto.getCredentials().getUsername());
-    User user = getUserHelper(userRequestDto.getCredentials().getUsername());
+    String username = userRequestDto.getCredentials().getUsername().toLowerCase();
+    String password = userRequestDto.getCredentials().getPassword();
+    log.info("102 - Login attempt for user: '{}'", username);
+    User user = getUserHelper(username);
 
     boolean doesPasswordMatch =
-        passwordEncoder.verifyPassword(
-            userRequestDto.getCredentials().getPassword(), user.getCredentials().getPassword());
+        passwordEncoder.verifyPassword(password, user.getCredentials().getPassword());
 
     if (!doesPasswordMatch) {
-      log.warn(
-          "401 - '{}' submitted an incorrect password at login",
-          userRequestDto.getCredentials().getUsername());
+      log.warn("401 - '{}' submitted an incorrect password at login", username);
       throw new NotAuthorizedException("Username or password is incorrect");
     }
 
@@ -150,13 +151,13 @@ public class UserServiceImpl implements UserService {
     userResponseDto.getProfile().setAdmin(user.getProfile().isAdmin());
     userResponseDto.setToken(newJwtToken);
 
-    log.info(
-        "200 - Successful login for user: '{}'", userRequestDto.getCredentials().getUsername());
+    log.info("200 - Successful login for user: '{}'", username);
     return ResponseEntity.ok(userResponseDto);
   }
 
   @Override
-  public ResponseEntity<AuthDto> validateUser(UserRequestDto userRequestDto, HttpServletRequest request) {
+  public ResponseEntity<AuthDto> validateUser(
+      UserRequestDto userRequestDto, HttpServletRequest request) {
     String username = userRequestDto.getCredentials().getUsername();
     log.info("102 - Token validation request for user: '{}'", username);
     try {
@@ -176,7 +177,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public ResponseEntity<AuthDto> logoutUser(UserRequestDto userRequestDto, HttpServletRequest request, HttpServletResponse response) {
+  public ResponseEntity<AuthDto> logoutUser(
+      UserRequestDto userRequestDto, HttpServletRequest request, HttpServletResponse response) {
     String username = userRequestDto.getCredentials().getUsername();
     log.info("102 - Logging out user: '{}'", username);
 
@@ -189,7 +191,7 @@ public class UserServiceImpl implements UserService {
     if (token == null) {
       log.warn("401 - No token found in request or body for user: {}", username);
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-              .body(new AuthDto(false, "No token found"));
+          .body(new AuthDto(false, "No token found"));
     }
 
     boolean isValidToken = jwtService.validateTokenAndUser(request, username);
@@ -203,16 +205,15 @@ public class UserServiceImpl implements UserService {
         authCookie.setSecure(false);
         response.addCookie(authCookie);
 
-        response.setHeader("Set-Cookie",
-                "homevideosCookie=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax");
+        response.setHeader(
+            "Set-Cookie", "homevideosCookie=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax");
 
         log.info("200 - Successfully logged out user: '{}'", username);
         return ResponseEntity.ok(new AuthDto(true, "Token has been invalidated"));
       }
     }
 
-    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-            .body(new AuthDto(false, "Invalid token"));
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthDto(false, "Invalid token"));
   }
 
   @Override

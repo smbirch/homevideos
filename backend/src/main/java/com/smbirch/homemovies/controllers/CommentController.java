@@ -5,7 +5,11 @@ import com.smbirch.homemovies.dtos.CommentResponseDto;
 import com.smbirch.homemovies.entities.Comment;
 import com.smbirch.homemovies.services.CommentService;
 import java.util.List;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,13 +20,15 @@ public class CommentController {
   private final CommentService commentService;
 
   @GetMapping("/{videoId}")
+  @Transactional
   public List<Comment> getVideoComments(@PathVariable Long videoId) {
     return commentService.getVideoComments(videoId);
   }
 
   @PostMapping("/new")
-  public CommentResponseDto postVideoComment(@RequestBody CommentRequestDto commentRequestDto) {
-    return commentService.postVideoComment(commentRequestDto);
+  @Transactional
+  public ResponseEntity<CommentResponseDto> postVideoComment(@RequestBody CommentRequestDto commentRequestDto, HttpServletRequest request) {
+    return commentService.postVideoComment(commentRequestDto, request);
   }
 
   @PatchMapping("/update")

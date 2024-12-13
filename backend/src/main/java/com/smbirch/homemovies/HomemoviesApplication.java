@@ -1,10 +1,11 @@
 package com.smbirch.homemovies;
 
 import java.util.Arrays;
-import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -17,26 +18,39 @@ public class HomemoviesApplication {
   }
 
   @Bean
+  @Order(Ordered.HIGHEST_PRECEDENCE)
   public CorsFilter corsFilter() {
     CorsConfiguration corsConfiguration = new CorsConfiguration();
+
     corsConfiguration.setAllowCredentials(true);
-    corsConfiguration.setAllowedOrigins(
-        List.of(
-            "http://localhost:4200",
-            "http://localhost:3000",
-            "http://homevideos.smbirch.com",
-            "https://homevideos.smbirch.com",
-            "http://www.homevideos.smbirch.com",
-            "https://www.homevideos.smbirch.com"));
-    corsConfiguration.setAllowedHeaders(List.of("*"));
-    corsConfiguration.setExposedHeaders(List.of("*"));
 
+    // Use setAllowedOriginPatterns instead of setAllowedOrigins
+    corsConfiguration.setAllowedOriginPatterns(
+        Arrays.asList("http://localhost:[*]", "https://*.smbirch.com"));
+
+    // Rest of your configuration remains the same
     corsConfiguration.setAllowedMethods(
-        Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
-    UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource =
-        new UrlBasedCorsConfigurationSource();
-    urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
-    return new CorsFilter(urlBasedCorsConfigurationSource);
+    corsConfiguration.setAllowedHeaders(
+        Arrays.asList(
+            "Authorization",
+            "Content-Type",
+            "Accept",
+            "Origin",
+            "X-Requested-With",
+            "Access-Control-Request-Method",
+            "Access-Control-Request-Headers"));
+
+    corsConfiguration.setExposedHeaders(
+        Arrays.asList(
+            "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "Authorization"));
+
+    corsConfiguration.setMaxAge(3600L);
+
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", corsConfiguration);
+
+    return new CorsFilter(source);
   }
 }

@@ -15,8 +15,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -48,7 +52,7 @@ public class CommentServiceImpl implements CommentService {
   }
 
   @Override
-  public CommentResponseDto postVideoComment(CommentRequestDto commentRequestDto) {
+  public ResponseEntity<CommentResponseDto> postVideoComment(CommentRequestDto commentRequestDto, HttpServletRequest request) {
     log.info(
         "102 - '{}' posting comment: '{}'",
         commentRequestDto.getAuthor(),
@@ -74,12 +78,15 @@ public class CommentServiceImpl implements CommentService {
     video.getComments().add(comment);
 
     videoRepository.saveAndFlush(video);
-    log.info("Comment posted by user '{}'", commentRequestDto.getAuthor());
-    return convertToResponseDto(comment);
+
+    log.info("102 - Comment posted by user '{}'", commentRequestDto.getAuthor());
+    CommentResponseDto commentResponseDto = convertToResponseDto(comment);
+    return ResponseEntity.ok(commentResponseDto);
   }
 
   @Override
   public List<Comment> getVideoComments(Long videoId) {
+    log.info("102 - Getting comments for video '{}'", videoId);
     ArrayList<Comment> commentList = commentRepository.findByVideoId(videoId);
     commentList.removeIf(Comment::isDeleted);
     return commentList;

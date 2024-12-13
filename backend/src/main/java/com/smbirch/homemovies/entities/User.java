@@ -28,10 +28,10 @@ public class User {
 
   @Embedded private Profile profile;
 
-  @ManyToMany
-  @JoinTable(
-      name = "user_likes",
-      joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "video_id"))
-  private List<Video> likedVideos = new ArrayList<>();
+//  @ManyToMany
+//  @JoinTable(
+//      name = "user_likes",
+//      joinColumns = @JoinColumn(name = "user_id"),
+//      inverseJoinColumns = @JoinColumn(name = "video_id"))
+//  private List<Video> likedVideos = new ArrayList<>();
 }
