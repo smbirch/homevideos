@@ -1,19 +1,21 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, {memo, useState} from 'react';
+import { Comment } from "@/app/types/comment"
 
 interface AddCommentFormProps {
   videoId: number;
-  onCommentAdded: (text: string, author: string) => Promise<void>;
+  onCommentAdded: (text: string, author: string) => Promise<Comment | null>;
 }
 
-const AddCommentForm: React.FC<AddCommentFormProps> = ({ videoId, onCommentAdded }) => {
+const AddCommentForm: React.FC<AddCommentFormProps> = memo(({ videoId, onCommentAdded }) => {
   const [text, setText] = useState('');
   const [author, setAuthor] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Form submitted with:", { text, author });
     if (!text || !author) return;
 
     setIsSubmitting(true);
@@ -65,6 +67,6 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ videoId, onCommentAdded
       </button>
     </form>
   );
-};
+});
 
 export default AddCommentForm;

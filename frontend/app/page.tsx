@@ -1,215 +1,139 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, useCallback, Suspense } from 'react';
-import { useInView } from 'react-intersection-observer';
+import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useInView } from 'react-intersection-observer';
 import { Video } from '@/app/types/video';
 import { getVideoPage } from "@/app/services/videoService";
-import { Loader2 } from "lucide-react";
 
-// Loading component
+// Loading Component
 const LoadingSpinner = () => (
-  <div className="flex justify-center items-center min-h-[200px]">
-    <Loader2 className="h-8 w-8 animate-spin" />
+  <div className="flex justify-center items-center py-8">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
   </div>
 );
 
-// Error boundary component
-const ErrorDisplay = ({ error }: { error: Error }) => (
-  <div className="text-center p-4 text-red-500">
-    <p>Error loading content: {error.message}</p>
+// Error Component
+const ErrorDisplay = ({ onRetry }: { onRetry: () => void }) => (
+  <div className="text-center p-6 bg-red-50">
+    <p className="text-red-600 mb-4">Unable to load videos</p>
     <button
-      onClick={() => window.location.reload()}
-      className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+      onClick={onRetry}
+      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
     >
-      Retry
+      Try Again
     </button>
   </div>
 );
 
 export default function HomePage() {
+  // State management
   const [videos, setVideos] = useState<Video[]>([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const [isClient, setIsClient] = useState(false);
 
+  // Intersection observer hook
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: '100px',
+    rootMargin: '200px',
   });
 
-  // Handle client-side mounting
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const getVideos = useCallback(async () => {
+  // Fetch videos function
+  const fetchVideos = useCallback(async () => {
     if (loading || !hasMore) return;
+
     setLoading(true);
     setError(null);
 
     try {
-      const newVideoPage = await getVideoPage(page);
+      const newVideos = await getVideoPage(page);
 
-      // Handle empty or invalid response
-      if (!Array.isArray(newVideoPage)) {
-        throw new Error('Invalid response format');
-      }
-
-      if (newVideoPage.length < 12) {
+      // If fewer videos than expected, we've reached the end
+      if (newVideos.length < 12) {
         setHasMore(false);
       }
 
-      setVideos((prevVideos) => [...prevVideos, ...newVideoPage]);
-      setPage((prevPage) => prevPage + 1);
-    } catch (error) {
-      console.error('Error fetching videos:', error);
-      setError(error instanceof Error ? error : new Error('Failed to fetch videos'));
+      // Append new videos
+      setVideos(prevVideos => [...prevVideos, ...newVideos]);
+
+      // Increment page
+      setPage(prevPage => prevPage + 1);
+    } catch (err) {
+      console.error('Failed to fetch videos:', err);
+      setError(err instanceof Error ? err : new Error('Failed to fetch videos'));
       setHasMore(false);
     } finally {
       setLoading(false);
     }
   }, [page, loading, hasMore]);
 
-  // Initial data fetch
+  // Initial load effect
   useEffect(() => {
-    if (isClient && videos.length === 0) {
-      getVideos();
-    }
-  }, [isClient, getVideos, videos.length]);
+    fetchVideos();
+  }, []);
 
-  // Infinite scroll handler
+  // Infinite scroll effect
   useEffect(() => {
-    if (inView && isClient && !loading && hasMore) {
-      getVideos();
+    if (inView && !loading && hasMore) {
+      fetchVideos();
     }
-  }, [inView, getVideos, isClient, loading, hasMore]);
+  }, [inView, fetchVideos, loading, hasMore]);
 
-  // Show loading state before client-side hydration
-  if (!isClient) {
-    return <LoadingSpinner />;
-  }
-
-  // Show error state if there's an error
+  // Error handling
   if (error && videos.length === 0) {
-    return <ErrorDisplay error={error} />;
+    return <ErrorDisplay onRetry={() => {
+      setPage(0);
+      setVideos([]);
+      setHasMore(true);
+      fetchVideos();
+    }} />;
   }
 
   return (
     <div className="container mx-auto p-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+      {/* Video Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {videos.map((video) => (
-          <Link href={`/video/${video.id}`} key={video.id}>
-            <div className="bg-black rounded-lg shadow-md overflow-hidden cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-800">
-              <div className="relative w-full h-48">
-                <img
-                  src={video.thumbnailurl}
-                  alt={video.title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
+          <Link
+            key={video.id}
+            href={`/video/${video.id}`}
+            className="group"
+          >
+            <div className="bg-black rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 group-hover:scale-105">
+              <Image
+                src={video.thumbnailurl}
+                alt={video.title}
+                width={300}
+                height={200}
+                className="w-full h-48 object-cover"
+                priority={false}
+                loading="lazy"
+              />
               <div className="p-4">
-                <h2 className="text-lg font-semibold truncate text-center">{video.title}</h2>
+                <h2 className="text-white text-lg font-semibold truncate text-center">
+                  {video.title}
+                </h2>
               </div>
             </div>
           </Link>
         ))}
       </div>
 
+      {/* Loading Indicator */}
       {loading && <LoadingSpinner />}
+
+      {/* No More Videos */}
       {!hasMore && videos.length > 0 && (
-        <p className="text-center mt-4">No more videos to load.</p>
+        <p className="text-center mt-4 text-gray-500">
+          No more videos to load
+        </p>
       )}
+
+      {/* Intersection Observer Trigger */}
       <div ref={ref} className="h-10" />
     </div>
   );
 }
-
-
-// "use client";
-//
-// import React, {useState, useEffect, useCallback} from 'react';
-// import {useInView} from 'react-intersection-observer';
-// import Link from 'next/link';
-// import {Video} from '@/app/types/video';
-// import {getVideoPage} from "@/app/services/videoService";
-//
-// export default function HomePage() {
-//   const [videos, setVideos] = useState<Video[]>([]);
-//   const [page, setPage] = useState(0);
-//   const [loading, setLoading] = useState(false);
-//   const [hasMore, setHasMore] = useState(true);
-//   const [mounted, setMounted] = useState(false);
-//
-//   const {ref, inView} = useInView({
-//     threshold: 0,
-//   });
-//
-//   // Add this effect to handle initial mount
-//   useEffect(() => {
-//     setMounted(true);
-//     // Fetch initial data
-//     getVideos();
-//   }, []);
-//
-//   const getVideos = useCallback(async () => {
-//     if (loading || !hasMore) return;
-//     setLoading(true);
-//
-//     try {
-//       const newVideoPage = await getVideoPage(page);
-//       if (newVideoPage.length < 12) {
-//         setHasMore(false);
-//       }
-//       setVideos((prevVideos) => [...prevVideos, ...newVideoPage]);
-//       setPage((prevPage) => prevPage + 1);
-//     } catch (error) {
-//       console.error('Error fetching videos:', error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   }, [page, loading, hasMore]);
-//
-//   useEffect(() => {
-//     if (inView && mounted) {
-//       getVideos();
-//     }
-//   }, [inView, getVideos, mounted]);
-//
-//   // Show loading state before mount
-//   if (!mounted) {
-//     return (
-//       <div className="container mx-auto p-4">
-//         <div className="text-center">Loading...</div>
-//       </div>
-//     );
-//   }
-//
-//   return (
-//     <div className="container mx-auto p-4">
-//       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-//         {videos.map((video) => (
-//           <Link href={`/video/${video.id}`} key={video.id}>
-//             <div
-//               className="bg-black rounded-lg shadow-md overflow-hidden cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-800">
-//               <img
-//                 src={video.thumbnailurl}
-//                 alt={video.title}
-//                 className="w-full h-48 object-cover"
-//               />
-//               <div className="p-4">
-//                 <h2 className="text-lg font-semibold truncate text-center">{video.title}</h2>
-//               </div>
-//             </div>
-//           </Link>
-//         ))}
-//       </div>
-//       {loading && <p className="text-center mt-4">Loading...</p>}
-//       {!hasMore && <p className="text-center mt-4">No more videos to load.</p>}
-//       <div ref={ref} style={{height: '10px'}}></div>
-//     </div>
-//   );
-// }
