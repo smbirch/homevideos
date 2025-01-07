@@ -24,11 +24,12 @@ public class HomemoviesApplication {
 
     corsConfiguration.setAllowCredentials(true);
 
-    // Use setAllowedOriginPatterns instead of setAllowedOrigins
-    corsConfiguration.setAllowedOriginPatterns(
-        Arrays.asList("http://localhost:[*]", "https://*.smbirch.com"));
+    corsConfiguration.setAllowedOriginPatterns(Arrays.asList(
+            "http://localhost:[*]",
+            "http://192.168.1.*",  // adjust this to match your local network pattern
+            "https://*.smbirch.com"
+    ));
 
-    // Rest of your configuration remains the same
     corsConfiguration.setAllowedMethods(
         Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 

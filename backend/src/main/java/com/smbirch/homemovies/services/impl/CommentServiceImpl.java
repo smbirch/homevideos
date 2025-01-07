@@ -11,15 +11,14 @@ import com.smbirch.homemovies.repositories.CommentRepository;
 import com.smbirch.homemovies.repositories.UserRepository;
 import com.smbirch.homemovies.repositories.VideoRepository;
 import com.smbirch.homemovies.services.CommentService;
+import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +35,8 @@ public class CommentServiceImpl implements CommentService {
     Optional<User> userToCheckFor = userRepository.findByCredentials_Username(username);
 
     if (userToCheckFor.isEmpty() || userToCheckFor.get().isDeleted()) {
-      throw new NotFoundException("No user found with username: '" + username + "'");
+      log.info("404 - User not found: '{}'", username);
+      return null;
     }
     return userToCheckFor.get();
   }
@@ -52,20 +52,24 @@ public class CommentServiceImpl implements CommentService {
   }
 
   @Override
-  public ResponseEntity<CommentResponseDto> postVideoComment(CommentRequestDto commentRequestDto, HttpServletRequest request) {
+  public ResponseEntity<CommentResponseDto> postVideoComment(
+          CommentRequestDto commentRequestDto, HttpServletRequest request) {
     log.info(
-        "102 - '{}' posting comment: '{}'",
-        commentRequestDto.getAuthor(),
-        commentRequestDto.getText());
+            "102 - '{}' posting comment: '{}'",
+            commentRequestDto.getAuthor(),
+            commentRequestDto.getText());
     Video video =
-        videoRepository
-            .findById(commentRequestDto.getVideoId())
-            .orElseThrow(
-                () ->
-                    new NotFoundException(
-                        "Video not found with ID: " + commentRequestDto.getVideoId()));
+            videoRepository
+                    .findById(commentRequestDto.getVideoId())
+                    .orElseThrow(
+                            () ->
+                                    new NotFoundException(
+                                            "Video not found with ID: " + commentRequestDto.getVideoId()));
 
     User user = getUserHelper(commentRequestDto.getAuthor());
+    if (user == null) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
 
     Comment comment = new Comment();
     comment.setText(commentRequestDto.getText());
