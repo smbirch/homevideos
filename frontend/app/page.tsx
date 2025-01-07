@@ -6,17 +6,11 @@ import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { Video } from '@/app/types/video';
 import { getVideoPage } from "@/app/services/videoService";
-
-// Loading Component
-const LoadingSpinner = () => (
-  <div className="flex justify-center items-center py-8">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
-  </div>
-);
+import LoadingSpinner from "@/app/components/LoadingSpinner"
 
 // Error Component
 const ErrorDisplay = ({ onRetry }: { onRetry: () => void }) => (
-  <div className="text-center p-6 bg-red-50">
+  <div className="text-center p-6 bg-gray-100">
     <p className="text-red-600 mb-4">Unable to load videos</p>
     <button
       onClick={onRetry}
@@ -51,7 +45,6 @@ export default function HomePage() {
     try {
       const newVideos = await getVideoPage(page);
 
-      // If fewer videos than expected, we've reached the end
       if (newVideos.length < 12) {
         setHasMore(false);
       }

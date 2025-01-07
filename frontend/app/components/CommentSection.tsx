@@ -17,7 +17,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ videoId, comments }) =>
       ) : (
         <ul className="space-y-4 w-full md:w-3/4 pl-4">
           {comments.map((comment) => (
-            <li key={comment.id} className="flex flex-col bg-gray-300 p-4 rounded-lg">
+            <li key={comment.id} className="flex flex-col bg-gray-300 p-4 rounded-lg mb-4">
               <div className="flex items-center mb-2">
                 <span className="font-semibold text-gray-600 mr-2">{comment.author}</span>
                 <span className="text-gray-500 text-sm">{new Date(comment.createdAt).toLocaleString()}</span>
