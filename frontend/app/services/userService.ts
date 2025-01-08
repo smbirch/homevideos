@@ -1,7 +1,6 @@
 "use server"
 
 import {User, UserRequestDto, UserResponseDto} from "@/app/types/user";
-import {Credentials} from "@/app/types/credentials";
 import {cookies} from 'next/headers'
 
 const API_BASE_URL = 'http://localhost:8080/api/auth';
@@ -70,7 +69,8 @@ export async function loginUser(userRequestDto: UserRequestDto): Promise<UserRes
     // Parse the cookie value from the header
     const cookieValue = setCookieHeader.split(';')[0].split('=')[1];
 
-    // Set the cookie using Next.js cookies API
+    // Set the cookie
+    // TODO: use cookieUtils setCookie instead
     cookies().set({
       name: 'homevideosCookie',
       value: cookieValue,

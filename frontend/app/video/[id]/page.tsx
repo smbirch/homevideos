@@ -106,7 +106,7 @@ export default function VideoPage() {
         <VideoPlayer url={video.url} title={video.title}/>
       </div>
       <h1 className="text-3xl font-bold mb-4">{video.title}</h1>
-      <p className="text-gray-700 mb-4">{video.description}</p>
+      <p className="text-gray-700 mb-8">{video.description}</p>
 
       <AddCommentForm
         videoId={video.id}

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { UserCircle } from 'lucide-react';
+import {usePathname} from 'next/navigation';
+import {UserCircle} from 'lucide-react';
+
 
 interface UserProfile {
   firstName: string;
@@ -25,6 +26,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   // Function to check user auth status
+  // TODO: abstract this out using authUtils
   const checkAuthStatus = () => {
     // Only run on client-side
     if (typeof window !== 'undefined') {
@@ -45,18 +47,13 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    // Ensure this only runs on the client
     setIsClient(true);
-
-    // Check auth status when component mounts
     checkAuthStatus();
 
-    // Add event listener for storage changes
     const handleStorage = () => checkAuthStatus();
     window.addEventListener('storage', handleStorage);
     window.addEventListener('authChange', handleStorage);
 
-    // Cleanup
     return () => {
       window.removeEventListener('storage', handleStorage);
       window.removeEventListener('authChange', handleStorage);
@@ -76,7 +73,7 @@ const Navbar = () => {
             HomeVideos
           </Link>
           <div>
-            <UserCircle size={32} className="text-white" />
+            <UserCircle size={32} className="text-white"/>
           </div>
         </div>
       </nav>
@@ -94,7 +91,7 @@ const Navbar = () => {
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="text-white focus:outline-none"
           >
-            <UserCircle size={32} />
+            <UserCircle size={32}/>
           </button>
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
