@@ -61,7 +61,6 @@ const useFetchVideoData = (videoId: string | undefined) => {
   }, [fetchData]);
 
   const addComment = async (text: string, author: string): Promise<Comment | null> => {
-    console.log("addComment triggered with:", {text, author});
     if (!video) return null;
 
     try {

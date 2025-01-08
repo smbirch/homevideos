@@ -14,6 +14,7 @@ import com.smbirch.homemovies.services.CommentService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -93,6 +94,7 @@ public class CommentServiceImpl implements CommentService {
     log.info("102 - Getting comments for video '{}'", videoId);
     ArrayList<Comment> commentList = commentRepository.findByVideoId(videoId);
     commentList.removeIf(Comment::isDeleted);
+    Collections.reverse(commentList);
     return commentList;
   }
 
