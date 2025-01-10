@@ -67,13 +67,19 @@ export function getCookie(name: string): string | null {
   return null;
 }
 
+
 export function removeCookie(name: string) {
   if (typeof window === 'undefined') {
     return;
   }
-  const date = new Date();
 
-  // Set it expire in -1 days
-  date.setTime(date.getTime() + (-1 * 24 * 60 * 60 * 1000));
-  document.cookie = name+"=; expires="+date.toUTCString()+"; path=/";
+  // set token to empty and set expiry in the past
+  document.cookie = `${encodeURIComponent(name)}=; ` +
+    'expires=Thu, 01 Jan 1970 00:00:00 GMT; ' +
+    'path=/; ' +
+    (process.env.NODE_ENV === 'production' ? 'secure; ' : '') +
+    'sameSite=lax';
+
+  // For good measure, also try maxAge=0 approach as a fallback
+  document.cookie = `${encodeURIComponent(name)}=; max-age=0; path=/`;
 }

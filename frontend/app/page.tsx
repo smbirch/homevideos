@@ -29,9 +29,8 @@ export default function HomePage() {
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
-  // Intersection observer hook
   const { ref, inView } = useInView({
-    threshold: 0,
+    threshold: 1,
     rootMargin: '200px',
   });
 

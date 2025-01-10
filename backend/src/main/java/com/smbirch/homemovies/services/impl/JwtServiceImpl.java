@@ -143,6 +143,10 @@ public class JwtServiceImpl implements JwtService {
 
   @Override
   public boolean isBlacklisted(String token) {
+    if (token == null || token.isEmpty()) {
+      log.warn("406 - Token is null or empty");
+      return false;
+    }
     String key = "blacklist:" + token;
     boolean isBlacklisted = redisTemplate.opsForValue().get(key) != null;
     log.info("102 - Checking token blacklist status");
