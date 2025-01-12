@@ -123,7 +123,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public ResponseEntity<UserResponseDto> login(UserRequestDto userRequestDto, HttpServletResponse response) {
+  public ResponseEntity<UserResponseDto> login(
+      UserRequestDto userRequestDto, HttpServletResponse response) {
     String username = userRequestDto.getCredentials().getUsername().toLowerCase();
     String password = userRequestDto.getCredentials().getPassword();
     log.info("102 - Login attempt for user: '{}'", username);
@@ -178,9 +179,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public ResponseEntity<AuthDto> logoutUser(
-      UserRequestDto userRequestDto, HttpServletRequest request, HttpServletResponse response) {
+    UserRequestDto userRequestDto, HttpServletRequest request, HttpServletResponse response) {
+    log.info("102 - Logging out user:");
     String username = userRequestDto.getCredentials().getUsername();
-    log.info("102 - Logging out user: '{}'", username);
 
     String token = jwtService.getTokenFromRequest(request);
 

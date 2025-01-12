@@ -71,7 +71,7 @@ export async function loginUser(userRequestDto: UserRequestDto): Promise<UserRes
 
     // Set the cookie
     // TODO: use cookieUtils setCookie instead
-    cookies().set({
+    (await cookies()).set({
       name: 'homevideosCookie',
       value: cookieValue,
       httpOnly: true,
@@ -86,7 +86,8 @@ export async function loginUser(userRequestDto: UserRequestDto): Promise<UserRes
 }
 
 export async function logoutUser(userRequestDto: UserRequestDto): Promise<UserResponseDto> {
-  const currentCookie = cookies().get('homevideosCookie')
+  console.log("logging out")
+  const currentCookie = (await cookies()).get('homevideosCookie')
 
   const response = await fetch(`${API_BASE_URL}/logout`, {
     method: 'POST',
@@ -97,7 +98,7 @@ export async function logoutUser(userRequestDto: UserRequestDto): Promise<UserRe
     },
     body: JSON.stringify({
       ...userRequestDto,
-      token: currentCookie?.value // Add token to request body as well
+      token: currentCookie?.value
     }),
     credentials: 'include'
   });
@@ -107,7 +108,7 @@ export async function logoutUser(userRequestDto: UserRequestDto): Promise<UserRe
     throw new Error(errorData.message || 'Failed to logout user');
   }
 
-  cookies().delete('homevideosCookie')
+  (await cookies()).delete('homevideosCookie')
 
   return response.json();
 }
