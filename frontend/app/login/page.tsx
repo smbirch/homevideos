@@ -32,10 +32,10 @@ export default function LoginPage() {
         token: ''
       }
 
-      const userResponse: UserResponseDto = await loginUser(userRequestDto)
+      const userResponse: UserResponseDto = await loginUser(userRequestDto);
 
       // Remove existing auth token
-      removeCookie('auth_token')
+      removeCookie('homeVideosCookie')
 
       const {token, ...userInfo} = userResponse
       localStorage.setItem('user', JSON.stringify(userInfo))

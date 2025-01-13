@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { logoutUser } from "@/app/services/userService";
+import React, {useEffect, useState} from 'react';
+import {useRouter} from 'next/navigation';
+import {logoutUser} from "@/app/services/userService";
 import LoadingSpinner from "@/app/components/LoadingSpinner";
 
 export default function LogoutPage() {
@@ -42,8 +42,7 @@ export default function LogoutPage() {
       <div className="flex flex-col items-center gap-4">
         <div>Goodbye!</div>
         {isLoggingOut && (
-          <div className="text-sm text-gray-400">Logging out...<br/><LoadingSpinner /></div>
-
+          <div className="text-sm text-gray-400">Logging out...<br/><LoadingSpinner/></div>
         )}
       </div>
     </div>

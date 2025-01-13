@@ -1,5 +1,3 @@
-import {cookies} from 'next/headers';
-
 interface CookieOptions {
   maxAge?: number;
   httpOnly?: boolean;
@@ -50,29 +48,12 @@ export function setCookie(name: string, value: string, options: CookieOptions = 
   }
 }
 
-// export function getCookie(name: string): string | null {
-//   // if (typeof window === 'undefined') {
-//   //   return null;
-//   // }
-//
-//   const nameEQ = encodeURIComponent(name) + '=';
-//   const cookies = document.cookie.split(';');
-//
-//   for (let cookie of cookies) {
-//     cookie = cookie.trim();
-//     if (cookie.indexOf(nameEQ) === 0) {
-//       return decodeURIComponent(cookie.substring(nameEQ.length));
-//     }
-//   }
-//   return null;
-// }
-
 
 export function removeCookie(name: string) {
   console.log("removing cookie")
-  // if (typeof window === 'undefined') {
-  //   return;
-  // }
+  if (typeof window === 'undefined') {
+    return;
+  }
   document.cookie.split(';').forEach(cookie => {
     const eqPos = cookie.indexOf('=');
     const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
