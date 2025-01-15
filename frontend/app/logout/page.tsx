@@ -13,6 +13,7 @@ export default function LogoutPage() {
 
   useEffect(() => {
     const performLogout = async () => {
+      console.log("perform logout");
       const localUser = JSON.parse(localStorage.getItem("user") || "{}");
       try {
         if (localUser?.username) {
@@ -28,7 +29,8 @@ export default function LogoutPage() {
       } catch (error) {
         console.error("Logout error:", error);
       } finally {
-        await new Promise(resolve => setTimeout(resolve, 600));
+        localStorage.removeItem("user");
+        await new Promise(resolve => setTimeout(resolve, 500));
         setIsLoggingOut(false);
         window.location.href = '/';
       }
