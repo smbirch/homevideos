@@ -1,3 +1,5 @@
+import {deleteCookie} from "cookies-next/client";
+
 interface CookieOptions {
   maxAge?: number;
   httpOnly?: boolean;
@@ -51,12 +53,5 @@ export function setCookie(name: string, value: string, options: CookieOptions = 
 
 export function removeCookie(name: string) {
   console.log("removing cookie")
-  if (typeof window === 'undefined') {
-    return;
-  }
-  document.cookie.split(';').forEach(cookie => {
-    const eqPos = cookie.indexOf('=');
-    const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
-    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
-  });
+  deleteCookie('homevideosCookie');
 }

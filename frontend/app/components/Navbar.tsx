@@ -1,10 +1,9 @@
 // "use client";
 //
-// import React, {useState, useEffect} from 'react';
-// import Link from 'next/link';
-// import {usePathname} from 'next/navigation';
-// import {UserCircle} from 'lucide-react';
-//
+// import React, { useState, useEffect, useRef } from "react";
+// import Link from "next/link";
+// import { usePathname } from "next/navigation";
+// import { UserCircle } from "lucide-react";
 //
 // interface UserProfile {
 //   firstName: string;
@@ -24,20 +23,19 @@
 //   const [user, setUser] = useState<User | null>(null);
 //   const [isClient, setIsClient] = useState(false);
 //   const pathname = usePathname();
+//   const dropdownRef = useRef<HTMLDivElement | null>(null);
 //
 //   // Function to check user auth status
-//   // TODO: abstract this out using authUtils
 //   const checkAuthStatus = () => {
-//     // Only run on client-side
-//     if (typeof window !== 'undefined') {
-//       const userData = localStorage.getItem('user');
+//     if (typeof window !== "undefined") {
+//       const userData = localStorage.getItem("user");
 //       if (userData) {
 //         try {
 //           const parsedUser = JSON.parse(userData) as User;
 //           setUser(parsedUser);
 //         } catch (error) {
-//           console.error('Error parsing user data:', error);
-//           localStorage.removeItem('user');
+//           console.error("Error parsing user data:", error);
+//           localStorage.removeItem("user");
 //           setUser(null);
 //         }
 //       } else {
@@ -51,12 +49,12 @@
 //     checkAuthStatus();
 //
 //     const handleStorage = () => checkAuthStatus();
-//     window.addEventListener('storage', handleStorage);
-//     window.addEventListener('authChange', handleStorage);
+//     window.addEventListener("storage", handleStorage);
+//     window.addEventListener("authChange", handleStorage);
 //
 //     return () => {
-//       window.removeEventListener('storage', handleStorage);
-//       window.removeEventListener('authChange', handleStorage);
+//       window.removeEventListener("storage", handleStorage);
+//       window.removeEventListener("authChange", handleStorage);
 //     };
 //   }, []);
 //
@@ -64,7 +62,20 @@
 //     setIsDropdownOpen(false);
 //   }, [pathname]);
 //
-//   // Prevent hydration mismatch
+//   useEffect(() => {
+//     const handleClickOutside = (event: MouseEvent) => {
+//       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+//         setIsDropdownOpen(false);
+//       }
+//     };
+//
+//     document.addEventListener("mousedown", handleClickOutside);
+//
+//     return () => {
+//       document.removeEventListener("mousedown", handleClickOutside);
+//     };
+//   }, []);
+//
 //   if (!isClient) {
 //     return (
 //       <nav className="bg-gray-800 p-4">
@@ -73,7 +84,7 @@
 //             HomeVideos
 //           </Link>
 //           <div>
-//             <UserCircle size={32} className="text-white"/>
+//             <UserCircle size={32} className="text-white" />
 //           </div>
 //         </div>
 //       </nav>
@@ -86,12 +97,12 @@
 //         <Link href="/" className="text-white text-2xl font-bold">
 //           HomeVideos
 //         </Link>
-//         <div className="relative">
+//         <div className="relative" ref={dropdownRef}>
 //           <button
 //             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
 //             className="text-white focus:outline-none"
 //           >
-//             <UserCircle size={32}/>
+//             <UserCircle size={32} />
 //           </button>
 //           {isDropdownOpen && (
 //             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
@@ -132,6 +143,8 @@
 // };
 //
 // export default Navbar;
+
+
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -159,7 +172,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  // Function to check user auth status
   const checkAuthStatus = () => {
     if (typeof window !== "undefined") {
       const userData = localStorage.getItem("user");
@@ -231,45 +243,52 @@ const Navbar = () => {
         <Link href="/" className="text-white text-2xl font-bold">
           HomeVideos
         </Link>
-        <div className="relative" ref={dropdownRef}>
-          <button
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="text-white focus:outline-none"
-          >
-            <UserCircle size={32} />
-          </button>
-          {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
-              {user ? (
-                <>
-                  <div className="px-4 py-2 text-sm text-gray-500 border-b">
-                    {user.username}
-                  </div>
-                  <Link
-                    href="/logout"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Logout
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href="/login"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    href="/register"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Register
-                  </Link>
-                </>
-              )}
-            </div>
+        <div className="flex items-center gap-4">
+          {user && (
+            <span className="text-white text-sm">
+              Hello, {user.username}
+            </span>
           )}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="text-white focus:outline-none"
+            >
+              <UserCircle size={32} />
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                {user ? (
+                  <>
+                    <div className="px-4 py-2 text-sm text-gray-500 border-b">
+                      {user.username}
+                    </div>
+                    <Link
+                      href="/logout"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Logout
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/login"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Register
+                    </Link>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>

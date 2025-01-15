@@ -44,6 +44,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = memo(({ videoId, onComment
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log("handleSubmit");
     e.preventDefault();
     if (!text || !user) return;
 

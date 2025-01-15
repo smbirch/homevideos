@@ -86,7 +86,6 @@ export async function loginUser(userRequestDto: UserRequestDto): Promise<UserRes
 }
 
 export async function logoutUser(userRequestDto: UserRequestDto): Promise<UserResponseDto> {
-  console.log("logging out")
   const currentCookie = (await cookies()).get('homevideosCookie')
 
   const response = await fetch(`${API_BASE_URL}/logout`, {
@@ -105,10 +104,10 @@ export async function logoutUser(userRequestDto: UserRequestDto): Promise<UserRe
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
+    (await cookies()).delete('homevideosCookie')
     throw new Error(errorData.message || 'Failed to logout user');
   }
 
-  (await cookies()).delete('homevideosCookie')
-
+  (await cookies()).delete('homevideosCookie');
   return response.json();
 }

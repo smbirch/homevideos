@@ -5,6 +5,8 @@ import com.smbirch.homemovies.dtos.CommentResponseDto;
 import com.smbirch.homemovies.entities.Comment;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
+
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface CommentService {

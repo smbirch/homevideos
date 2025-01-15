@@ -4,6 +4,8 @@ import React, {useEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {logoutUser} from "@/app/services/userService";
 import LoadingSpinner from "@/app/components/LoadingSpinner";
+import {cookies} from "next/headers";
+import {removeCookie} from "@/app/utils/cookieUtils";
 
 export default function LogoutPage() {
   const router = useRouter();
@@ -11,9 +13,8 @@ export default function LogoutPage() {
 
   useEffect(() => {
     const performLogout = async () => {
+      const localUser = JSON.parse(localStorage.getItem("user") || "{}");
       try {
-        const localUser = JSON.parse(localStorage.getItem("user") || "{}");
-
         if (localUser?.username) {
           await logoutUser({
             credentials: {
@@ -25,10 +26,9 @@ export default function LogoutPage() {
           });
         }
       } catch (error) {
-        console.error("Logout failed:", error);
+        console.error("Logout error:", error);
       } finally {
-        localStorage.removeItem("user");
-        await new Promise(resolve => setTimeout(resolve, 800));
+        await new Promise(resolve => setTimeout(resolve, 600));
         setIsLoggingOut(false);
         window.location.href = '/';
       }

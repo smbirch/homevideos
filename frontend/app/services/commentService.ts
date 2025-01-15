@@ -12,7 +12,7 @@ export const getCommentsByVideoId = async (videoId: string, signal?: AbortSignal
 };
 
 export async function postComment(videoId: number, text: string, author: string): Promise<Comment> {
-  const currentCookie = cookies().get('homevideosCookie')
+  const currentCookie = (await cookies()).get('homevideosCookie')
   const response = await fetch(`${API_BASE_URL}/api/comments/new`, {
     method: 'POST',
     headers: {
@@ -29,6 +29,9 @@ export async function postComment(videoId: number, text: string, author: string)
   });
 
   if (!response.ok) {
+    if (response.status === 404 || response.status === 500) {
+      throw new Error('AUTH_ERROR')
+    }
     console.log("failed to post comment");
     throw new Error('Failed to post comment');
   }

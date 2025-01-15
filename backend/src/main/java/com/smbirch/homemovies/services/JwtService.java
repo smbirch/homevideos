@@ -26,7 +26,7 @@ public interface JwtService {
 
   boolean isTokenValid(String token);
 
-  boolean validateTokenAndUser(HttpServletRequest request, String username);
+  boolean validateTokenAndUser(String token, String username);
 
   boolean blacklistToken(String token);
 
