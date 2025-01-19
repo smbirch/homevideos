@@ -1,14 +1,60 @@
 "use client";
 
-import React from 'react';
-import { Comment } from '@/app/types/comment';
+import React, {useState, useEffect} from 'react';
+import {Comment} from '@/app/types/comment';
+import {updateComment} from "@/app/services/commentService";
 
 interface CommentSectionProps {
-  videoId: number;
-  comments: Comment[];
+  videoId: number,
+  comments: Comment[],
+  refreshComments?: () => Promise<void>
 }
 
-const CommentSection: React.FC<CommentSectionProps> = ({ videoId, comments }) => {
+const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refreshComments}) => {
+  const [currentUser, setCurrentUser] = useState<{ username: string; isAdmin: boolean } | null>(null);
+  const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
+  const [editText, setEditText] = useState('');
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setCurrentUser(JSON.parse(userData));
+    }
+  }, []);
+
+  const canModifyComment = (comment: Comment) => {
+    if (!currentUser) return false;
+    return currentUser.isAdmin || currentUser.username === comment.author;
+  };
+
+  const handleEditClick = (comment: Comment) => {
+    setEditingCommentId(comment.id);
+    setEditText(comment.text);
+  };
+
+  const handleSaveEdit = async (commentId: number) => {
+    try {
+      // @ts-ignore
+      await updateComment(commentId, editText, videoId, currentUser.username);
+      setEditingCommentId(null);
+      if (refreshComments) {
+        await refreshComments();
+      }
+    } catch (error) {
+      console.error('Failed to update comment:', error);
+    }
+  };
+
+  const handleDelete = async (commentId: number) => {
+    try {
+
+      // await deleteComment(commentId);
+      // You might want to refresh the comments list here
+    } catch (error) {
+      console.error('Failed to delete comment:', error);
+    }
+  };
+
   return (
     <div className="mt-8 w-full">
       <h2 className="text-xl font-bold mb-4 pl-4">Comments</h2>
@@ -22,7 +68,51 @@ const CommentSection: React.FC<CommentSectionProps> = ({ videoId, comments }) =>
                 <span className="font-semibold text-gray-600 mr-2">{comment.author}</span>
                 <span className="text-gray-500 text-sm">{new Date(comment.createdAt).toLocaleString()}</span>
               </div>
-              <p className="text-black">{comment.text}</p>
+
+              {editingCommentId === comment.id ? (
+                <div className="mt-2">
+                  <textarea
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                    className="w-full p-2 rounded border border-gray-400 text-black"
+                    rows={3}
+                  />
+                  <div className="mt-2 space-x-2">
+                    <button
+                      onClick={() => handleSaveEdit(comment.id)}
+                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setEditingCommentId(null)}
+                      className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <p className="text-black">{comment.text}</p>
+                  {canModifyComment(comment) && (
+                    <div className="mt-2 space-x-2">
+                      <button
+                        onClick={() => handleEditClick(comment)}
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(comment.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
             </li>
           ))}
         </ul>

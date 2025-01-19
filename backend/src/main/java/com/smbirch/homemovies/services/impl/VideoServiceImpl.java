@@ -34,7 +34,7 @@ public class VideoServiceImpl implements VideoService {
 
   @Override
   public VideoResponseDto getVideoById(Long id) {
-    log.info("102 - Getting video by id {}", id);
+    log.info("102 - Getting video by ID: {}", id);
     Optional<Video> current = videoRepository.findById(id);
 
     if (current.isEmpty()) {

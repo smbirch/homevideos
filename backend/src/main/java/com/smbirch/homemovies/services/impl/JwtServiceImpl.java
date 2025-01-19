@@ -127,9 +127,9 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public boolean blacklistToken(String token) {
-        if (token == null) {
-            log.warn("500 - Token is null at blacklistToken");
-            return false;
+        if (token == null || token.isEmpty()) {
+            log.warn("500 - Token is null at blacklistToken, will not blacklist");
+            return true;
         }
         String key = "blacklist:" + token;
 

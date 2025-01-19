@@ -117,8 +117,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentResponseDto updateComment(CommentRequestDto commentRequestDto) {
-        log.info("102 - Updating Comment: '{}'", commentRequestDto.getCommentId());
+    public ResponseEntity<CommentResponseDto> updateComment(CommentRequestDto commentRequestDto, HttpServletRequest request) {
+        log.info("102 - Updating Comment ID: {} - Message: '{}'", commentRequestDto.getCommentId(), commentRequestDto.getText());
         Comment comment = commentRepository.findById(commentRequestDto.getCommentId()).orElseThrow(() -> new NotFoundException("Comment not found with ID: " + commentRequestDto.getCommentId()));
 
         if (comment.isDeleted()) {
@@ -131,6 +131,6 @@ public class CommentServiceImpl implements CommentService {
 
         commentRepository.saveAndFlush(comment);
 
-        return convertToResponseDto(comment);
+        return ResponseEntity.ok(convertToResponseDto(comment));
     }
 }

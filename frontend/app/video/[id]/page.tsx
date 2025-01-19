@@ -9,8 +9,7 @@ import VideoPlayer from "@/app/components/VideoPlayer";
 import CommentSection from "@/app/components/CommentSection";
 import AddCommentForm from "@/app/components/AddCommentForm";
 import {getCommentsByVideoId, postComment} from "@/app/services/commentService";
-import {logoutUser} from "@/app/services/userService";
-import {User} from "@/app/types/user";
+
 
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center min-h-[50vh]">
@@ -96,6 +95,7 @@ export default function VideoPage() {
       isLoading,
       error,
       addComment,
+      refreshComments,
     } = useFetchVideoData(videoId);
 
     // Early return for loading and error states
@@ -119,6 +119,7 @@ export default function VideoPage() {
         <CommentSection
           videoId={video.id}
           comments={comments}
+          refreshComments={refreshComments}
         />
       </div>
     );

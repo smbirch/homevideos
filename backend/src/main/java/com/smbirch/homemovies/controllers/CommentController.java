@@ -33,8 +33,8 @@ public class CommentController {
   }
 
   @PatchMapping("/update")
-  public CommentResponseDto updateComment(@RequestBody CommentRequestDto commentRequestDto) {
-    return commentService.updateComment(commentRequestDto);
+  public ResponseEntity<CommentResponseDto> updateComment(@RequestBody CommentRequestDto commentRequestDto, HttpServletRequest request) {
+    return commentService.updateComment(commentRequestDto, request);
   }
 
   // only requires commentId in commentRequestDto

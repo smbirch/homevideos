@@ -4,8 +4,6 @@ import React, {useEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {logoutUser} from "@/app/services/userService";
 import LoadingSpinner from "@/app/components/LoadingSpinner";
-import {cookies} from "next/headers";
-import {removeCookie} from "@/app/utils/cookieUtils";
 
 export default function LogoutPage() {
   const router = useRouter();

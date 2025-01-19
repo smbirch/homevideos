@@ -63,13 +63,12 @@ export async function loginUser(userRequestDto: UserRequestDto): Promise<UserRes
     throw new Error(errorData.message || 'Failed to login user');
   }
 
-  // Get the Set-Cookie header
+
   const setCookieHeader = response.headers.get('set-cookie');
   if (setCookieHeader) {
-    // Parse the cookie value from the header
+
     const cookieValue = setCookieHeader.split(';')[0].split('=')[1];
 
-    // Set the cookie
     // TODO: use cookieUtils setCookie instead
     (await cookies()).set({
       name: 'homevideosCookie',

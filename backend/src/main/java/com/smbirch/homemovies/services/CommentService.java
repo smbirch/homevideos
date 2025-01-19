@@ -16,6 +16,8 @@ public interface CommentService {
 
   CommentResponseDto deleteComment(CommentRequestDto commentRequestDto);
 
-  CommentResponseDto updateComment(CommentRequestDto commentRequestDto);
+
+
+  ResponseEntity<CommentResponseDto> updateComment(CommentRequestDto commentRequestDto, HttpServletRequest request);
 
 }
