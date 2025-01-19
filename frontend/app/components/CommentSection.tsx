@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react';
 import {Comment} from '@/app/types/comment';
-import {updateComment} from "@/app/services/commentService";
+import {deleteComment, updateComment} from "@/app/services/commentService";
 
 interface CommentSectionProps {
   videoId: number,
@@ -45,13 +45,20 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
     }
   };
 
-  const handleDelete = async (commentId: number) => {
+  const handleDelete = async (comment: Comment) => {
     try {
-
-      // await deleteComment(commentId);
-      // You might want to refresh the comments list here
+      // @ts-ignore
+      await deleteComment(comment.id, comment.text, videoId, currentUser.username);
+      if (refreshComments) {
+        await refreshComments();
+      }
     } catch (error) {
-      console.error('Failed to delete comment:', error);
+      if (error instanceof Error && error.message === 'AUTH_ERROR') {
+        console.error('Authentication error while deleting comment');
+        window.location.href = '/';
+      } else {
+        console.error('Failed to delete comment:', error);
+      }
     }
   };
 
@@ -104,7 +111,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
                         Edit
                       </button>
                       <button
-                        onClick={() => handleDelete(comment.id)}
+                        onClick={() => handleDelete(comment)}
                         className="text-red-600 hover:text-red-800"
                       >
                         Delete

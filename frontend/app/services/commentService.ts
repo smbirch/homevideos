@@ -71,3 +71,29 @@ export async function updateComment(
 
   return response.json();
 }
+
+export async function deleteComment(commentId: number, text: string, videoId: number, author: string): Promise<void> {
+  const currentCookie = (await cookies()).get('homevideosCookie')
+  const response = await fetch(`${API_BASE_URL}/api/comments/delete`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': `homevideosCookie=${currentCookie?.value || ''}`,
+      'Authorization': `Bearer ${currentCookie?.value || ''}`,
+    },
+    body: JSON.stringify({
+      commentId,
+      videoId,
+      text,
+      author,
+    }),
+  });
+
+  if (!response.ok) {
+    if (response.status === 404 || response.status === 500) {
+      throw new Error('AUTH_ERROR')
+    }
+    console.log("failed to delete comment");
+    throw new Error('Failed to delete comment');
+  }
+}

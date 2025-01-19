@@ -39,7 +39,7 @@ public class CommentController {
 
   // only requires commentId in commentRequestDto
   @DeleteMapping("/delete")
-  public CommentResponseDto deleteComment(@RequestBody CommentRequestDto commentRequestDto) {
-    return commentService.deleteComment(commentRequestDto);
+  public ResponseEntity<CommentResponseDto> deleteComment(@RequestBody CommentRequestDto commentRequestDto, HttpServletRequest request) {
+    return commentService.deleteComment(commentRequestDto, request);
   }
 }

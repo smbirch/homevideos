@@ -14,9 +14,7 @@ public interface CommentService {
 
   List<Comment> getVideoComments(Long videoId);
 
-  CommentResponseDto deleteComment(CommentRequestDto commentRequestDto);
-
-
+  ResponseEntity<CommentResponseDto> deleteComment(CommentRequestDto commentRequestDto, HttpServletRequest request);
 
   ResponseEntity<CommentResponseDto> updateComment(CommentRequestDto commentRequestDto, HttpServletRequest request);
 

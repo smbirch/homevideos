@@ -106,14 +106,18 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentResponseDto deleteComment(CommentRequestDto commentRequestDto) {
+    public ResponseEntity<CommentResponseDto> deleteComment(CommentRequestDto commentRequestDto, HttpServletRequest request) {
         Comment comment = commentRepository.findById(commentRequestDto.getCommentId()).orElseThrow(() -> new NotFoundException("Comment with ID: " + commentRequestDto.getCommentId() + " not found"));
+        if (commentRequestDto.getAuthor() == null || commentRequestDto.getAuthor().isEmpty()) {
+            log.warn("404 - User not found while deleting comment: '{}'", commentRequestDto.getAuthor());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
 
         comment.setDeleted(true);
         commentRepository.saveAndFlush(comment);
         log.info("102 - Comment '{}' deleted by user '{}'", commentRequestDto.getCommentId(), commentRequestDto.getAuthor());
 
-        return convertToResponseDto(comment);
+        return ResponseEntity.ok(convertToResponseDto(comment));
     }
 
     @Override
