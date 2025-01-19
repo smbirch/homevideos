@@ -123,7 +123,15 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public ResponseEntity<CommentResponseDto> updateComment(CommentRequestDto commentRequestDto, HttpServletRequest request) {
         log.info("102 - Updating Comment ID: {} - Message: '{}'", commentRequestDto.getCommentId(), commentRequestDto.getText());
+        String token = jwtService.getTokenFromRequest(request);
         Comment comment = commentRepository.findById(commentRequestDto.getCommentId()).orElseThrow(() -> new NotFoundException("Comment not found with ID: " + commentRequestDto.getCommentId()));
+
+        // check token
+        boolean isValidToken = jwtService.validateTokenAndUser(token, commentRequestDto.getAuthor());
+        if (!isValidToken) {
+            log.warn("404 - Invalid token while editing comment");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
 
         if (comment.isDeleted()) {
             throw new NotFoundException("Comment with ID: " + commentRequestDto.getCommentId() + " is deleted and cannot be updated");
