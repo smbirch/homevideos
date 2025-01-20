@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { UserCircle } from "lucide-react";
+import {usePathname} from "next/navigation";
+import {UserCircle} from "lucide-react";
 
 interface UserProfile {
   firstName: string;
@@ -83,7 +83,7 @@ const Navbar = () => {
             HomeVideos
           </Link>
           <div>
-            <UserCircle size={32} className="text-white" />
+            <UserCircle size={32} className="text-white"/>
           </div>
         </div>
       </nav>
@@ -107,7 +107,7 @@ const Navbar = () => {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="text-white focus:outline-none"
             >
-              <UserCircle size={32} />
+              <UserCircle size={32}/>
             </button>
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
@@ -116,6 +116,12 @@ const Navbar = () => {
                     <div className="px-4 py-2 text-sm text-gray-500 border-b">
                       {user.username}
                     </div>
+                    <Link
+                      href="/about"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      About
+                    </Link>
                     <Link
                       href="/logout"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
