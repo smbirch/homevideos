@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 export default function About() {
   const textContent = [
     { type: "h1", text: "About This Site\n" },
-    { type: "p", text: "Welcome to my Home Videos! This site was created as a way to digitize and archive the VHS videos that were taken when I was young.\n" },
+    { type: "p", text: "Welcome to my home video archive! This site was created as a way to digitize and archive the VHS videos that were taken when I was young.\n" },
     { type: "p", text: "If you want more info or to see other projects: " },
     { type: "link", text: "check out my GitHub" },
     { type: "p", text: "." },

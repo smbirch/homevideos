@@ -117,6 +117,12 @@ const Navbar = () => {
                       {user.username}
                     </div>
                     <Link
+                      href="/profile"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Profile
+                    </Link>
+                    <Link
                       href="/about"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
