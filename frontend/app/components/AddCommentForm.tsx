@@ -1,46 +1,27 @@
 "use client";
 
-import React, { memo, useState, useEffect } from 'react';
-import { Comment } from "@/app/types/comment"
+import React, {memo, useState, useEffect} from 'react';
+import {Comment} from "@/app/types/comment"
+import {getLocalUserData} from "@/app/utils/authUtils";
+import {User} from "@/app/types/user";
 
-interface User {
-  id: number;
-  username: string;
-  profile: UserProfile;
-}
-
-interface UserProfile {
-  firstName: string;
-  lastName: string;
-  email: string;
-  admin: boolean;
-}
 
 interface AddCommentFormProps {
   videoId: number;
   onCommentAdded: (text: string, author: string) => Promise<Comment | null>;
 }
 
-const AddCommentForm: React.FC<AddCommentFormProps> = memo(({ videoId, onCommentAdded }) => {
+const AddCommentForm: React.FC<AddCommentFormProps> = memo(({videoId, onCommentAdded}) => {
   const [text, setText] = useState('');
-  const [author, setAuthor] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      try {
-        const parsedUser = JSON.parse(userData) as User;
-        setUser(parsedUser);
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-        localStorage.removeItem('user');
-        setUser(null);
-      }
-    }
+    // @ts-ignore
+    let user: User | null = getLocalUserData();
+    setUser(user);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,7 +41,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = memo(({ videoId, onComment
   };
 
   if (!isClient) {
-    return null; // Prevent hydration issues
+    return null;
   }
 
   if (!user) {

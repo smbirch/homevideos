@@ -3,6 +3,8 @@
 import React, {useState, useEffect} from 'react';
 import {Comment} from '@/app/types/comment';
 import {deleteComment, updateComment} from "@/app/services/commentService";
+import {User} from "@/app/types/user";
+import {getLocalUserData} from "@/app/utils/authUtils";
 
 interface CommentSectionProps {
   videoId: number,
@@ -11,20 +13,20 @@ interface CommentSectionProps {
 }
 
 const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refreshComments}) => {
-  const [currentUser, setCurrentUser] = useState<{ username: string; isAdmin: boolean } | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<{ username: string; isAdmin: boolean } | null>(null);
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editText, setEditText] = useState('');
 
   useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setCurrentUser(JSON.parse(userData));
-    }
+    // @ts-ignore
+    let user: User | null  = getLocalUserData();
+    setUser(user);
   }, []);
 
   const canModifyComment = (comment: Comment) => {
-    if (!currentUser) return false;
-    return currentUser.isAdmin || currentUser.username === comment.author;
+    if (!user) return false;
+    return user.profile.admin || user.username === comment.author;
   };
 
   const handleEditClick = (comment: Comment) => {
@@ -35,7 +37,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
   const handleSaveEdit = async (commentId: number) => {
     try {
       // @ts-ignore
-      await updateComment(commentId, editText, videoId, currentUser.username);
+      await updateComment(commentId, editText, videoId, user.username);
       setEditingCommentId(null);
       if (refreshComments) {
         await refreshComments();
@@ -48,7 +50,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
   const handleDelete = async (comment: Comment) => {
     try {
       // @ts-ignore
-      await deleteComment(comment.id, comment.text, videoId, currentUser.username);
+      await deleteComment(comment.id, comment.text, videoId, user.username);
       if (refreshComments) {
         await refreshComments();
       }

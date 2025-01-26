@@ -4,6 +4,7 @@ import React, {useState, useEffect, useRef} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {UserCircle} from "lucide-react";
+import {getLocalUserData} from "@/app/utils/authUtils";
 
 interface UserProfile {
   firstName: string;
@@ -26,22 +27,11 @@ const Navbar = () => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const checkAuthStatus = () => {
-    if (typeof window !== "undefined") {
-      const userData = localStorage.getItem("user");
-      if (userData) {
-        try {
-          const parsedUser = JSON.parse(userData) as User;
-          setUser(parsedUser);
-        } catch (error) {
-          console.error("Error parsing user data:", error);
-          localStorage.removeItem("user");
-          setUser(null);
-        }
-      } else {
-        setUser(null);
-      }
-    }
+    // @ts-ignore
+    let user: User | null = getLocalUserData();
+    setUser(user);
   };
+
 
   useEffect(() => {
     setIsClient(true);

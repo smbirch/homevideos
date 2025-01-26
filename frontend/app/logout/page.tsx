@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {logoutUser} from "@/app/services/userService";
 import LoadingSpinner from "@/app/components/LoadingSpinner";
+import {getLocalUserData} from "@/app/utils/authUtils";
 
 export default function LogoutPage() {
   const router = useRouter();
@@ -12,7 +13,7 @@ export default function LogoutPage() {
   useEffect(() => {
     const performLogout = async () => {
       console.log("perform logout");
-      const localUser = JSON.parse(localStorage.getItem("user") || "{}");
+      const localUser = getLocalUserData();
       try {
         if (localUser?.username) {
           await logoutUser({

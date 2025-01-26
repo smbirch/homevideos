@@ -1,16 +1,16 @@
 "use client"
 import {useEffect, useState} from 'react';
 import {User} from "@/app/types/user";
+import {getLocalUserData} from "@/app/utils/authUtils";
 
 export default function Profile() {
   const [user, setUser] = useState<User | null>(null);
 
 
   useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
+    // @ts-ignore
+    let user: User | null = getLocalUserData();
+    setUser(user);
   }, []);
 
   if (!user) {

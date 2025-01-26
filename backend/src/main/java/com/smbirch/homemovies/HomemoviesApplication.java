@@ -24,6 +24,7 @@ public class HomemoviesApplication {
 
     corsConfiguration.setAllowCredentials(true);
 
+    // TODO: update this in prod
     corsConfiguration.addAllowedOriginPattern("*");
 //    corsConfiguration.setAllowedOriginPatterns(Arrays.asList(
 //            "http://localhost:[*]",

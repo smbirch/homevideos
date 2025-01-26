@@ -1,9 +1,8 @@
 import {Video} from './video';
 import {Credentials} from './credentials';
-import {Profile} from './profile';
 
 export interface User {
-  username: any;
+  username: string;
   id: number;
   joined: Date;
   deleted: boolean;
@@ -23,4 +22,11 @@ export interface UserResponseDto {
   username: string;
   token: string;
   profile: Profile;
+}
+
+export interface Profile {
+  firstName: string;
+  lastName: string;
+  email: string;
+  admin: boolean;
 }

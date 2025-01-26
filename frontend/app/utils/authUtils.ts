@@ -1,21 +1,25 @@
-import { setCookie, removeCookie } from './cookieUtils';
+import {removeCookie, setCookie} from './cookieUtils';
 import {useEffect, useState} from "react";
 import {getCookie} from "cookies-next";
+import {User} from "@/app/types/user";
 
-export interface UserProfile {
-  firstName: string;
-  lastName: string;
-  email: string;
-  admin: boolean;
-}
-
-export interface User {
-  id: number;
-  username: string;
-  profile: UserProfile;
-}
 
 const USER_COOKIE_NAME = 'homevideosCookie';
+
+export const getLocalUserData = () => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      console.log(userData);
+      try {
+        return JSON.parse(userData) as User;
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+        localStorage.removeItem("user");
+      }
+    } else {
+      return null;
+    }
+};
 
 export const getStoredUser = (): User | null => {
   try {
