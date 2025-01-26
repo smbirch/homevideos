@@ -42,12 +42,11 @@ public class UserServiceImpl implements UserService {
         return userToCheckFor.get();
     }
 
-    private ResponseEntity<AuthDto> invalidateTokenHelper(
-            String username, HttpServletResponse response) {
+    // TODO: Is this needed? can it be simplified?
+    private ResponseEntity<AuthDto> invalidateTokenHelper(String username, HttpServletResponse response) {
         String token = response.getHeader("Authorization");
         try {
-            boolean isValidToken =
-                    jwtService.validateTokenAndUser(token, username);
+            boolean isValidToken = jwtService.validateTokenAndUser(token, username);
             if (isValidToken) {
                 if (jwtService.blacklistToken(token)) {
                     log.info("200 - Token invalidated succesfully: '{}'", token);
@@ -55,19 +54,15 @@ public class UserServiceImpl implements UserService {
                 }
             } else {
                 log.warn("400 - Invalid token: '{}' for user: '{}'", token, username);
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(new AuthDto(false, "Invalid token"));
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthDto(false, "Invalid token"));
             }
         } catch (Exception e) {
             log.warn("500 - Error invalidating token: '{}'", e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new AuthDto(false, "Error invalidating token"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthDto(false, "Error invalidating token"));
         }
         // If we get here we will fail the request
-        log.warn(
-                "500 - Error not caught while invalidating token: '{}' for user: '{}'", token, username);
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(new AuthDto(false, "Error invalidating token"));
+        log.warn("500 - Error not caught while invalidating token: '{}' for user: '{}'", token, username);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthDto(false, "Error invalidating token"));
     }
 
     @Override
@@ -83,18 +78,12 @@ public class UserServiceImpl implements UserService {
         CredentialsDto credentials = userRequestDto.getCredentials();
         ProfileDto profile = userRequestDto.getProfile();
 
-        if (credentials == null
-                || profile == null
-                || profile.getEmail() == null
-                || credentials.getPassword() == null
-                || credentials.getUsername() == null) {
+        if (credentials == null || profile == null || profile.getEmail() == null || credentials.getPassword() == null || credentials.getUsername() == null) {
             log.info("400 - A required parameter is missing {}: createUser", userRequestDto);
             throw new BadRequestException("A required parameter is missing");
         }
         if (userRepository.existsByCredentials_Username(credentials.getUsername())) {
-            log.warn(
-                    "400 - Failed to create user with username: '{}' - username already exists",
-                    credentials.getUsername());
+            log.warn("400 - Failed to create user with username: '{}' - username already exists", credentials.getUsername());
             throw new BadRequestException("This username is already in use.");
         }
 
@@ -104,10 +93,7 @@ public class UserServiceImpl implements UserService {
 
         String newJwtToken = jwtService.generateToken(user);
         user = userRepository.saveAndFlush(user);
-        log.info(
-                "201 - New user created successfully with ID: '{}' and username: '{}'",
-                user.getId(),
-                user.getCredentials().getUsername());
+        log.info("201 - New user created successfully with ID: '{}' and username: '{}'", user.getId(), user.getCredentials().getUsername());
 
         UserResponseDto userResponseDto = new UserResponseDto();
         userResponseDto.setId(user.getId());
@@ -124,15 +110,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<UserResponseDto> login(
-            UserRequestDto userRequestDto, HttpServletResponse response) {
+    public ResponseEntity<UserResponseDto> login(UserRequestDto userRequestDto, HttpServletResponse response) {
         String username = userRequestDto.getCredentials().getUsername().toLowerCase();
         String password = userRequestDto.getCredentials().getPassword();
         log.info("102 - Login attempt for user: '{}'", username);
         User user = getUserHelper(username);
 
-        boolean doesPasswordMatch =
-                passwordEncoder.verifyPassword(password, user.getCredentials().getPassword());
+        boolean doesPasswordMatch = passwordEncoder.verifyPassword(password, user.getCredentials().getPassword());
 
         if (!doesPasswordMatch) {
             log.warn("401 - '{}' submitted an incorrect password at login", username);
@@ -158,8 +142,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<AuthDto> validateUser(
-            UserRequestDto userRequestDto, HttpServletRequest request) {
+    public ResponseEntity<AuthDto> validateUser(UserRequestDto userRequestDto, HttpServletRequest request) {
         String username = userRequestDto.getCredentials().getUsername();
         log.info("102 - Token validation request for user: '{}'", username);
         String token = jwtService.getTokenFromRequest(request);
@@ -169,26 +152,22 @@ public class UserServiceImpl implements UserService {
                 return ResponseEntity.ok(new AuthDto(true, "Token is valid"));
             } else {
                 log.warn("401 - Token is invalid for user '{}'", username);
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(new AuthDto(false, "Invalid token"));
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthDto(false, "Invalid token"));
             }
         } catch (Exception e) {
             log.error("500 - Cannot validate token for user '{}'", username);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new AuthDto(false, "Error validating token"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthDto(false, "Error validating token"));
         }
     }
 
     @Override
-    public ResponseEntity<AuthDto> logoutUser(
-            UserRequestDto userRequestDto, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<AuthDto> logoutUser(UserRequestDto userRequestDto, HttpServletRequest request, HttpServletResponse response) {
         log.info("102 - Logging out user: {}", userRequestDto.getCredentials().getUsername());
         String token = jwtService.getTokenFromRequest(request);
 
         if (token == null) {
             log.warn("401 - No token found in request for user: {}", userRequestDto.getCredentials().getUsername());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new AuthDto(false, "No token found"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthDto(false, "No token found"));
         }
 
         jwtService.blacklistToken(token);

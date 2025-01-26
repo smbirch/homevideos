@@ -24,11 +24,15 @@ public class HomemoviesApplication {
 
     corsConfiguration.setAllowCredentials(true);
 
-    corsConfiguration.setAllowedOriginPatterns(Arrays.asList(
-            "http://localhost:[*]",
-            "http://192.168.1.*",  // adjust this to match your local network pattern
-            "https://*.smbirch.com"
-    ));
+    corsConfiguration.addAllowedOriginPattern("*");
+//    corsConfiguration.setAllowedOriginPatterns(Arrays.asList(
+//            "http://localhost:[*]",
+//            "http://192.168.*.*",
+//            "http://10.*.*.*",
+//            "http://172.16.*.*",
+//            "https://*.smbirch.com",
+//            "https://d1vqiwu0adek5c.cloudfront.net"
+//    ));
 
     corsConfiguration.setAllowedMethods(
         Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));

@@ -123,12 +123,6 @@ const Navbar = () => {
                       Profile
                     </Link>
                     <Link
-                      href="/about"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      About
-                    </Link>
-                    <Link
                       href="/logout"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
@@ -151,6 +145,12 @@ const Navbar = () => {
                     </Link>
                   </>
                 )}
+                <Link
+                  href="/about"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  About
+                </Link>
               </div>
             )}
           </div>

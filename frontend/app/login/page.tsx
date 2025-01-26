@@ -34,14 +34,12 @@ export default function LoginPage() {
 
       const userResponse: UserResponseDto = await loginUser(userRequestDto);
 
-      // Remove existing auth token
       removeCookie('homeVideosCookie')
 
       const {token, ...userInfo} = userResponse
       localStorage.setItem('user', JSON.stringify(userInfo))
       window.dispatchEvent(new Event('authChange'));
 
-      // Redirect to dashboard or home page
       router.push('/')
     } catch (err) {
       if (err instanceof Error) {

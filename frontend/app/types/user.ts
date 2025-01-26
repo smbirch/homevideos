@@ -3,6 +3,7 @@ import {Credentials} from './credentials';
 import {Profile} from './profile';
 
 export interface User {
+  username: any;
   id: number;
   joined: Date;
   deleted: boolean;

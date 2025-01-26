@@ -7,19 +7,17 @@ const nextConfig = {
         hostname: '*.cloudfront.net',
         port: '',
         pathname: '/**',
-      }
-    ]
+      },
+    ],
   },
-  // compiler: {
-  //   removeConsole: false,
-  // },
   rewrites: async () => {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8080/api/:path*',
+        destination: 'http://192.168.x.x:8080/api/:path*', // TODO: change for prod
       },
     ];
   },
 };
+
 export default nextConfig;

@@ -107,6 +107,18 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public ResponseEntity<CommentResponseDto> deleteComment(CommentRequestDto commentRequestDto, HttpServletRequest request) {
+        log.info("102 - deleting comment ID: {}", commentRequestDto.getCommentId());
+
+        //check token
+        String token = jwtService.getTokenFromRequest(request);
+
+        boolean isValidToken = jwtService.validateTokenAndUser(token, commentRequestDto.getAuthor());
+        if (!isValidToken) {
+            log.warn("500 - Invalid token for: '{}'", commentRequestDto.getAuthor());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        // get comment
         Comment comment = commentRepository.findById(commentRequestDto.getCommentId()).orElseThrow(() -> new NotFoundException("Comment with ID: " + commentRequestDto.getCommentId() + " not found"));
         if (commentRequestDto.getAuthor() == null || commentRequestDto.getAuthor().isEmpty()) {
             log.warn("404 - User not found while deleting comment: '{}'", commentRequestDto.getAuthor());
@@ -123,15 +135,16 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public ResponseEntity<CommentResponseDto> updateComment(CommentRequestDto commentRequestDto, HttpServletRequest request) {
         log.info("102 - Updating Comment ID: {} - Message: '{}'", commentRequestDto.getCommentId(), commentRequestDto.getText());
-        String token = jwtService.getTokenFromRequest(request);
-        Comment comment = commentRepository.findById(commentRequestDto.getCommentId()).orElseThrow(() -> new NotFoundException("Comment not found with ID: " + commentRequestDto.getCommentId()));
 
         // check token
+        String token = jwtService.getTokenFromRequest(request);
         boolean isValidToken = jwtService.validateTokenAndUser(token, commentRequestDto.getAuthor());
         if (!isValidToken) {
             log.warn("404 - Invalid token while editing comment");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+        Comment comment = commentRepository.findById(commentRequestDto.getCommentId()).orElseThrow(() -> new NotFoundException("Comment not found with ID: " + commentRequestDto.getCommentId()));
+
 
         if (comment.isDeleted()) {
             throw new NotFoundException("Comment with ID: " + commentRequestDto.getCommentId() + " is deleted and cannot be updated");

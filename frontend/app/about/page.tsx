@@ -1,13 +1,16 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 
 export default function About() {
   const textContent = [
-    { type: "h1", text: "About This Site\n" },
-    { type: "p", text: "Welcome to my home video archive! This site was created as a way to digitize and archive the VHS videos that were taken when I was young.\n" },
-    { type: "p", text: "If you want more info or to see other projects: " },
-    { type: "link", text: "check out my GitHub" },
-    { type: "p", text: "." },
+    {type: "h1", text: "About This Site\n"},
+    {
+      type: "p",
+      text: "Welcome to my home video archive! This site was created as a way to digitize and archive the VHS videos that were taken when I was young.\n"
+    },
+    {type: "p", text: "If you want more info or to see other projects: "},
+    {type: "link", text: "check out my GitHub"},
+    {type: "p", text: "."},
   ];
 
   const [displayText, setDisplayText] = useState("");
@@ -31,12 +34,11 @@ export default function About() {
     return () => clearInterval(typingInterval);
   }, [currentIndex]);
 
-  // Helper function to concatenate all text
+  // concatenate text
   const getAllText = () => {
     return textContent.map((item) => item.text).join("");
   };
 
-  // Function to render text with proper formatting
   const renderFormattedText = () => {
     let currentPos = 0;
     return textContent.map((item, idx) => {
@@ -67,7 +69,7 @@ export default function About() {
           return (
             <span key={idx}>
               {content.replace("\n", "")}
-              {content.includes("\n") && <br />}
+              {content.includes("\n") && <br/>}
             </span>
           );
         default:
@@ -101,6 +103,7 @@ export default function About() {
             border-color: white;
           }
         }
+
         .animate-blink {
           animation: blink 1s step-end infinite;
         }

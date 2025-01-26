@@ -1,15 +1,14 @@
 "use client"
-// pages/profile.js
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
+import {User} from "@/app/types/user";
 
 export default function Profile() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
+
 
   useEffect(() => {
-    // Retrieve the "user" item from localStorage
     const userData = localStorage.getItem('user');
     if (userData) {
-      // Parse the JSON string into an object
       setUser(JSON.parse(userData));
     }
   }, []);

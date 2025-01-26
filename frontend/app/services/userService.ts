@@ -69,7 +69,6 @@ export async function loginUser(userRequestDto: UserRequestDto): Promise<UserRes
 
     const cookieValue = setCookieHeader.split(';')[0].split('=')[1];
 
-    // TODO: use cookieUtils setCookie instead
     (await cookies()).set({
       name: 'homevideosCookie',
       value: cookieValue,
