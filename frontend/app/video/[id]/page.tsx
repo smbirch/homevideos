@@ -69,7 +69,7 @@ const useFetchVideoData = (videoId: string | undefined) => {
       setComments(prevComments => [newComment, ...prevComments]);
       return newComment;
     } catch (err) {
-      console.error('Comment posting error:', err);
+      alert("Please log in again to perform this action");
       return null;
     }
   };
@@ -83,7 +83,6 @@ const useFetchVideoData = (videoId: string | undefined) => {
     refreshComments: fetchData
   };
 };
-
 
 export default function VideoPage() {
     const params = useParams();

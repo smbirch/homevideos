@@ -43,7 +43,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
         await refreshComments();
       }
     } catch (error) {
-      console.error('Failed to update comment:', error);
+      alert("Please log in again to perform this action");
+
     }
   };
 
@@ -59,7 +60,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
         console.error('Authentication error while deleting comment');
         window.location.href = '/';
       } else {
-        console.error('Failed to delete comment:', error);
+        alert("Please log in again to perform this action");
       }
     }
   };

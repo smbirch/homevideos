@@ -8,7 +8,6 @@ import { Video } from '@/app/types/video';
 import { getVideoPage } from "@/app/services/videoService";
 import LoadingSpinner from "@/app/components/LoadingSpinner"
 
-// Error Component
 const ErrorDisplay = ({ onRetry }: { onRetry: () => void }) => (
   <div className="text-center p-6 bg-gray-100">
     <p className="text-red-600 mb-4">Unable to load videos</p>
@@ -22,7 +21,6 @@ const ErrorDisplay = ({ onRetry }: { onRetry: () => void }) => (
 );
 
 export default function HomePage() {
-  // State management
   const [videos, setVideos] = useState<Video[]>([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -34,7 +32,6 @@ export default function HomePage() {
     rootMargin: '200px',
   });
 
-  // Fetch videos function
   const fetchVideos = useCallback(async () => {
     if (loading || !hasMore) return;
 
@@ -62,19 +59,17 @@ export default function HomePage() {
     }
   }, [page, loading, hasMore]);
 
-  // Initial load effect
   useEffect(() => {
     fetchVideos();
   }, []);
 
-  // Infinite scroll effect
+  // Infinite scroll
   useEffect(() => {
     if (inView && !loading && hasMore) {
       fetchVideos();
     }
   }, [inView, fetchVideos, loading, hasMore]);
 
-  // Error handling
   if (error && videos.length === 0) {
     return <ErrorDisplay onRetry={() => {
       setPage(0);
@@ -114,17 +109,14 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* Loading Indicator */}
       {loading && <LoadingSpinner />}
 
-      {/* No More Videos */}
       {!hasMore && videos.length > 0 && (
         <p className="text-center mt-4 text-gray-500">
           No more videos to load
         </p>
       )}
 
-      {/* Intersection Observer Trigger */}
       <div ref={ref} className="h-10" />
     </div>
   );
