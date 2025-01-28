@@ -1,10 +1,11 @@
-"use client";
+'use client'
 
 import React, {useState, useEffect} from 'react';
 import {Comment} from '@/app/types/comment';
 import {deleteComment, updateComment} from "@/app/services/commentService";
 import {User} from "@/app/types/user";
 import {getLocalUserData} from "@/app/utils/authUtils";
+
 
 interface CommentSectionProps {
   videoId: number,
@@ -20,7 +21,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
 
   useEffect(() => {
     // @ts-ignore
-    let user: User | null  = getLocalUserData();
+    let user: User | null = getLocalUserData();
     setUser(user);
   }, []);
 
@@ -44,7 +45,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
       }
     } catch (error) {
       alert("Please log in again to perform this action");
-
+      localStorage.removeItem("user");
+      location.reload();
     }
   };
 
@@ -61,6 +63,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
         window.location.href = '/';
       } else {
         alert("Please log in again to perform this action");
+        localStorage.removeItem("user");
+        location.reload();
       }
     }
   };

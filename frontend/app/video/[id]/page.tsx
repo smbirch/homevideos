@@ -70,6 +70,8 @@ const useFetchVideoData = (videoId: string | undefined) => {
       return newComment;
     } catch (err) {
       alert("Please log in again to perform this action");
+      localStorage.removeItem("user");
+      location.reload();
       return null;
     }
   };

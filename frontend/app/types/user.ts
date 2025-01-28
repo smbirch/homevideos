@@ -1,6 +1,3 @@
-import {Video} from './video';
-import {Credentials} from './credentials';
-
 export interface User {
   username: string;
   id: number;
@@ -8,7 +5,6 @@ export interface User {
   deleted: boolean;
   credentials: Credentials;
   profile: Profile;
-  likedVideos: Video[];
 }
 
 export interface UserRequestDto {
@@ -29,4 +25,9 @@ export interface Profile {
   lastName: string;
   email: string;
   admin: boolean;
+}
+
+export interface Credentials {
+  username: string;
+  password: string;
 }

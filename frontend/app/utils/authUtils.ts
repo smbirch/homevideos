@@ -1,24 +1,24 @@
 import {removeCookie, setCookie} from './cookieUtils';
 import {useEffect, useState} from "react";
 import {getCookie} from "cookies-next";
-import {User} from "@/app/types/user";
+import {Credentials, User, UserRequestDto} from "@/app/types/user";
 
 
 const USER_COOKIE_NAME = 'homevideosCookie';
 
 export const getLocalUserData = () => {
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      console.log(userData);
-      try {
-        return JSON.parse(userData) as User;
-      } catch (error) {
-        console.error("Error parsing user data:", error);
-        localStorage.removeItem("user");
-      }
-    } else {
-      return null;
+  const userData = localStorage.getItem("user");
+  if (userData) {
+    console.log(userData);
+    try {
+      return JSON.parse(userData) as User;
+    } catch (error) {
+      console.error("Error parsing user data:", error);
+      localStorage.removeItem("user");
     }
+  } else {
+    return null;
+  }
 };
 
 export const getStoredUser = (): User | null => {
@@ -97,3 +97,22 @@ export const useAuth = () => {
     isAuthenticated: !!user,
   };
 };
+
+export function createUserRequestDto(localStorageUser: string, credentials?: Credentials, token?: string): UserRequestDto {
+  // Parse the local storage string into an object
+  const userData = JSON.parse(localStorageUser);
+
+  return {
+    credentials: credentials || {
+      username: '',
+      password: ''
+    },
+    profile: {
+      firstName: userData.profile.firstName,
+      lastName: userData.profile.lastName,
+      email: userData.profile.email,
+      admin: userData.profile.admin
+    },
+    token: token || ''
+  };
+}
