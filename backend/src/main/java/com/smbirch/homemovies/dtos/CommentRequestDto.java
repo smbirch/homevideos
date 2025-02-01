@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class CommentRequestDto {
-    private Long videoId;
+  private Long videoId;
 
-    private Long commentId;
+  private Long commentId;
 
-    private String text;
+  private String text;
 
-    private String author;
-
+  private String author;
 }

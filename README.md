@@ -1,30 +1,31 @@
-# Home Video-Tube
 
-A home video viewing site incorporating Spring Boot, Maven, PostgreSQL, Angular, Typescript, S3, and self-hosted with Docker on
-Digital Ocean at www.homevideos.smbirch.com.
+# Home Videos Viewer
+A home video viewing site incorporating Spring Boot, Maven, Postgres, Redis, Next.js, Typescript, S3, and self-hosted with Docker on Digital Ocean at www.homevideos.smbirch.com
 
-![](https://github.com/smbirch/homevideos/blob/main/media/Screenshot%202024-04-17%20at%205.27.57%E2%80%AFPM.png)
+
+
 
 ## API Reference
 
-## Users
+### Users
 
 #### Get all users
 
-```http request
-GET /users
+```http
+GET /users/
 ```
+
 
 #### Get user by username
 
-```http request
+```http
 GET /users/{username}
 ```
 
 #### Create new user
 
-```http request
-POST /users
+```http
+POST /users/
 ```
 
 ```json
@@ -42,73 +43,128 @@ POST /users
 }
 ```
 
+
 #### Validate a user
 
-```http request
+```http
 POST /users/validate
 ```
 
-```json 
+```json
 {
+  "credentials": {
     "username": "example_username",
     "password": "example_password"
   }
+}
 ```
 
-## Videos
+ 
+
+### Videos
 
 #### Get all videos
 
-```http request
-GET /content/all
+```http
+GET /video/all
+```
+
+#### Get all videos
+
+```http
+GET /video/all
 ```
 
 #### Get video by ID
 
-```http request
-GET /content/{id}
+```http
+GET /video/{id}
 ```
 
-#### Get all thumbnails
+#### Get all video thumbnails
 
-```http request
-GET /content/all/thumbnails
+```http
+GET /video/thumbnail/all
 ```
 
-#### Get a page of videos
+#### Get page of videos by page number (12 videos per page)
 
-```http request
-GET /content/page
+```http
+GET /video/page?page={pageNumber}
 ```
 
-```
-Accepts a page number, default is page 0
-``` 
+#### Update a video title
 
-#### Update video title
-
-```http request
-PATCH /content/update/title
+```http
+PATCH /video/update/title
 ```
 
-```json 
+```json
 {
-  "id": "video_id_required",
-  "title": "new_title",
-  "description": "not_required"
+  "id": "0",
+  "title": "New Title"
 }
 ```
 
-#### Update video description
+#### Update a video description
 
-```http request
-PATCH /content/update/description
+```http
+PATCH /video/update/description
 ```
 
-```json 
+```json
 {
-  "id": "video_id_required",
-  "title": "not_required",
-  "description": "new_description"
+  "id": "0",
+  "description": "New Description"
 }
 ```
+ 
+### Comments
+
+#### Get all comments for a video
+
+```http
+GET /comments/{videoId}
+```
+
+#### Make a new comment on a video
+
+```http
+POST /comments/new
+```
+
+```json
+{
+  "videoId": 0,
+  "text": "this is a comment",
+  "author": "spencer"
+}
+```
+
+#### Update a comment
+
+```http
+PATCH /comments/update
+```
+
+```json
+{
+  "commentId": 0,
+  "text": "Updated comment here"
+}
+```
+
+#### Delete a comment
+
+```http
+DELETE /comments/delete 
+```
+
+```json
+{
+  "commentId": 0
+}
+```
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)

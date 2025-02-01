@@ -8,15 +8,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(
-        componentModel = "spring",
-        uses = {ProfileMapper.class, CredentialsMapper.class})
+    componentModel = "spring",
+    uses = {ProfileMapper.class, CredentialsMapper.class})
 public interface UserMapper {
-    @Mapping(target = "username", source = "credentials.username")
-    UserResponseDto entityToDto(User user);
+  @Mapping(target = "username", source = "credentials.username")
+  UserResponseDto entityToDto(User user);
 
-    User responseDtoToEntity(UserResponseDto userResponseDto);
+  User responseDtoToEntity(UserResponseDto userResponseDto);
 
-    User requestDtoToEntity(UserRequestDto userRequestDto);
+  User requestDtoToEntity(UserRequestDto userRequestDto);
 
-    List<UserResponseDto> entitiesToDtos(List<User> users);
+  List<UserResponseDto> entitiesToDtos(List<User> users);
 }

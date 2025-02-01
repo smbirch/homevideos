@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ProfileDto {
-    private String firstName;
+  private String firstName;
 
-    private String lastName;
+  private String lastName;
 
-    private String email;
+  private String email;
 
-    private boolean admin;
+  private boolean admin;
 }

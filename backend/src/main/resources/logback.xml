@@ -1,0 +1,29 @@
+<configuration>
+
+    <!-- Define the file appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./logs/server.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>./logs/server-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- keep 3 days worth of history -->
+            <maxHistory>3</maxHistory>
+            <!-- max file size before rollover -->
+            <maxFileSize>5MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %-5level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Use only the file appender -->
+    <root level="DEBUG">
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <!-- Add a logger for the package com.smbirch.homemovies with DEBUG level -->
+    <logger name="com.smbirch.homemovies" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+</configuration>

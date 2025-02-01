@@ -23,6 +23,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/homevideos_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: bondstone
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
 
   frontend:
     build: ./frontend
@@ -31,6 +33,12 @@ services:
       - backend
     ports:
       - "8081:80"
+
+  redis:
+    image: redis:latest
+    container_name: homevideos_redis
+    ports:
+      - "6379:6379"
 
 volumes:
   postgres_data:
