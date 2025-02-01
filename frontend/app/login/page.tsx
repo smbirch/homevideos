@@ -3,10 +3,9 @@
 import React, {useState} from 'react'
 import {useRouter} from 'next/navigation'
 import {loginUser} from '@/app/services/userService'
-import {Credentials} from '@/app/types/credentials'
-import {UserRequestDto} from '@/app/types/user'
+import {Credentials, UserRequestDto} from '@/app/types/user'
 import {UserResponseDto} from '@/app/types/user'
-import {removeCookie, setCookie} from "@/app/utils/cookieUtils";
+import {removeCookie} from "@/app/utils/cookieUtils";
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')

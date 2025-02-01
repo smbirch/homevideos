@@ -9,6 +9,9 @@ import VideoPlayer from "@/app/components/VideoPlayer";
 import CommentSection from "@/app/components/CommentSection";
 import AddCommentForm from "@/app/components/AddCommentForm";
 import {getCommentsByVideoId, postComment} from "@/app/services/commentService";
+import {logoutUser} from "@/app/services/userService";
+import {User} from "@/app/types/user";
+import {getLocalUserData} from "@/app/utils/authUtils";
 
 
 const LoadingSpinner = () => (
@@ -70,6 +73,17 @@ const useFetchVideoData = (videoId: string | undefined) => {
       return newComment;
     } catch (err) {
       alert("Please log in again to perform this action");
+      const localUser = getLocalUserData();
+      if (localUser?.username) {
+        await logoutUser({
+          credentials: {
+            username: localUser.username,
+            password: ""
+          },
+          profile: localUser.profile,
+          token: ""
+        });
+      }
       localStorage.removeItem("user");
       location.reload();
       return null;
@@ -87,41 +101,41 @@ const useFetchVideoData = (videoId: string | undefined) => {
 };
 
 export default function VideoPage() {
-    const params = useParams();
-    const videoId = params.id as string;
+  const params = useParams();
+  const videoId = params.id as string;
 
-    const {
-      video,
-      comments,
-      isLoading,
-      error,
-      addComment,
-      refreshComments,
-    } = useFetchVideoData(videoId);
+  const {
+    video,
+    comments,
+    isLoading,
+    error,
+    addComment,
+    refreshComments,
+  } = useFetchVideoData(videoId);
 
-    // Early return for loading and error states
-    if (isLoading) return <LoadingSpinner/>;
-    if (error) return <ErrorDisplay message={error}/>;
-    if (!video) return <ErrorDisplay message="Video not found"/>;
+  // Early return for loading and error states
+  if (isLoading) return <LoadingSpinner/>;
+  if (error) return <ErrorDisplay message={error}/>;
+  if (!video) return <ErrorDisplay message="Video not found"/>;
 
-    return (
-      <div className="container mx-auto p-4">
-        <div className="mb-4">
-          <VideoPlayer url={video.url} title={video.title}/>
-        </div>
-        <h1 className="text-3xl font-bold mb-4">{video.title}</h1>
-        <p className="text-gray-700 mb-8">{video.description}</p>
-
-        <AddCommentForm
-          videoId={video.id}
-          onCommentAdded={addComment}
-        />
-
-        <CommentSection
-          videoId={video.id}
-          comments={comments}
-          refreshComments={refreshComments}
-        />
+  return (
+    <div className="container mx-auto p-4">
+      <div className="mb-4">
+        <VideoPlayer url={video.url} title={video.title}/>
       </div>
-    );
-  }
+      <h1 className="text-3xl font-bold mb-4">{video.title}</h1>
+      <p className="text-gray-700 mb-8">{video.description}</p>
+
+      <AddCommentForm
+        videoId={video.id}
+        onCommentAdded={addComment}
+      />
+
+      <CommentSection
+        videoId={video.id}
+        comments={comments}
+        refreshComments={refreshComments}
+      />
+    </div>
+  );
+}

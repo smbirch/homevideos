@@ -5,6 +5,7 @@ import {Comment} from '@/app/types/comment';
 import {deleteComment, updateComment} from "@/app/services/commentService";
 import {User} from "@/app/types/user";
 import {getLocalUserData} from "@/app/utils/authUtils";
+import {logoutUser} from "@/app/services/userService";
 
 
 interface CommentSectionProps {
@@ -45,8 +46,20 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
       }
     } catch (error) {
       alert("Please log in again to perform this action");
+      const localUser = getLocalUserData();
+      if (localUser?.username) {
+        await logoutUser({
+          credentials: {
+            username: localUser.username,
+            password: ""
+          },
+          profile: localUser.profile,
+          token: ""
+        });
+      }
       localStorage.removeItem("user");
       location.reload();
+      return null;
     }
   };
 
@@ -63,8 +76,20 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
         window.location.href = '/';
       } else {
         alert("Please log in again to perform this action");
+        const localUser = getLocalUserData();
+        if (localUser?.username) {
+          await logoutUser({
+            credentials: {
+              username: localUser.username,
+              password: ""
+            },
+            profile: localUser.profile,
+            token: ""
+          });
+        }
         localStorage.removeItem("user");
         location.reload();
+        return null;
       }
     }
   };
