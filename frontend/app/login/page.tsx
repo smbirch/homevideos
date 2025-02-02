@@ -5,7 +5,7 @@ import {useRouter} from 'next/navigation'
 import {loginUser} from '@/app/services/userService'
 import {Credentials, UserRequestDto} from '@/app/types/user'
 import {UserResponseDto} from '@/app/types/user'
-import {removeCookie} from "@/app/utils/cookieUtils";
+import {deleteCookie} from "cookies-next/client";
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
@@ -33,7 +33,8 @@ export default function LoginPage() {
 
       const userResponse: UserResponseDto = await loginUser(userRequestDto);
 
-      removeCookie('homeVideosCookie')
+      deleteCookie('homevideosCookie');
+
 
       const {token, ...userInfo} = userResponse
       localStorage.setItem('user', JSON.stringify(userInfo))

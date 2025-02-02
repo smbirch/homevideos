@@ -162,7 +162,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<AuthDto> logoutUser(UserRequestDto userRequestDto, HttpServletRequest request, HttpServletResponse response) {
-        log.info("102 - Logging out user: {}", userRequestDto.getCredentials().getUsername());
+        log.info("102 - Logging out user: '{}'", userRequestDto.getCredentials().getUsername());
         String token = jwtService.getTokenFromRequest(request);
 
         if (token == null) {

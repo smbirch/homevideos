@@ -1,13 +1,12 @@
-// import {removeCookie, setCookie} from './cookieUtils';
-// import {useEffect, useState} from "react";
-// import {getCookie} from "cookies-next";
-import {Credentials, User, UserRequestDto} from "@/app/types/user";
+"use client"
 
-
-const USER_COOKIE_NAME = 'homevideosCookie';
+import {User} from "@/app/types/user";
 
 export const getLocalUserData = () => {
-  const userData = localStorage.getItem("user");
+  let userData;
+  if (typeof window !== "undefined") {
+    userData = localStorage.getItem("user");
+  }
   if (userData) {
     console.log(userData);
     try {
