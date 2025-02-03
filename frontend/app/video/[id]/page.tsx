@@ -1,18 +1,17 @@
 "use client";
 
-import React, {useState, useEffect, useCallback} from 'react';
-import {useParams} from 'next/navigation';
-import {Video} from '../../types/video';
-import {Comment} from "@/app/types/comment";
-import {getVideoById} from "@/app/services/videoService";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'next/navigation';
+import { Video } from '../../types/video';
+import { Comment } from "@/app/types/comment";
+import {getVideoById, updateVideoDescription, updateVideoTitle} from "@/app/services/videoService";
 import VideoPlayer from "@/app/components/VideoPlayer";
 import CommentSection from "@/app/components/CommentSection";
 import AddCommentForm from "@/app/components/AddCommentForm";
-import {getCommentsByVideoId, postComment} from "@/app/services/commentService";
-import {logoutUser} from "@/app/services/userService";
-import {getLocalUserData} from "@/app/utils/authUtils";
+import { getCommentsByVideoId, postComment } from "@/app/services/commentService";
+import { logoutUser } from "@/app/services/userService";
+import { getLocalUserData } from "@/app/utils/authUtils";
 import EditableField from "@/app/components/EditableField";
-
 
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center min-h-[50vh]">
@@ -27,6 +26,7 @@ const ErrorDisplay = ({message}: { message: string }) => (
     </div>
   </div>
 );
+
 const useFetchVideoData = (videoId: string | undefined) => {
   const [video, setVideo] = useState<Video | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -92,6 +92,7 @@ const useFetchVideoData = (videoId: string | undefined) => {
 
   return {
     video,
+    setVideo,
     comments,
     isLoading,
     error,
@@ -107,6 +108,7 @@ export default function VideoPage() {
 
   const {
     video,
+    setVideo,
     comments,
     isLoading,
     error,
@@ -115,13 +117,62 @@ export default function VideoPage() {
   } = useFetchVideoData(videoId);
 
   const handleTitleEdit = async (newTitle: string) => {
-    // TODO: Implement editVideoTitle function
-    console.log('Editing title:', newTitle);
+    if (!user?.profile?.admin) {
+      alert("You must be an admin to edit videos");
+      return;
+    }
+
+    try {
+      const updatedVideo = await updateVideoTitle(video!.id, newTitle);
+      setVideo(updatedVideo);
+    } catch (err) {
+      if (err instanceof Error && err.message === 'AUTH_ERROR') {
+        alert("Please log in again to perform this action");
+        const localUser = getLocalUserData();
+        if (localUser?.username) {
+          await logoutUser({
+            credentials: {
+              username: localUser.username,
+              password: ""
+            },
+            profile: localUser.profile,
+            token: ""
+          });
+        }
+        localStorage.removeItem("user");
+        location.reload();
+      } else {
+        alert("Failed to update video title");
+      }
+    }
   };
 
   const handleDescriptionEdit = async (newDescription: string) => {
-    // TODO: Implement editVideoDescription function
-    console.log('Editing description:', newDescription);
+    if (!video) return;
+
+    try {
+      const updatedVideo = await updateVideoDescription(video.id, newDescription);
+      setVideo(updatedVideo);
+    } catch (err) {
+      if (err instanceof Error && err.message === 'AUTH_ERROR') {
+        alert("Please log in again to perform this action");
+        const localUser = getLocalUserData();
+        if (localUser?.username) {
+          await logoutUser({
+            credentials: {
+              username: localUser.username,
+              password: ""
+            },
+            profile: localUser.profile,
+            token: ""
+          });
+        }
+        localStorage.removeItem("user");
+        location.reload();
+      } else {
+        alert("Failed to update video description");
+      }
+    }
   };
 
   // Early return for loading and error states

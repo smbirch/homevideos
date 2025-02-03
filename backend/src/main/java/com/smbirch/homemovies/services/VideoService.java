@@ -2,6 +2,9 @@ package com.smbirch.homemovies.services;
 
 import com.smbirch.homemovies.dtos.VideoRequestDto;
 import com.smbirch.homemovies.dtos.VideoResponseDto;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.ResponseEntity;
+
 import java.util.List;
 
 public interface VideoService {
@@ -14,7 +17,7 @@ public interface VideoService {
 
   List<VideoResponseDto> getPage(int page);
 
-  VideoResponseDto updateVideoTitle(VideoRequestDto videoRequestDto);
+  ResponseEntity<VideoResponseDto> updateVideoTitle(VideoRequestDto videoRequestDto, HttpServletRequest request);
 
-  VideoResponseDto updateVideoDescription(VideoRequestDto videoRequestDto);
+  ResponseEntity<VideoResponseDto> updateVideoDescription(VideoRequestDto videoRequestDto, HttpServletRequest request);
 }

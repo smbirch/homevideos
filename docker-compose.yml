@@ -17,6 +17,7 @@ services:
     container_name: homevideos_backend
     depends_on:
       - db
+      - redis
     ports:
       - "8080:8080"
     environment:
@@ -27,12 +28,14 @@ services:
       SPRING_REDIS_PORT: 6379
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: homevideos_frontend
     depends_on:
       - backend
     ports:
-      - "8081:80"
+      - "3000:3000"
 
   redis:
     image: redis:latest
