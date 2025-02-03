@@ -1,18 +1,17 @@
 "use client";
 
-import React, {useState, useEffect, useCallback} from 'react';
-import {useParams} from 'next/navigation';
-import {Video} from '../../types/video';
-import {Comment} from "@/app/types/comment";
-import {getVideoById} from "@/app/services/videoService";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'next/navigation';
+import { Video } from '../../types/video';
+import { Comment } from "@/app/types/comment";
+import {getVideoById, updateVideoDescription, updateVideoTitle} from "@/app/services/videoService";
 import VideoPlayer from "@/app/components/VideoPlayer";
 import CommentSection from "@/app/components/CommentSection";
 import AddCommentForm from "@/app/components/AddCommentForm";
-import {getCommentsByVideoId, postComment} from "@/app/services/commentService";
-import {logoutUser} from "@/app/services/userService";
-import {User} from "@/app/types/user";
-import {getLocalUserData} from "@/app/utils/authUtils";
-
+import { getCommentsByVideoId, postComment } from "@/app/services/commentService";
+import { logoutUser } from "@/app/services/userService";
+import { getLocalUserData } from "@/app/utils/authUtils";
+import EditableField from "@/app/components/EditableField";
 
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center min-h-[50vh]">
@@ -27,6 +26,7 @@ const ErrorDisplay = ({message}: { message: string }) => (
     </div>
   </div>
 );
+
 const useFetchVideoData = (videoId: string | undefined) => {
   const [video, setVideo] = useState<Video | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -92,6 +92,7 @@ const useFetchVideoData = (videoId: string | undefined) => {
 
   return {
     video,
+    setVideo,
     comments,
     isLoading,
     error,
@@ -103,15 +104,76 @@ const useFetchVideoData = (videoId: string | undefined) => {
 export default function VideoPage() {
   const params = useParams();
   const videoId = params.id as string;
+  const [user, setUser] = useState(getLocalUserData());
 
   const {
     video,
+    setVideo,
     comments,
     isLoading,
     error,
     addComment,
     refreshComments,
   } = useFetchVideoData(videoId);
+
+  const handleTitleEdit = async (newTitle: string) => {
+    if (!user?.profile?.admin) {
+      alert("You must be an admin to edit videos");
+      return;
+    }
+
+    try {
+      const updatedVideo = await updateVideoTitle(video!.id, newTitle);
+      setVideo(updatedVideo);
+    } catch (err) {
+      if (err instanceof Error && err.message === 'AUTH_ERROR') {
+        alert("Please log in again to perform this action");
+        const localUser = getLocalUserData();
+        if (localUser?.username) {
+          await logoutUser({
+            credentials: {
+              username: localUser.username,
+              password: ""
+            },
+            profile: localUser.profile,
+            token: ""
+          });
+        }
+        localStorage.removeItem("user");
+        location.reload();
+      } else {
+        alert("Failed to update video title");
+      }
+    }
+  };
+
+  const handleDescriptionEdit = async (newDescription: string) => {
+    if (!video) return;
+
+    try {
+      const updatedVideo = await updateVideoDescription(video.id, newDescription);
+      setVideo(updatedVideo);
+    } catch (err) {
+      if (err instanceof Error && err.message === 'AUTH_ERROR') {
+        alert("Please log in again to perform this action");
+        const localUser = getLocalUserData();
+        if (localUser?.username) {
+          await logoutUser({
+            credentials: {
+              username: localUser.username,
+              password: ""
+            },
+            profile: localUser.profile,
+            token: ""
+          });
+        }
+        localStorage.removeItem("user");
+        location.reload();
+      } else {
+        alert("Failed to update video description");
+      }
+    }
+  };
 
   // Early return for loading and error states
   if (isLoading) return <LoadingSpinner/>;
@@ -123,8 +185,27 @@ export default function VideoPage() {
       <div className="mb-4">
         <VideoPlayer url={video.url} title={video.title}/>
       </div>
-      <h1 className="text-3xl font-bold mb-4">{video.title}</h1>
-      <p className="text-gray-700 mb-8">{video.description}</p>
+
+      {user?.profile?.admin ? (
+        <>
+          <EditableField
+            value={video.title}
+            onSave={handleTitleEdit}
+            onCancel={undefined}
+          />
+          <EditableField
+            value={video.description}
+            onSave={handleDescriptionEdit}
+            onCancel={undefined}
+            isTextArea
+          />
+        </>
+      ) : (
+        <>
+          <h1 className="text-3xl font-bold mb-4">{video.title}</h1>
+          <p className="text-gray-700 mb-8">{video.description}</p>
+        </>
+      )}
 
       <AddCommentForm
         videoId={video.id}

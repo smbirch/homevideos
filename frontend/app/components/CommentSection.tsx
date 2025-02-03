@@ -16,7 +16,6 @@ interface CommentSectionProps {
 
 const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refreshComments}) => {
   const [user, setUser] = useState<User | null>(null);
-  // const [user, setUser] = useState<{ username: string; isAdmin: boolean } | null>(null);
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editText, setEditText] = useState('');
 
@@ -95,7 +94,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
   };
 
   return (
-    <div className="mt-8 w-full">
+    <div className="mt-8 w-4/5 mx-10">
       <h2 className="text-xl font-bold mb-4 pl-4">Comments</h2>
       {comments.length === 0 ? (
         <p className="text-gray-500 pl-4">No comments yet.</p>
@@ -144,7 +143,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({videoId, comments, refre
                       </button>
                       <button
                         onClick={() => handleDelete(comment)}
-                        className="text-red-600 hover:text-red-800"
+                        className="text-black hover:text-red-500"
                       >
                         Delete
                       </button>

@@ -53,7 +53,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = memo(({videoId, onCommentA
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 mx-3">
       <div>
         <label htmlFor="comment" className="block text-sm font-medium text-white">
           Comment
@@ -61,7 +61,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = memo(({videoId, onCommentA
         <textarea
           id="comment"
           rows={3}
-          className="mt-1 block w-half rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black"
+          className="mt-1 block w-2/5 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black bg-gray-300"
           value={text}
           onChange={(e) => setText(e.target.value)}
           required

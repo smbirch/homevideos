@@ -4,7 +4,10 @@ import com.smbirch.homemovies.dtos.VideoRequestDto;
 import com.smbirch.homemovies.dtos.VideoResponseDto;
 import com.smbirch.homemovies.services.VideoService;
 import java.util.List;
+
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -35,12 +38,12 @@ public class VideoController {
   }
 
   @PatchMapping("/update/title")
-  public VideoResponseDto updateVideoTitle(@RequestBody VideoRequestDto videoRequestDto) {
-    return videoService.updateVideoTitle(videoRequestDto);
+  public ResponseEntity<VideoResponseDto> updateVideoTitle(@RequestBody VideoRequestDto videoRequestDto, HttpServletRequest request) {
+    return videoService.updateVideoTitle(videoRequestDto, request);
   }
 
   @PatchMapping("/update/description")
-  public VideoResponseDto updateVideoDescription(@RequestBody VideoRequestDto videoRequestDto) {
-    return videoService.updateVideoDescription(videoRequestDto);
+  public ResponseEntity<VideoResponseDto> updateVideoDescription(@RequestBody VideoRequestDto videoRequestDto, HttpServletRequest request) {
+    return videoService.updateVideoDescription(videoRequestDto, request);
   }
 }
