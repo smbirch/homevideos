@@ -6,6 +6,7 @@
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/exceptions/NotAuthorizedException.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/mappers/ProfileMapper.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/entities/Credentials.java
+/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/controllers/HealthController.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/exceptions/BadRequestException.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/dtos/ErrorDto.java
 /Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/src/main/java/com/smbirch/homemovies/services/UserService.java

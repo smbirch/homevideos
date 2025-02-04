@@ -27,6 +27,7 @@ com/smbirch/homemovies/mappers/CommentMapper.class
 com/smbirch/homemovies/controllers/VideoController.class
 com/smbirch/homemovies/entities/Profile.class
 com/smbirch/homemovies/services/impl/PasswordEncoderImpl.class
+com/smbirch/homemovies/controllers/HealthController.class
 com/smbirch/homemovies/mappers/UserMapperImpl.class
 com/smbirch/homemovies/dtos/CommentResponseDto.class
 com/smbirch/homemovies/mappers/CommentMapperImpl.class
