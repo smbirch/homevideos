@@ -5,7 +5,6 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
-
 RUN npm run build
 
 FROM node:18-alpine AS runner
@@ -13,10 +12,9 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public  # Ensure public directory exists
+COPY --from=builder /app/.next ./.next    # Copy everything from .next
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["node", ".next/standalone/server.js"]
