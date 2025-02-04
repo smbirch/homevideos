@@ -1,6 +1,11 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from 'react';
+import {createUser} from "@/app/services/userService";
+import {UserRequestDto, UserResponseDto} from "@/app/types/user";
+import {deleteCookie} from "cookies-next/client";
+import {useRouter} from 'next/navigation'
+
 
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
@@ -22,9 +27,12 @@ const RegistrationPage = () => {
   });
 
   const [passwordError, setPasswordError] = useState('');
+  const [submitError, setSubmitError] = useState('');
+  const router = useRouter()
+
 
   useEffect(() => {
-    let timerId: string | number | NodeJS.Timeout | undefined;
+    let timerId: NodeJS.Timeout;
     if (passwordError) {
       timerId = setTimeout(() => {
         setPasswordError('');
@@ -38,8 +46,7 @@ const RegistrationPage = () => {
     };
   }, [passwordError]);
 
-  // @ts-ignore
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -50,12 +57,15 @@ const RegistrationPage = () => {
       ...prevErrors,
       [name]: false
     }));
-    // don't clear passwordError so useEffect can handle the timeout
+
+    if (submitError) {
+      setSubmitError('');
+    }
   };
 
-  // @ts-ignore
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitError('');
 
     const newErrors = {
       username: formData.username.trim() === '',
@@ -81,7 +91,34 @@ const RegistrationPage = () => {
       return;
     }
 
-    console.log('Form submitted', formData);
+    const userRequestDto: UserRequestDto = {
+      credentials: {
+        username: formData.username,
+        password: formData.password
+      },
+      profile: {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        admin: false
+      },
+      token: ''
+    };
+
+    try {
+      const response: UserResponseDto = await createUser(userRequestDto);
+      deleteCookie('homevideosCookie');
+
+      const {token, ...userInfo} = response;
+      localStorage.setItem('user', JSON.stringify(userInfo))
+      window.dispatchEvent(new Event('authChange'));
+
+      router.push('/')
+
+    } catch (error) {
+      setSubmitError('Registration failed. Please try again.');
+      console.error('Registration error:', error);
+    }
   };
 
   return (
@@ -90,9 +127,9 @@ const RegistrationPage = () => {
         onSubmit={handleSubmit}
         className="bg-black p-8 rounded-lg w-full max-w-md"
       >
-        {passwordError && (
+        {(passwordError || submitError) && (
           <div className="mb-4 p-2 bg-red-600 text-white rounded text-center">
-            {passwordError}
+            {passwordError || submitError}
           </div>
         )}
         <div className="mb-4">
@@ -161,9 +198,6 @@ const RegistrationPage = () => {
               ${errors.confirmPassword ? 'border-2 border-red-500' : ''}`}
           />
         </div>
-
-
-
         <button
           type="submit"
           className="w-full p-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition duration-300"

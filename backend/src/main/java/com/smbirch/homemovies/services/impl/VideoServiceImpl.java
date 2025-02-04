@@ -98,7 +98,7 @@ public class VideoServiceImpl implements VideoService {
                   return new NotFoundException(
                       "Video not found with ID: " + videoRequestDto.getId());
                 });
-    log.info("102 - Updating video title for video ID: '{}' - '{}'", videoRequestDto.getId(), video.getTitle());
+    log.info("102 - Updating video title for video ID: '{}' - '{}'", videoRequestDto.getId(), videoRequestDto.getTitle());
     video.setTitle(videoRequestDto.getTitle());
     videoRepository.save(video);
 
@@ -128,7 +128,7 @@ public class VideoServiceImpl implements VideoService {
                   return new NotFoundException(
                       "Video not found with ID: " + videoRequestDto.getId());
                 });
-    log.info("102 - Updating video description for video ID: '{}' - '{}'", videoRequestDto.getId(), video.getDescription());
+    log.info("102 - Updating video description for video ID: '{}' - '{}'", videoRequestDto.getId(), videoRequestDto.getDescription());
     video.setDescription(videoRequestDto.getDescription());
     videoRepository.saveAndFlush(video);
     return ResponseEntity.ok(videoMapper.entityToDto(video));

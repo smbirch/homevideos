@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 public interface UserService {
   List<UserResponseDto> getAllUsers();
 
-  UserResponseDto createUser(UserRequestDto userRequestDto);
+  ResponseEntity<UserResponseDto> createUser(UserRequestDto userRequestDto, HttpServletResponse response);
 
   UserResponseDto getUserByUsername(String username);
 
