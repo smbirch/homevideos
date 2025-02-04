@@ -40,6 +40,8 @@ services:
       - backend
     ports:
       - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: "http://backend:8080"
     networks:
       - homevideos_network
 

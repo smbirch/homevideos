@@ -25,15 +25,12 @@ public class HomemoviesApplication {
     corsConfiguration.setAllowCredentials(true);
 
     // TODO: update this in prod
-    corsConfiguration.addAllowedOriginPattern("*");
-//    corsConfiguration.setAllowedOriginPatterns(Arrays.asList(
-//            "http://localhost:[*]",
-//            "http://192.168.*.*",
-//            "http://10.*.*.*",
-//            "http://172.16.*.*",
-//            "https://*.smbirch.com",
-//            "https://d1vqiwu0adek5c.cloudfront.net"
-//    ));
+    corsConfiguration.setAllowedOrigins(Arrays.asList(
+            "http://localhost:3000",      //
+            "http://homevideos.smbirch.com",     // your production domain
+            "https://homevideos.smbirch.com"     // if you're using HTTPS (recommended)
+    ));
+
 
     corsConfiguration.setAllowedMethods(
         Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));

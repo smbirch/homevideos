@@ -3,7 +3,8 @@
 import {User, UserRequestDto, UserResponseDto} from "@/app/types/user";
 import {cookies} from 'next/headers'
 
-const API_BASE_URL = 'http://localhost:8080/api/auth';
+// const API_BASE_URL = 'http://localhost:8080/api/auth'; // DEV
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/auth'; //PROD
 
 export async function getUserByUsername(username: string): Promise<User> {
   const response = await fetch(`${API_BASE_URL}/${username}`);

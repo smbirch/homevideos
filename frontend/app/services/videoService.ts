@@ -3,8 +3,12 @@
 import {Video} from "@/app/types/video";
 import {cookies} from "next/headers";
 
+// const API_BASE_URL = 'http://localhost:8080/api/video'; // DEV
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/video'; //PROD
+
 export async function getVideoPage(page: number): Promise<Video[]> {
-  const response = await fetch(`http://localhost:8080/api/video/page?page=${page}`);
+  const response = await fetch(`${API_BASE_URL}/page?page=${page}`);
+
   if (!response.ok) {
     throw new Error('Failed to fetch videos');
   }
@@ -13,7 +17,7 @@ export async function getVideoPage(page: number): Promise<Video[]> {
 
 export const getVideoById = async (id: string, signal?: AbortSignal): Promise<Video> => {
   try {
-    const response = await fetch(`http://localhost:8080/api/video/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
       signal,
       headers: {
         'Accept': 'application/json',
@@ -39,7 +43,7 @@ export const getVideoById = async (id: string, signal?: AbortSignal): Promise<Vi
 export async function updateVideoTitle(videoId: number, newTitle: string): Promise<Video> {
   const currentCookie = (await cookies()).get('homevideosCookie');
 
-  const response = await fetch(`http://localhost:8080/api/video/update/title`, {
+  const response = await fetch(`${API_BASE_URL}/update/title`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -67,7 +71,7 @@ export async function updateVideoTitle(videoId: number, newTitle: string): Promi
 export async function updateVideoDescription(videoId: number, newDescription: string): Promise<Video> {
   const currentCookie = (await cookies()).get('homevideosCookie');
 
-  const response = await fetch(`http://localhost:8080/api/video/update/description`, {
+  const response = await fetch(`${API_BASE_URL}/update/description`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
