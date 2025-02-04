@@ -1,5 +1,6 @@
 const nextConfig = {
   reactStrictMode: false,
+
   images: {
     remotePatterns: [
       {
@@ -14,7 +15,9 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://192.168.x.x:8080/api/:path*', // TODO: change for prod
+        // destination: 'http://192.168.x.x:8080/api/:path*', // DEV
+        destination: 'http://backend:8080/api/:path*', // PROD
+
       },
     ];
   },
