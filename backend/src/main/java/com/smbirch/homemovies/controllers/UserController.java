@@ -30,8 +30,8 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public UserResponseDto createUser(@RequestBody UserRequestDto userRequestDto) {
-    return userService.createUser(userRequestDto);
+  public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto userRequestDto, HttpServletResponse response) {
+    return userService.createUser(userRequestDto, response);
   }
 
   @PostMapping("/login")

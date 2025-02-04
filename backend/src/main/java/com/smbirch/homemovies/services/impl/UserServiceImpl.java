@@ -73,13 +73,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto createUser(UserRequestDto userRequestDto) {
+    public ResponseEntity<UserResponseDto> createUser(UserRequestDto userRequestDto, HttpServletResponse response) {
         log.info("102 - Creating new user: '{}'", userRequestDto.getCredentials().getUsername());
         CredentialsDto credentials = userRequestDto.getCredentials();
         ProfileDto profile = userRequestDto.getProfile();
 
         if (credentials == null || profile == null || profile.getEmail() == null || credentials.getPassword() == null || credentials.getUsername() == null) {
-            log.info("400 - A required parameter is missing {}: createUser", userRequestDto);
+            log.info("400 - Create User Failed: A required parameter is missing: '{}'", userRequestDto);
             throw new BadRequestException("A required parameter is missing");
         }
         if (userRepository.existsByCredentials_Username(credentials.getUsername())) {
@@ -92,6 +92,8 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.requestDtoToEntity(userRequestDto);
 
         String newJwtToken = jwtService.generateToken(user);
+        jwtService.setAuthenticationCookie(newJwtToken, response);
+
         user = userRepository.saveAndFlush(user);
         log.info("201 - New user created successfully with ID: '{}' and username: '{}'", user.getId(), user.getCredentials().getUsername());
 
@@ -101,7 +103,7 @@ public class UserServiceImpl implements UserService {
         userResponseDto.setProfile(profile);
         userResponseDto.setToken(newJwtToken);
 
-        return userResponseDto;
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDto);
     }
 
     @Override

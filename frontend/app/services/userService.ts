@@ -27,6 +27,23 @@ export async function createUser(userRequestDto: UserRequestDto): Promise<UserRe
     throw new Error(errorData.message || 'Failed to create user');
   }
 
+  const setCookieHeader = response.headers.get('set-cookie');
+  console.log(setCookieHeader);
+
+  if (setCookieHeader) {
+    const cookieValue = setCookieHeader.split(';')[0].split('=')[1];
+
+    (await cookies()).set({
+      name: 'homevideosCookie',
+      value: cookieValue,
+      httpOnly: true,
+      path: '/',
+      sameSite: 'lax',
+      maxAge: 3600, // 1 hour
+      // secure: process.env.NODE_ENV === 'production', //TODO: Enable in production
+    });
+  }
+
   return response.json();
 }
 
@@ -63,10 +80,8 @@ export async function loginUser(userRequestDto: UserRequestDto): Promise<UserRes
     throw new Error(errorData.message || 'Failed to login user');
   }
 
-
   const setCookieHeader = response.headers.get('set-cookie');
   if (setCookieHeader) {
-
     const cookieValue = setCookieHeader.split(';')[0].split('=')[1];
 
     (await cookies()).set({
