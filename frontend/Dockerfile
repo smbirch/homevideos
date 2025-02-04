@@ -12,8 +12,8 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-COPY --from=builder /app/public ./public  # Ensure public directory exists
-COPY --from=builder /app/.next ./.next    # Copy everything from .next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
 
 EXPOSE 3000
 
