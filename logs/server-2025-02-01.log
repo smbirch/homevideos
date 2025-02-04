@@ -1,0 +1,170 @@
+2025-02-01 00:00:03 - WARN  - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h52m15s237ms).
+2025-02-01 01:24:29 - WARN  - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h24m25s386ms).
+2025-02-01 06:01:05 - WARN  - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4h36m35s819ms).
+2025-02-01 08:00:13 - WARN  - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h59m8s121ms).
+2025-02-01 09:01:44 - WARN  - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h1m31s76ms).
+2025-02-01 10:16:53 - WARN  - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h15m9s184ms).
+2025-02-01 20:20:40 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 98576 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2025-02-01 20:20:40 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2025-02-01 20:20:40 - INFO  - The following 1 profile is active: "production"
+2025-02-01 20:20:40 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-02-01 20:20:40 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-01 20:20:40 - INFO  - Finished Spring Data repository scanning in 61 ms. Found 3 JPA repository interfaces.
+2025-02-01 20:20:40 - INFO  - Tomcat initialized with port 8080 (http)
+2025-02-01 20:20:40 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-01 20:20:40 - INFO  - Starting service [Tomcat]
+2025-02-01 20:20:40 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-02-01 20:20:40 - INFO  - Initializing Spring embedded WebApplicationContext
+2025-02-01 20:20:40 - INFO  - Root WebApplicationContext: initialization completed in 518 ms
+2025-02-01 20:20:41 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-02-01 20:20:41 - INFO  - HikariPool-1 - Starting...
+2025-02-01 20:20:41 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3bab95ca
+2025-02-01 20:20:41 - INFO  - HikariPool-1 - Start completed.
+2025-02-01 20:20:41 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-01 20:20:42 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-01 20:20:42 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2025-02-01 20:20:42 - INFO  - Started HomemoviesApplication in 1.857 seconds (process running for 2.153)
+2025-02-01 20:21:01 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-01 20:21:01 - INFO  - Initializing Servlet 'dispatcherServlet'
+2025-02-01 20:21:01 - INFO  - Completed initialization in 1 ms
+2025-02-01 20:21:01 - INFO  - 102 - Getting page 0
+2025-02-01 20:21:01 - INFO  - 102 - Getting page 1
+2025-02-01 20:21:01 - INFO  - 102 - Getting page 2
+2025-02-01 20:21:05 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:21:05 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:21:07 - INFO  - 102 - 'spencer' posting comment: 'test'
+2025-02-01 20:21:07 - WARN  - 406 - Token is null or empty at validateTokenAndUser
+2025-02-01 20:21:07 - WARN  - 404 - Invalid token for: 'spencer'
+2025-02-01 20:21:09 - INFO  - 102 - Logging out user: spencer
+2025-02-01 20:21:09 - WARN  - 500 - Token is null at blacklistToken, will not blacklist
+2025-02-01 20:21:09 - INFO  - 200 - Successfully logged out user: 'spencer'
+2025-02-01 20:21:09 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:21:09 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:21:11 - INFO  - 102 - Getting page 0
+2025-02-01 20:21:11 - INFO  - 102 - Getting page 1
+2025-02-01 20:21:11 - INFO  - 102 - Getting page 2
+2025-02-01 20:25:08 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-02-01 20:25:08 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-02-01 20:25:08 - INFO  - 200 - Set authentication cookie
+2025-02-01 20:25:08 - INFO  - 200 - Successful login for user: 'spencer'
+2025-02-01 20:25:08 - INFO  - 102 - Getting page 0
+2025-02-01 20:25:08 - INFO  - 102 - Getting page 1
+2025-02-01 20:25:08 - INFO  - 102 - Getting page 2
+2025-02-01 20:31:24 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:31:24 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:38:10 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:38:10 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:38:48 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:38:49 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:38:54 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:38:54 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:39:09 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:39:09 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:39:15 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:39:15 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:39:51 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:39:51 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:41:07 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:41:07 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:41:29 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:41:29 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:41:51 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:41:51 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:42:22 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:42:22 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:42:24 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:42:24 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:42:39 - INFO  - 102 - Getting page 0
+2025-02-01 20:42:39 - INFO  - 102 - Getting page 1
+2025-02-01 20:42:39 - INFO  - 102 - Getting page 2
+2025-02-01 20:42:41 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:42:41 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:42:51 - INFO  - 102 - 'spencer' posting comment: 'test'
+2025-02-01 20:42:51 - INFO  - 102 - Checking token blacklist status
+2025-02-01 20:42:51 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4NDY2NzA4LCJleHAiOjE3Mzg0NzAzMDh9.77650STm1eptse3mGNJJZKnfPQlVm-8isx4QVuSBO6cyMoWvAq7GbU2ZX02CCVlL'
+2025-02-01 20:42:51 - INFO  - 200 - Token validated for user 'spencer'
+2025-02-01 20:42:51 - INFO  - 102 - Comment posted by user 'spencer'
+2025-02-01 20:43:29 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:43:29 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:54:37 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:54:38 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:56:32 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:56:32 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:57:07 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:57:07 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:57:12 - INFO  - 102 - Getting page 0
+2025-02-01 20:57:12 - INFO  - 102 - Getting page 1
+2025-02-01 20:57:12 - INFO  - 102 - Getting page 2
+2025-02-01 20:57:18 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-02-01 20:57:19 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-02-01 20:57:19 - INFO  - 200 - Set authentication cookie
+2025-02-01 20:57:19 - INFO  - 200 - Successful login for user: 'spencer'
+2025-02-01 20:57:19 - INFO  - 102 - Getting page 0
+2025-02-01 20:57:19 - INFO  - 102 - Getting page 1
+2025-02-01 20:57:19 - INFO  - 102 - Getting page 2
+2025-02-01 20:57:27 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:57:27 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:59:00 - WARN  - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `boolean` from String "falsa": only "true"/"True"/"TRUE" or "false"/"False"/"FALSE" recognized]
+2025-02-01 20:59:21 - INFO  - 102 - Creating new user: 'test'
+2025-02-01 20:59:21 - INFO  - 102 - Generating JWT token for user 'test'
+2025-02-01 20:59:21 - INFO  - 201 - New user created successfully with ID: '3' and username: 'test'
+2025-02-01 20:59:26 - INFO  - 102 - Logging out user: spencer
+2025-02-01 20:59:26 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4NDY4NjM5LCJleHAiOjE3Mzg0NzIyMzl9.OFgNY7m0PBtrkEAJlghX2LT02fRE5okJi5kq5FLfE2nKSbrx5TH04ZdgyqbBNlHE'
+2025-02-01 20:59:26 - INFO  - 200 - Successfully logged out user: 'spencer'
+2025-02-01 20:59:26 - INFO  - 102 - Getting page 0
+2025-02-01 20:59:26 - INFO  - 102 - Getting page 1
+2025-02-01 20:59:26 - INFO  - 102 - Getting page 2
+2025-02-01 20:59:31 - INFO  - 102 - Login attempt for user: 'test'
+2025-02-01 20:59:31 - INFO  - 102 - Generating JWT token for user 'test'
+2025-02-01 20:59:31 - INFO  - 200 - Set authentication cookie
+2025-02-01 20:59:31 - INFO  - 200 - Successful login for user: 'test'
+2025-02-01 20:59:31 - INFO  - 102 - Getting page 0
+2025-02-01 20:59:31 - INFO  - 102 - Getting page 1
+2025-02-01 20:59:31 - INFO  - 102 - Getting page 2
+2025-02-01 20:59:34 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:59:34 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 20:59:41 - INFO  - 102 - 'test' posting comment: 'testing new'
+2025-02-01 20:59:41 - INFO  - 102 - Checking token blacklist status
+2025-02-01 20:59:41 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjpmYWxzZSwic3ViIjoidGVzdCIsImlhdCI6MTczODQ2ODc3MSwiZXhwIjoxNzM4NDcyMzcxfQ.cx2CMeqPLz7tH1Y-okji6hcBwQd3c6KshOxdIo9DtDXznmYoNbBKumrXQ1Yvpp1I'
+2025-02-01 20:59:41 - INFO  - 200 - Token validated for user 'test'
+2025-02-01 20:59:41 - INFO  - 102 - Comment posted by user 'test'
+2025-02-01 20:59:42 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 20:59:42 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 21:01:42 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 21:01:42 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 21:01:45 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 21:01:45 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 21:02:19 - INFO  - 102 - deleting comment ID: 25
+2025-02-01 21:02:19 - INFO  - 102 - Checking token blacklist status
+2025-02-01 21:02:19 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjpmYWxzZSwic3ViIjoidGVzdCIsImlhdCI6MTczODQ2ODc3MSwiZXhwIjoxNzM4NDcyMzcxfQ.cx2CMeqPLz7tH1Y-okji6hcBwQd3c6KshOxdIo9DtDXznmYoNbBKumrXQ1Yvpp1I'
+2025-02-01 21:02:19 - INFO  - 200 - Token validated for user 'test'
+2025-02-01 21:02:19 - INFO  - 102 - Comment '25' deleted by user 'test'
+2025-02-01 21:02:19 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 21:02:19 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 21:02:46 - INFO  - 102 - Logging out user: test
+2025-02-01 21:02:46 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjpmYWxzZSwic3ViIjoidGVzdCIsImlhdCI6MTczODQ2ODc3MSwiZXhwIjoxNzM4NDcyMzcxfQ.cx2CMeqPLz7tH1Y-okji6hcBwQd3c6KshOxdIo9DtDXznmYoNbBKumrXQ1Yvpp1I'
+2025-02-01 21:02:46 - INFO  - 200 - Successfully logged out user: 'test'
+2025-02-01 21:02:47 - INFO  - 102 - Getting page 0
+2025-02-01 21:02:47 - INFO  - 102 - Getting page 1
+2025-02-01 21:02:47 - INFO  - 102 - Getting page 2
+2025-02-01 21:02:54 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-02-01 21:02:55 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-02-01 21:02:55 - INFO  - 200 - Set authentication cookie
+2025-02-01 21:02:55 - INFO  - 200 - Successful login for user: 'spencer'
+2025-02-01 21:02:55 - INFO  - 102 - Getting page 0
+2025-02-01 21:02:55 - INFO  - 102 - Getting page 1
+2025-02-01 21:02:55 - INFO  - 102 - Getting page 2
+2025-02-01 21:03:44 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 21:03:44 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 21:07:19 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 21:07:19 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 21:13:51 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 21:13:51 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 21:21:25 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 21:21:25 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 21:21:28 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 21:21:28 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 21:21:28 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 21:21:28 - INFO  - 102 - Getting comments for video '4'
+2025-02-01 21:24:51 - INFO  - 102 - Getting video by ID: 4
+2025-02-01 21:24:51 - INFO  - 102 - Getting comments for video '4'

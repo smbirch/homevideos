@@ -106,6 +106,5 @@ typings/
 # System Files
 .DS_Store/!/backend/target/
 
-*.log
 
 .vscode

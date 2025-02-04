@@ -1,0 +1,2 @@
+2025-02-03 15:33:05,172 - INFO - Running command: cp -R /opt/homevideos /opt/homevideos/backup_20250203_153305
+2025-02-03 15:33:05,173 - ERROR - Deployment failed: [Errno 2] No such file or directory: '/opt/homevideos'

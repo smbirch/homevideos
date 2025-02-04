@@ -1,0 +1,304 @@
+2025-01-31 21:03:08 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 92155 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2025-01-31 21:03:08 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2025-01-31 21:03:08 - INFO  - The following 1 profile is active: "production"
+2025-01-31 21:03:09 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-31 21:03:09 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-31 21:03:09 - INFO  - Finished Spring Data repository scanning in 62 ms. Found 3 JPA repository interfaces.
+2025-01-31 21:03:09 - INFO  - Tomcat initialized with port 8080 (http)
+2025-01-31 21:03:09 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-31 21:03:09 - INFO  - Starting service [Tomcat]
+2025-01-31 21:03:09 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-31 21:03:09 - INFO  - Initializing Spring embedded WebApplicationContext
+2025-01-31 21:03:09 - INFO  - Root WebApplicationContext: initialization completed in 516 ms
+2025-01-31 21:03:09 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-31 21:03:09 - INFO  - HikariPool-1 - Starting...
+2025-01-31 21:03:09 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@24aedcc5
+2025-01-31 21:03:09 - INFO  - HikariPool-1 - Start completed.
+2025-01-31 21:03:09 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-31 21:03:10 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2025-01-31 21:03:10 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2025-01-31 21:03:10 - INFO  - Started HomemoviesApplication in 1.787 seconds (process running for 2.121)
+2025-01-31 21:03:22 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-31 21:03:22 - INFO  - Initializing Servlet 'dispatcherServlet'
+2025-01-31 21:03:22 - INFO  - Completed initialization in 0 ms
+2025-01-31 21:03:22 - INFO  - 102 - Getting page 0
+2025-01-31 21:03:22 - INFO  - 102 - Getting page 1
+2025-01-31 21:03:22 - INFO  - 102 - Getting page 2
+2025-01-31 21:03:25 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:03:25 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:03:30 - INFO  - 102 - Getting page 0
+2025-01-31 21:03:30 - INFO  - 102 - Getting page 1
+2025-01-31 21:03:30 - INFO  - 102 - Getting page 2
+2025-01-31 21:09:48 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 92246 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2025-01-31 21:09:48 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2025-01-31 21:09:48 - INFO  - The following 1 profile is active: "production"
+2025-01-31 21:09:48 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-31 21:09:48 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-31 21:09:48 - INFO  - Finished Spring Data repository scanning in 55 ms. Found 3 JPA repository interfaces.
+2025-01-31 21:09:48 - INFO  - Tomcat initialized with port 8080 (http)
+2025-01-31 21:09:48 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-31 21:09:48 - INFO  - Starting service [Tomcat]
+2025-01-31 21:09:48 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-31 21:09:48 - INFO  - Initializing Spring embedded WebApplicationContext
+2025-01-31 21:09:48 - INFO  - Root WebApplicationContext: initialization completed in 494 ms
+2025-01-31 21:09:48 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-31 21:09:48 - INFO  - HikariPool-1 - Starting...
+2025-01-31 21:09:49 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@27261190
+2025-01-31 21:09:49 - INFO  - HikariPool-1 - Start completed.
+2025-01-31 21:09:49 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-31 21:09:49 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2025-01-31 21:09:49 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2025-01-31 21:09:49 - INFO  - Started HomemoviesApplication in 1.661 seconds (process running for 1.921)
+2025-01-31 21:13:13 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-31 21:13:13 - INFO  - Initializing Servlet 'dispatcherServlet'
+2025-01-31 21:13:13 - INFO  - Completed initialization in 2 ms
+2025-01-31 21:13:13 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-01-31 21:13:13 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-01-31 21:13:13 - INFO  - 200 - Set authentication cookie
+2025-01-31 21:13:13 - INFO  - 200 - Successful login for user: 'spencer'
+2025-01-31 21:13:13 - INFO  - 102 - Getting page 0
+2025-01-31 21:13:13 - INFO  - 102 - Getting page 1
+2025-01-31 21:13:13 - INFO  - 102 - Getting page 2
+2025-01-31 21:13:22 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:13:22 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:13:26 - INFO  - 102 - 'spencer' posting comment: 'test'
+2025-01-31 21:13:27 - INFO  - 102 - Checking token blacklist status
+2025-01-31 21:13:27 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4MzgzMTkzLCJleHAiOjE3MzgzODMxOTN9.eF_fBBfVhf3qSxWVdfCJa1h03NNx9JvHiM2rGoZYiLLL1psw5qIHYKS8vYoPyFpF'
+2025-01-31 21:13:27 - WARN  - 500 - Failure to validate Token: JWT expired 14069 milliseconds ago at 2025-02-01T04:13:13.000Z. Current time: 2025-02-01T04:13:27.069Z. Allowed clock skew: 0 milliseconds.
+2025-01-31 21:13:27 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4MzgzMTkzLCJleHAiOjE3MzgzODMxOTN9.eF_fBBfVhf3qSxWVdfCJa1h03NNx9JvHiM2rGoZYiLLL1psw5qIHYKS8vYoPyFpF'
+2025-01-31 21:13:27 - WARN  - 404 - Invalid token for: 'spencer'
+2025-01-31 21:13:29 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:13:29 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:18:18 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:18:18 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:18:35 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-01-31 21:18:35 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-01-31 21:18:35 - INFO  - 200 - Set authentication cookie
+2025-01-31 21:18:35 - INFO  - 200 - Successful login for user: 'spencer'
+2025-01-31 21:18:35 - INFO  - 102 - Getting page 0
+2025-01-31 21:18:35 - INFO  - 102 - Getting page 1
+2025-01-31 21:18:37 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:18:37 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:18:42 - INFO  - 102 - 'spencer' posting comment: 'test'
+2025-01-31 21:18:42 - INFO  - 102 - Checking token blacklist status
+2025-01-31 21:18:42 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4MzgzNTE1LCJleHAiOjE3MzgzODM1MTV9.D1XiJBmlw4PFlD6vgCfuw1dQs_Vj48qJ5BK8CVfF4cKxLbC0iTlM_h2RdhkldVOR'
+2025-01-31 21:18:42 - WARN  - 500 - Failure to validate Token: JWT expired 7854 milliseconds ago at 2025-02-01T04:18:35.000Z. Current time: 2025-02-01T04:18:42.854Z. Allowed clock skew: 0 milliseconds.
+2025-01-31 21:18:42 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4MzgzNTE1LCJleHAiOjE3MzgzODM1MTV9.D1XiJBmlw4PFlD6vgCfuw1dQs_Vj48qJ5BK8CVfF4cKxLbC0iTlM_h2RdhkldVOR'
+2025-01-31 21:18:42 - WARN  - 404 - Invalid token for: 'spencer'
+2025-01-31 21:18:44 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:18:44 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:26:07 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-01-31 21:26:07 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-01-31 21:26:07 - INFO  - 200 - Set authentication cookie
+2025-01-31 21:26:07 - INFO  - 200 - Successful login for user: 'spencer'
+2025-01-31 21:26:08 - INFO  - 102 - Getting page 0
+2025-01-31 21:26:08 - INFO  - 102 - Getting page 1
+2025-01-31 21:26:16 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:26:16 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:26:21 - INFO  - 102 - 'spencer' posting comment: 'test'
+2025-01-31 21:26:21 - INFO  - 102 - Checking token blacklist status
+2025-01-31 21:26:21 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4MzgzOTY3LCJleHAiOjE3MzgzODM5Njh9.r-xxsOwzLft7NQF6VNosLKQLi5DBwFUOF7coejldQg9bhK5UtPEUKGaJYkKhr-zO'
+2025-01-31 21:26:21 - WARN  - 500 - Failure to validate Token: JWT expired 13998 milliseconds ago at 2025-02-01T04:26:08.000Z. Current time: 2025-02-01T04:26:21.998Z. Allowed clock skew: 0 milliseconds.
+2025-01-31 21:26:21 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4MzgzOTY3LCJleHAiOjE3MzgzODM5Njh9.r-xxsOwzLft7NQF6VNosLKQLi5DBwFUOF7coejldQg9bhK5UtPEUKGaJYkKhr-zO'
+2025-01-31 21:26:22 - WARN  - 404 - Invalid token for: 'spencer'
+2025-01-31 21:26:27 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:26:27 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:27:26 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:27:27 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:27:34 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-01-31 21:27:35 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-01-31 21:27:35 - INFO  - 200 - Set authentication cookie
+2025-01-31 21:27:35 - INFO  - 200 - Successful login for user: 'spencer'
+2025-01-31 21:27:35 - INFO  - 102 - Getting page 0
+2025-01-31 21:27:35 - INFO  - 102 - Getting page 1
+2025-01-31 21:27:36 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:27:36 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:27:41 - INFO  - 102 - 'spencer' posting comment: 'test'
+2025-01-31 21:27:41 - INFO  - 102 - Checking token blacklist status
+2025-01-31 21:27:41 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg0MDU1LCJleHAiOjE3MzgzODQwNTV9.Hi5H8T8WjpHx0adktr2HErKQixnwvGW7lH0NSC5KpeKog-SqoYizrQi3cIbSspfY'
+2025-01-31 21:27:41 - WARN  - 500 - Failure to validate Token: JWT expired 6976 milliseconds ago at 2025-02-01T04:27:35.000Z. Current time: 2025-02-01T04:27:41.976Z. Allowed clock skew: 0 milliseconds.
+2025-01-31 21:27:41 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg0MDU1LCJleHAiOjE3MzgzODQwNTV9.Hi5H8T8WjpHx0adktr2HErKQixnwvGW7lH0NSC5KpeKog-SqoYizrQi3cIbSspfY'
+2025-01-31 21:27:41 - WARN  - 404 - Invalid token for: 'spencer'
+2025-01-31 21:27:43 - INFO  - 102 - Logging out user: spencer
+2025-01-31 21:27:43 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg0MDU1LCJleHAiOjE3MzgzODQwNTV9.Hi5H8T8WjpHx0adktr2HErKQixnwvGW7lH0NSC5KpeKog-SqoYizrQi3cIbSspfY'
+2025-01-31 21:27:43 - INFO  - 200 - Successfully logged out user: 'spencer'
+2025-01-31 21:27:43 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:27:43 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:29:18 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 95030 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2025-01-31 21:29:18 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2025-01-31 21:29:18 - INFO  - The following 1 profile is active: "production"
+2025-01-31 21:29:18 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-31 21:29:18 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-31 21:29:18 - INFO  - Finished Spring Data repository scanning in 64 ms. Found 3 JPA repository interfaces.
+2025-01-31 21:29:19 - INFO  - Tomcat initialized with port 8080 (http)
+2025-01-31 21:29:19 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-31 21:29:19 - INFO  - Starting service [Tomcat]
+2025-01-31 21:29:19 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-31 21:29:19 - INFO  - Initializing Spring embedded WebApplicationContext
+2025-01-31 21:29:19 - INFO  - Root WebApplicationContext: initialization completed in 525 ms
+2025-01-31 21:29:19 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-31 21:29:19 - INFO  - HikariPool-1 - Starting...
+2025-01-31 21:29:19 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@74ebd159
+2025-01-31 21:29:19 - INFO  - HikariPool-1 - Start completed.
+2025-01-31 21:29:19 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-31 21:29:20 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2025-01-31 21:29:20 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2025-01-31 21:29:20 - INFO  - Started HomemoviesApplication in 1.812 seconds (process running for 2.118)
+2025-01-31 21:30:50 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-31 21:30:50 - INFO  - Initializing Servlet 'dispatcherServlet'
+2025-01-31 21:30:50 - INFO  - Completed initialization in 1 ms
+2025-01-31 21:30:50 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:30:50 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:31:20 - INFO  - 102 - Logging out user: spencer
+2025-01-31 21:31:20 - WARN  - 500 - Token is null at blacklistToken, will not blacklist
+2025-01-31 21:31:20 - INFO  - 200 - Successfully logged out user: 'spencer'
+2025-01-31 21:31:20 - INFO  - 102 - Getting page 0
+2025-01-31 21:31:20 - INFO  - 102 - Getting page 1
+2025-01-31 21:31:26 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-01-31 21:31:26 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-01-31 21:31:26 - INFO  - 200 - Set authentication cookie
+2025-01-31 21:31:26 - INFO  - 200 - Successful login for user: 'spencer'
+2025-01-31 21:31:26 - INFO  - 102 - Getting page 0
+2025-01-31 21:31:26 - INFO  - 102 - Getting page 1
+2025-01-31 21:31:28 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:31:28 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:31:33 - INFO  - 102 - Updating Comment ID: 20 - Message: 'this is a new test! ed'
+2025-01-31 21:31:33 - INFO  - 102 - Checking token blacklist status
+2025-01-31 21:31:33 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg0Mjg2LCJleHAiOjE3MzgzODQyODd9.Yyycf7GE3E6XNkFTm9dz_wnZ_IYUJMTl685AwIoCVEBCNxBre3g-HwkwmsBNUlbb'
+2025-01-31 21:31:33 - WARN  - 500 - Failure to validate Token: JWT expired 6391 milliseconds ago at 2025-02-01T04:31:27.000Z. Current time: 2025-02-01T04:31:33.391Z. Allowed clock skew: 0 milliseconds.
+2025-01-31 21:31:33 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg0Mjg2LCJleHAiOjE3MzgzODQyODd9.Yyycf7GE3E6XNkFTm9dz_wnZ_IYUJMTl685AwIoCVEBCNxBre3g-HwkwmsBNUlbb'
+2025-01-31 21:31:33 - WARN  - 404 - Invalid token while editing comment
+2025-01-31 21:31:35 - INFO  - 102 - Logging out user: spencer
+2025-01-31 21:31:35 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg0Mjg2LCJleHAiOjE3MzgzODQyODd9.Yyycf7GE3E6XNkFTm9dz_wnZ_IYUJMTl685AwIoCVEBCNxBre3g-HwkwmsBNUlbb'
+2025-01-31 21:31:35 - INFO  - 200 - Successfully logged out user: 'spencer'
+2025-01-31 21:31:35 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:31:35 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:32:52 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-01-31 21:32:52 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-01-31 21:32:52 - INFO  - 200 - Set authentication cookie
+2025-01-31 21:32:52 - INFO  - 200 - Successful login for user: 'spencer'
+2025-01-31 21:32:52 - INFO  - 102 - Getting page 0
+2025-01-31 21:32:52 - INFO  - 102 - Getting page 1
+2025-01-31 21:32:53 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:32:53 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:32:56 - INFO  - 102 - 'spencer' posting comment: 'test'
+2025-01-31 21:32:56 - INFO  - 102 - Checking token blacklist status
+2025-01-31 21:32:56 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg0MzcyLCJleHAiOjE3MzgzODQzNzJ9.6FAQYx02yQksy3f19XpI5zZW4OeXSrxxHuIltXNtjxErCsmNEvrK68Wq4TmNhrU1'
+2025-01-31 21:32:56 - WARN  - 500 - Failure to validate Token: JWT expired 4736 milliseconds ago at 2025-02-01T04:32:52.000Z. Current time: 2025-02-01T04:32:56.736Z. Allowed clock skew: 0 milliseconds.
+2025-01-31 21:32:56 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg0MzcyLCJleHAiOjE3MzgzODQzNzJ9.6FAQYx02yQksy3f19XpI5zZW4OeXSrxxHuIltXNtjxErCsmNEvrK68Wq4TmNhrU1'
+2025-01-31 21:32:56 - WARN  - 404 - Invalid token for: 'spencer'
+2025-01-31 21:32:58 - INFO  - 102 - Logging out user: spencer
+2025-01-31 21:32:58 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg0MzcyLCJleHAiOjE3MzgzODQzNzJ9.6FAQYx02yQksy3f19XpI5zZW4OeXSrxxHuIltXNtjxErCsmNEvrK68Wq4TmNhrU1'
+2025-01-31 21:32:58 - INFO  - 200 - Successfully logged out user: 'spencer'
+2025-01-31 21:32:59 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:32:59 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:33:04 - INFO  - 102 - Getting page 0
+2025-01-31 21:33:04 - INFO  - 102 - Getting page 1
+2025-01-31 21:47:47 - INFO  - Starting HomemoviesApplication using Java 21.0.2 with PID 95363 (/Users/spencerbirch/Documents/Code/homemovies/homevideos/backend/target/classes started by spencerbirch in /Users/spencerbirch/Documents/Code/homemovies/homevideos)
+2025-01-31 21:47:47 - DEBUG - Running with Spring Boot v3.2.2, Spring v6.1.3
+2025-01-31 21:47:47 - INFO  - The following 1 profile is active: "production"
+2025-01-31 21:47:47 - INFO  - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-31 21:47:47 - INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-31 21:47:48 - INFO  - Finished Spring Data repository scanning in 59 ms. Found 3 JPA repository interfaces.
+2025-01-31 21:47:48 - INFO  - Tomcat initialized with port 8080 (http)
+2025-01-31 21:47:48 - INFO  - Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-31 21:47:48 - INFO  - Starting service [Tomcat]
+2025-01-31 21:47:48 - INFO  - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-31 21:47:48 - INFO  - Initializing Spring embedded WebApplicationContext
+2025-01-31 21:47:48 - INFO  - Root WebApplicationContext: initialization completed in 504 ms
+2025-01-31 21:47:48 - INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-31 21:47:48 - INFO  - HikariPool-1 - Starting...
+2025-01-31 21:47:48 - INFO  - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7198ab9a
+2025-01-31 21:47:48 - INFO  - HikariPool-1 - Start completed.
+2025-01-31 21:47:48 - INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-31 21:47:49 - INFO  - Starting ProtocolHandler ["http-nio-8080"]
+2025-01-31 21:47:49 - INFO  - Tomcat started on port 8080 (http) with context path ''
+2025-01-31 21:47:49 - INFO  - Started HomemoviesApplication in 1.779 seconds (process running for 2.068)
+2025-01-31 21:47:52 - INFO  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-31 21:47:52 - INFO  - Initializing Servlet 'dispatcherServlet'
+2025-01-31 21:47:52 - INFO  - Completed initialization in 1 ms
+2025-01-31 21:47:52 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-01-31 21:47:52 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-01-31 21:47:52 - INFO  - 200 - Set authentication cookie
+2025-01-31 21:47:52 - INFO  - 200 - Successful login for user: 'spencer'
+2025-01-31 21:47:52 - INFO  - 102 - Getting page 0
+2025-01-31 21:47:52 - INFO  - 102 - Getting page 1
+2025-01-31 21:47:54 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:47:54 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:47:59 - INFO  - 102 - 'spencer' posting comment: 'test'
+2025-01-31 21:47:59 - INFO  - 102 - Checking token blacklist status
+2025-01-31 21:47:59 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg1MjcyLCJleHAiOjE3MzgzODg4NzJ9.pna9aCR-SsOYdEUZtA3OoL4wuPFyrOvCPJ0cFYiYzbbB3kURiRsmj2eDGZSZOoEB'
+2025-01-31 21:47:59 - INFO  - 200 - Token validated for user 'spencer'
+2025-01-31 21:47:59 - INFO  - 102 - Comment posted by user 'spencer'
+2025-01-31 21:48:02 - INFO  - 102 - Logging out user: spencer
+2025-01-31 21:48:02 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg1MjcyLCJleHAiOjE3MzgzODg4NzJ9.pna9aCR-SsOYdEUZtA3OoL4wuPFyrOvCPJ0cFYiYzbbB3kURiRsmj2eDGZSZOoEB'
+2025-01-31 21:48:02 - INFO  - 200 - Successfully logged out user: 'spencer'
+2025-01-31 21:48:03 - INFO  - 102 - Getting page 0
+2025-01-31 21:48:03 - INFO  - 102 - Getting page 1
+2025-01-31 21:52:01 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:52:01 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:52:14 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-01-31 21:52:14 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-01-31 21:52:14 - INFO  - 200 - Set authentication cookie
+2025-01-31 21:52:14 - INFO  - 200 - Successful login for user: 'spencer'
+2025-01-31 21:52:14 - INFO  - 102 - Getting page 0
+2025-01-31 21:52:14 - INFO  - 102 - Getting page 1
+2025-01-31 21:52:20 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:52:20 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:53:19 - INFO  - 102 - Getting page 0
+2025-01-31 21:53:19 - INFO  - 102 - Getting page 1
+2025-01-31 21:53:22 - INFO  - 102 - Getting page 2
+2025-01-31 21:53:26 - INFO  - 102 - Getting page 3
+2025-01-31 21:53:26 - INFO  - 102 - Getting page 4
+2025-01-31 21:53:30 - INFO  - 102 - Getting page 5
+2025-01-31 21:53:38 - INFO  - 102 - Getting video by ID: 6
+2025-01-31 21:53:38 - INFO  - 102 - Getting comments for video '6'
+2025-01-31 21:53:52 - INFO  - 102 - Getting page 0
+2025-01-31 21:53:52 - INFO  - 102 - Getting page 1
+2025-01-31 21:53:56 - INFO  - 102 - Logging out user: spencer
+2025-01-31 21:53:56 - INFO  - 200 - Token blacklisted successfully: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg1NTM0LCJleHAiOjE3MzgzODkxMzR9.8fS1pcJeFcPoZ9FvWoknjFF09Dj2111bQtyMv3Aa3gA0vHh2--7gcsSsJE83Gogu'
+2025-01-31 21:53:56 - INFO  - 200 - Successfully logged out user: 'spencer'
+2025-01-31 21:53:57 - INFO  - 102 - Getting page 0
+2025-01-31 21:53:57 - INFO  - 102 - Getting page 1
+2025-01-31 21:58:49 - INFO  - 102 - Getting page 0
+2025-01-31 21:58:49 - INFO  - 102 - Getting page 1
+2025-01-31 21:58:49 - INFO  - 102 - Getting page 2
+2025-01-31 21:59:05 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:59:05 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 21:59:13 - INFO  - 102 - Login attempt for user: 'spencer'
+2025-01-31 21:59:13 - INFO  - 102 - Generating JWT token for user 'spencer'
+2025-01-31 21:59:13 - INFO  - 200 - Set authentication cookie
+2025-01-31 21:59:13 - INFO  - 200 - Successful login for user: 'spencer'
+2025-01-31 21:59:14 - INFO  - 102 - Getting page 0
+2025-01-31 21:59:14 - INFO  - 102 - Getting page 1
+2025-01-31 21:59:14 - INFO  - 102 - Getting page 2
+2025-01-31 21:59:15 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 21:59:15 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 22:00:22 - INFO  - 102 - 'spencer' posting comment: 'testtt'
+2025-01-31 22:00:22 - INFO  - 102 - Checking token blacklist status
+2025-01-31 22:00:22 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg1OTUzLCJleHAiOjE3MzgzODk1NTN9.RJIpSJWVRJGRNzT8Y4MLxboW4d7mVDMk3cz6Tr_P_W7u-rk6-eJayul84n-oPk76'
+2025-01-31 22:00:22 - INFO  - 200 - Token validated for user 'spencer'
+2025-01-31 22:00:22 - INFO  - 102 - Comment posted by user 'spencer'
+2025-01-31 22:00:23 - INFO  - 102 - deleting comment ID: 23
+2025-01-31 22:00:23 - INFO  - 102 - Checking token blacklist status
+2025-01-31 22:00:23 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg1OTUzLCJleHAiOjE3MzgzODk1NTN9.RJIpSJWVRJGRNzT8Y4MLxboW4d7mVDMk3cz6Tr_P_W7u-rk6-eJayul84n-oPk76'
+2025-01-31 22:00:23 - INFO  - 200 - Token validated for user 'spencer'
+2025-01-31 22:00:23 - INFO  - 102 - Comment '23' deleted by user 'spencer'
+2025-01-31 22:00:23 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 22:00:23 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 22:00:27 - INFO  - 102 - Updating Comment ID: 22 - Message: 'test!'
+2025-01-31 22:00:27 - INFO  - 102 - Checking token blacklist status
+2025-01-31 22:00:27 - INFO  - 200 - Token is not blacklisted: 'eyJhbGciOiJIUzM4NCJ9.eyJpc0FkbWluIjp0cnVlLCJzdWIiOiJzcGVuY2VyIiwiaWF0IjoxNzM4Mzg1OTUzLCJleHAiOjE3MzgzODk1NTN9.RJIpSJWVRJGRNzT8Y4MLxboW4d7mVDMk3cz6Tr_P_W7u-rk6-eJayul84n-oPk76'
+2025-01-31 22:00:27 - INFO  - 200 - Token validated for user 'spencer'
+2025-01-31 22:00:27 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 22:00:27 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 22:00:28 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 22:00:28 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 22:03:05 - INFO  - 102 - Getting page 0
+2025-01-31 22:03:05 - INFO  - 102 - Getting page 1
+2025-01-31 22:03:05 - INFO  - 102 - Getting page 2
+2025-01-31 22:03:06 - INFO  - 102 - Getting video by ID: 4
+2025-01-31 22:03:06 - INFO  - 102 - Getting comments for video '4'
+2025-01-31 22:07:26 - INFO  - 102 - Getting page 0
+2025-01-31 22:07:26 - INFO  - 102 - Getting page 1
+2025-01-31 22:07:26 - INFO  - 102 - Getting page 2
