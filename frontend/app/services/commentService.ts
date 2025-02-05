@@ -4,7 +4,7 @@ import {Comment} from "@/app/types/comment";
 import {cookies} from "next/headers";
 
 // const API_BASE_URL = 'http://localhost:8080'; //DEV
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'; //PROD
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://homevideos.smbirch.com/api/video'; //PROD
 
 export const getCommentsByVideoId = async (videoId: string, signal?: AbortSignal): Promise<Comment[]> => {
   const response = await fetch(`${API_BASE_URL}/api/comments/${videoId}`, {signal});
