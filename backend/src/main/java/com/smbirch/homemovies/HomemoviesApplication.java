@@ -26,9 +26,9 @@ public class HomemoviesApplication {
 
     // TODO: update this in prod
     corsConfiguration.setAllowedOrigins(Arrays.asList(
-            "http://localhost:3000",      //
-            "http://homevideos.smbirch.com",     // your production domain
-            "https://homevideos.smbirch.com"     // if you're using HTTPS (recommended)
+            "http://localhost:3000",
+            "http://homevideos.smbirch.com",
+            "https://homevideos.smbirch.com"
     ));
 
 

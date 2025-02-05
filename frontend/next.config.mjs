@@ -16,7 +16,7 @@ const nextConfig = {
       {
         source: '/api/:path*',
         // destination: 'http://192.168.x.x:8080/api/:path*', // DEV
-        destination: 'http://backend:8080/api/:path*', // PROD
+        destination: 'http://homevideos.smbirch.com/api/:path*', // PROD
       },
     ];
   },
