@@ -17,7 +17,7 @@ services:
   backend:
     build: ./backend
     links:
-      - redis-server
+      - redis
     container_name: homevideos_backend
     depends_on:
       - db
@@ -48,7 +48,7 @@ services:
     networks:
       - homevideos_network
 
-  redis-server:
+  redis:
     hostname: redis
     image: redis:latest
     container_name: homevideos_redis
