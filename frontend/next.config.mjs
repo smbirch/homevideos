@@ -11,15 +11,6 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        // destination: 'http://192.168.x.x:8080/api/:path*', // DEV
-        destination: 'http://homevideos.smbirch.com/api/:path*', // PROD
-      },
-    ];
-  },
 };
 
 export default nextConfig;
