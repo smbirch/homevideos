@@ -4,10 +4,10 @@ import {Video} from "@/app/types/video";
 import {cookies} from "next/headers";
 
 // const API_BASE_URL = 'http://localhost:8080/api/video'; // DEV
-// const API_BASE_URL = 'https://homevideos.smbirch.com/api/video'; //PROD
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://backend:8080/api/video';
+const API_BASE_URL = 'https://homevideos.smbirch.com/api/video'; //PROD
 
 export async function getVideoPage(page: number): Promise<Video[]> {
+  console.log(API_BASE_URL);
 
   const response = await fetch(`${API_BASE_URL}/page?page=${page}`);
 
