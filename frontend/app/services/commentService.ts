@@ -7,14 +7,14 @@ import {cookies} from "next/headers";
 const API_BASE_URL = 'https://homevideos.smbirch.com/api/comments'; //PROD
 
 export const getCommentsByVideoId = async (videoId: string, signal?: AbortSignal): Promise<Comment[]> => {
-  const response = await fetch(`${API_BASE_URL}/api/comments/${videoId}`, {signal});
+  const response = await fetch(`${API_BASE_URL}/${videoId}`, {signal});
   if (!response.ok) throw new Error('Failed to fetch comments');
   return response.json();
 };
 
 export async function postComment(videoId: number, text: string, author: string): Promise<Comment> {
   const currentCookie = (await cookies()).get('homevideosCookie')
-  const response = await fetch(`${API_BASE_URL}/api/comments/new`, {
+  const response = await fetch(`${API_BASE_URL}/new`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ export async function updateComment(
   author: string
 ): Promise<Comment> {
   const currentCookie = (await cookies()).get('homevideosCookie')
-  const response = await fetch(`${API_BASE_URL}/api/comments/update`, {
+  const response = await fetch(`${API_BASE_URL}/update`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ export async function updateComment(
 
 export async function deleteComment(commentId: number, text: string, videoId: number, author: string): Promise<void> {
   const currentCookie = (await cookies()).get('homevideosCookie')
-  const response = await fetch(`${API_BASE_URL}/api/comments/delete`, {
+  const response = await fetch(`${API_BASE_URL}/delete`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
