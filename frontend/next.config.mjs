@@ -1,6 +1,6 @@
 const nextConfig = {
   reactStrictMode: false,
-  output: 'standalone', // ✅ Standalone mode enabled
+  output: 'standalone',
   images: {
     remotePatterns: [
       {

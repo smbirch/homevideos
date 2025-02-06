@@ -28,7 +28,9 @@ public class HomemoviesApplication {
     corsConfiguration.setAllowedOrigins(Arrays.asList(
             "http://localhost:3000",
             "http://homevideos.smbirch.com",
-            "https://homevideos.smbirch.com"
+            "https://homevideos.smbirch.com",
+            "http://frontend:3000",
+            "http://backend:8080"
     ));
 
 

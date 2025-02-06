@@ -4,7 +4,8 @@ import {Video} from "@/app/types/video";
 import {cookies} from "next/headers";
 
 // const API_BASE_URL = 'http://localhost:8080/api/video'; // DEV
-const API_BASE_URL = 'https://homevideos.smbirch.com/api/video'; //PROD
+// const API_BASE_URL = 'https://homevideos.smbirch.com/api/video'; //PROD
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://backend:8080/api/video';
 
 export async function getVideoPage(page: number): Promise<Video[]> {
 
