@@ -4,7 +4,7 @@ import {User, UserRequestDto, UserResponseDto} from "@/app/types/user";
 import {cookies} from 'next/headers'
 
 // const API_BASE_URL = 'http://localhost:8080/api/auth'; // DEV
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://homevideos.smbirch.com/api/video'; //PROD
+const API_BASE_URL = 'http://homevideos.smbirch.com/api/video'; //PROD
 
 export async function getUserByUsername(username: string): Promise<User> {
   const response = await fetch(`${API_BASE_URL}/${username}`);
