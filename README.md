@@ -8,9 +8,6 @@ The video files themselves are stored in S3 and served with the help of Cloudfro
 Login and sessions are secured using bcrypt and JWTs which are blacklisted upon logout, expiration, or account deletion in Redis.
 The site is hosted in a Digital Ocean droplet as a subdomain of smbirch.com. I use NGINX to assist with proxying and some caching. 
 
-
-This document outlines the deployment process for HomeVideos, a multi-container application hosted on a Digital Ocean droplet.
-
 ## System Architecture
 
 The application consists of four main components:
