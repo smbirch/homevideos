@@ -1,3 +1,9 @@
+In 2024 my mom had all of our old VHS home movies digitized. They were delivered to her over FTP share and she had no idea how to download them, let alone watch them. 
+I built this website so that my family could more easily watch and talk about the videos created in my youth.
+
+https://homevideos.smbirch.com/
+
+
 ## System Architecture
 
 The application consists of four main components:
